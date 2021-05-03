@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screen/page service details.dart';
+import 'package:syriaonline/screen/page%20service%20details.dart';
 import 'restaurantS.dart';
 
 class RS extends StatelessWidget {
