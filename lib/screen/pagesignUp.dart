@@ -6,7 +6,7 @@ import 'page%20choose.dart';
 import 'page%20login.dart';
 import 'package:syriaonline/utils/allUrl.dart';
 import '../constant/constent.dart';
-import '../signup/signuprawMaterialButton.dart';
+import '../widgets/signup/signuprawMaterialButton.dart';
 import 'package:http/http.dart' as http;
 
 class SignUP extends StatefulWidget {

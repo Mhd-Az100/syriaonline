@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syriaonline/constant/drawer.dart';
-import '../category/horisantal.dart';
-import '../category/theGridView.dart';
+import '../widgets/category/horisantal.dart';
+import '../widgets/category/theGridView.dart';
 
 class ServiceView extends StatelessWidget {
   final int id;
