@@ -88,37 +88,24 @@ class _MyDrawerState extends State<MyDrawer> {
               leading: Icon(Icons.view_carousel_rounded),
             ),
           ),
-          isSign
-              ? InkWell(
-                  onTap: () async {
-                    SharedPreferences preferences =
-                        await SharedPreferences.getInstance();
-                    preferences.remove('first_name');
-                    preferences.remove('last_name');
-                    preferences.remove('e_mail');
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => LoginPage(),
-                    ));
-                  },
-                  child: ListTile(
-                    title: Text('Sign Out'),
-                    leading: Icon(
-                      Icons.logout,
-                    ),
-                  ),
-                )
-              : InkWell(
-                  onTap: () =>
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => LoginPage(),
-                  )),
-                  child: ListTile(
-                    title: Text('Sign In'),
-                    leading: Icon(
-                      Icons.logout,
-                    ),
-                  ),
-                ),
+          InkWell(
+            onTap: () async {
+              SharedPreferences preferences =
+                  await SharedPreferences.getInstance();
+              preferences.remove('first_name');
+              preferences.remove('last_name');
+              preferences.remove('e_mail');
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => LoginPage(),
+              ));
+            },
+            child: ListTile(
+              title: Text('Sign Out'),
+              leading: Icon(
+                Icons.logout,
+              ),
+            ),
+          )
         ],
       ),
     );
