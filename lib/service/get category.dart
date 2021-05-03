@@ -4,7 +4,7 @@ import 'package:syriaonline/model/model%20category%20.dart';
 import 'package:syriaonline/utils/allUrl.dart';
 
 class GetCategory {
-  var url = Uri.parse(category);
+  var url = Uri.parse(servicescatogary);
   Future<List<CategoryModel>> getcateg() async {
     List<CategoryModel> catlist = [];
 
