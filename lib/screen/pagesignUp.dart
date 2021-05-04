@@ -51,7 +51,8 @@ class _SignUPState extends State<SignUP> {
       http.Response res = await http.post(url, body: data);
       var resbody = jsonDecode(res.body);
 
-      savepref(resbody['first_name'], resbody['last_name'], resbody['e_mail']);
+      savepref(resbody['first_name'], resbody['last_name'], resbody['e_mail'],
+          resbody['account_id']);
 
       setState(() {
         loading = false;
@@ -66,15 +67,19 @@ class _SignUPState extends State<SignUP> {
   }
 
   //shared preferences////////////////////
-  savepref(String firstName, String lastName, String email) async {
+  savepref(
+      String firstName, String lastName, String email, int accountId) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString('first_name', firstName);
     preferences.setString('last_name', lastName);
     preferences.setString('e_mail', email);
+    preferences.setString('account_id', '$accountId');
+
     // مشان اتاكد
     print(preferences.getString('first_name'));
     print(preferences.getString('last_name'));
     print(preferences.getString('e_mail'));
+    print(preferences.getString('account_id'));
   }
 
   @override

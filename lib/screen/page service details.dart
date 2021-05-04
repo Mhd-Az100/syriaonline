@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:syriaonline/service/categoryApi.dart';
 import '../constant/constent.dart';
 import '../constant/drawer.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -16,16 +15,6 @@ double ratingX = 2.5;
 int indexpage = 2;
 
 class _DetailsState extends State<Details> {
-  fdata() async {
-    GetCategoryApi cat = GetCategoryApi();
-    cat.getcateg();
-  }
-
-  void initState() {
-    super.initState();
-    fdata();
-  }
-
   List<Map<String, Object>> _pages = [
     {},
     //pagecomment/////////////////////////

@@ -27,12 +27,6 @@ class _ServiceViewState extends State<ServiceView> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    print(fdata());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

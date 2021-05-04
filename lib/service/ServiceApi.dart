@@ -22,9 +22,6 @@ class GetServiceApi {
       for (var item in body) {
         servlist.add(ServicesModel.fromJson(item));
       }
-      for (var i in servlist) {
-        print(i.serviceName);
-      }
 
       return servlist;
     } else {
