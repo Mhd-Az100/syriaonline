@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syriaonline/service/get%20category.dart';
+import 'package:syriaonline/service/categoryApi.dart';
 import '../constant/constent.dart';
 import '../constant/drawer.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -17,7 +17,7 @@ int indexpage = 2;
 
 class _DetailsState extends State<Details> {
   fdata() async {
-    GetCategory cat = GetCategory();
+    GetCategoryApi cat = GetCategoryApi();
     cat.getcateg();
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syriaonline/model/model%20comment.dart';
-import 'package:syriaonline/service/get%20comment.dart';
+import 'package:syriaonline/service/commentApi.dart';
 
 class PageComment extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class _PageCommentState extends State<PageComment> {
   List<CommentModel> comments = [];
 
   Future<List<CommentModel>> fdata() async {
-    GetComments com = GetComments();
+    GetCommentsApi com = GetCommentsApi();
     await com.getcomment();
 
     List<CommentModel> coms = await com.getcomment();

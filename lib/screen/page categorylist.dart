@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:syriaonline/constant/drawer.dart';
 import 'package:syriaonline/model/model%20category%20.dart';
-import 'page%20category%20view.dart';
+import 'package:syriaonline/rama/category/category.dart';
+// import 'page%20category%20view.dart';
 import '../constant/constent.dart';
-import '../service/get category.dart';
+import '../service/categoryApi.dart';
 import '../model/model category .dart';
 
 // ignore: must_be_immutable
@@ -11,7 +12,7 @@ class CategoryListPage extends StatelessWidget {
   List<CategoryModel> categories = [];
 
   Future<List<CategoryModel>> fdata() async {
-    GetCategory cat = GetCategory();
+    GetCategoryApi cat = GetCategoryApi();
     await cat.getcateg();
 
     List<CategoryModel> cats = await cat.getcateg();

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:syriaonline/model/model%20category%20.dart';
 import 'package:syriaonline/screen/page%20category%20view.dart';
-import 'package:syriaonline/service/get%20category.dart';
+import 'package:syriaonline/service/categoryApi.dart';
 
 class HorisantalListView extends StatelessWidget {
   List<CategoryModel> categories = [];
 
   Future<List<CategoryModel>> fdata() async {
-    GetCategory cat = GetCategory();
+    GetCategoryApi cat = GetCategoryApi();
     await cat.getcateg();
 
     List<CategoryModel> cats = await cat.getcateg();
