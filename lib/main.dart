@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:syriaonline/screen/pagesignUp.dart';
+import 'package:syriaonline/screen/page%20signUp.dart';
 import 'screen/page choose.dart';
 
 void main() async {

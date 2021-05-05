@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:syriaonline/model/model%20comment.dart';
 import 'package:syriaonline/utils/allUrl.dart';
 
-class GetCommentsApi {
-  GetCommentsApi();
+class CommentsApi {
+  CommentsApi();
   var url = Uri.parse(rate);
   Future<List<CommentModel>> getcomment() async {
     List<CommentModel> comlst = [];
@@ -20,6 +20,21 @@ class GetCommentsApi {
       return comlst;
     } else {
       print('statuscode=${res.statusCode}');
+    }
+  }
+
+  Future<CommentModel> addComment({Map comment}) async {
+    var url = Uri.parse(rate);
+    var response = await http.post(
+      url,
+      body: jsonEncode(comment),
+    );
+    if (response.statusCode == 201) {
+      var responseBody = jsonDecode(response.body);
+      CommentModel comm = CommentModel.fromJson(responseBody);
+      return comm;
+    } else {
+      return null;
     }
   }
 }

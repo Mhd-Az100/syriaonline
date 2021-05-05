@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syriaonline/screen/page%20choose.dart';
-import 'package:syriaonline/screen/pagesignUp.dart';
+import 'package:syriaonline/screen/page%20signUp.dart';
 import 'package:syriaonline/widgets/signup/signuprawMaterialButton.dart';
 import '../constant/constent.dart';
 

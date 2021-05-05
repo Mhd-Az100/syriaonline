@@ -1,6 +1,7 @@
-import '../../service/ServiceApi.dart';
+import 'package:syriaonline/model/model%20services.dart';
+import 'package:syriaonline/service/ServiceApi.dart';
+
 import 'package:flutter/material.dart';
-import '../../model/model services.dart';
 import 'horisantal.dart';
 import 'gridViewCards.dart';
 

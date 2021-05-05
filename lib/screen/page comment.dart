@@ -8,16 +8,21 @@ class PageComment extends StatefulWidget {
 }
 
 class _PageCommentState extends State<PageComment> {
+  TextEditingController commentController = TextEditingController();
+
   ////////////////////////////////////////////////////////////////////
   List<CommentModel> comments = [];
-
   Future<List<CommentModel>> fdata() async {
-    GetCommentsApi com = GetCommentsApi();
+    CommentsApi com = CommentsApi();
     await com.getcomment();
 
     List<CommentModel> coms = await com.getcomment();
     comments = coms;
     return comments;
+  }
+
+  Future<CommentModel> addComment({Map comm}) {
+    CommentsApi commentapi = new CommentsApi();
   }
 
   void initState() {
@@ -51,29 +56,38 @@ class _PageCommentState extends State<PageComment> {
                               border:
                                   Border(top: BorderSide(color: Colors.grey))),
                           width: MediaQuery.of(context).size.width,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              hintText: 'Comment',
-                              filled: true,
-                              fillColor: Colors.grey[200],
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(style: BorderStyle.none),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(style: BorderStyle.none),
-                              ),
-                              errorBorder: InputBorder.none,
-                              suffixIcon: IconButton(
-                                  icon: Icon(Icons.send_outlined),
-                                  onPressed: () {
+                          child: Form(
+                            child: TextFormField(
+                              controller: commentController,
+                              decoration: InputDecoration(
+                                hintText: 'Comment',
+                                filled: true,
+                                fillColor: Colors.grey[200],
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  borderSide:
+                                      BorderSide(style: BorderStyle.none),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  borderSide:
+                                      BorderSide(style: BorderStyle.none),
+                                ),
+                                errorBorder: InputBorder.none,
+                                suffixIcon: IconButton(
+                                    icon: Icon(Icons.send_outlined),
                                     //fordata//////////////////
-                                  }),
-                              contentPadding: EdgeInsets.all(8),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.yellow),
-                                borderRadius: BorderRadius.circular(25),
+                                    onPressed: () {
+                                      Map commts = {
+                                        'comment': commentController.text,
+                                      };
+                                      addComment(comm: commts);
+                                    }),
+                                contentPadding: EdgeInsets.all(8),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.yellow),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
                               ),
                             ),
                           ),
