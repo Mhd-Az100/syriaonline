@@ -50,7 +50,8 @@ class CategoryListPage extends StatelessWidget {
                           CategoryModel categoreis = snapshot.data[index];
                           return GestureDetector(
                             onTap: () {
-                              ///////////////////////////////////for page view///////////////////
+                              //---------------------for view page -------------
+
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ServiceView(

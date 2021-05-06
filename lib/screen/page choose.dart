@@ -43,14 +43,14 @@ class ChoosePage extends StatelessWidget {
               ),
               Column(
                 children: [
-                  //veiw///////////////////
+                  //-------------------------------------view card--------------
+
                   GestureDetector(
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => CategoryListPage(),
                       ),
                     ),
-                    ////////////////////////////////////////////////////////
                     child: Container(
                       height: 100,
                       decoration: BoxDecoration(
@@ -61,7 +61,8 @@ class ChoosePage extends StatelessWidget {
                           child: Text('Veiw Service', style: kTitleCardText)),
                     ),
                   ),
-                  //add///////////////////
+
+                  //-------------------------------------add service card-------
 
                   GestureDetector(
                     onTap: () => Navigator.of(context).push(
@@ -69,7 +70,6 @@ class ChoosePage extends StatelessWidget {
                         builder: (context) => AddService(),
                       ),
                     ),
-                    ////////////////////////////////////////////
                     child: Container(
                       height: 100,
                       decoration: BoxDecoration(

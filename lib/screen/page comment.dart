@@ -10,7 +10,7 @@ class PageComment extends StatefulWidget {
 class _PageCommentState extends State<PageComment> {
   TextEditingController commentController = TextEditingController();
 
-  //////////////////////////////////////////////////////////////////
+  //-------------------------------------get comment----------------------------
   List<RateModel> comments = [];
   Future<List<RateModel>> fdata() async {
     CommentsApi com = CommentsApi();
@@ -19,7 +19,7 @@ class _PageCommentState extends State<PageComment> {
     comments = coms;
     return comments;
   }
-  ////////////////////////////////////////////////////////////////////
+  //-------------------------------------add comment----------------------------
 
   // Future<CommentModel> addComment({Map comm}) {
   //   CommentsApi commentapi = new CommentsApi();
@@ -41,7 +41,8 @@ class _PageCommentState extends State<PageComment> {
               height: MediaQuery.of(context).size.height,
             ),
 
-            ///////////comment/////////////////
+            //-------------------------------------view comments----------------
+
             Container(
               height: MediaQuery.of(context).size.height - 80,
               child: FutureBuilder(
@@ -118,7 +119,7 @@ class _PageCommentState extends State<PageComment> {
                                 errorBorder: InputBorder.none,
                                 suffixIcon: IconButton(
                                     icon: Icon(Icons.send_outlined),
-                                    //fordata//////////////////
+                                    //----------------comment for data-------------------
                                     onPressed: () {
                                       // Map commts = {
                                       //   'comment': commentController.text,

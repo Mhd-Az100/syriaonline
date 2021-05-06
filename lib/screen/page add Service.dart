@@ -10,7 +10,7 @@ class AddService extends StatefulWidget {
 }
 
 class _AddServiceState extends State<AddService> {
-  //img from device///////////
+  //-------------------------------------img from device------------------------
 
   File _image;
   final picker = ImagePicker();
@@ -48,7 +48,8 @@ class _AddServiceState extends State<AddService> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
-              //dropdown&&lebel///////////
+ //-------------------------------------dropdown&&lebel-------------------------
+
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 DropdownButton<String>(
@@ -93,8 +94,8 @@ class _AddServiceState extends State<AddService> {
             SizedBox(
               height: 15,
             ),
+ //-------------------------------------Form------------------------------------
 
-            ///form/////////////////////////
             Padding(
               padding: const EdgeInsets.all(25.0),
               child: Form(
