@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syriaonline/model/model%20comment.dart';
 import 'package:syriaonline/service/commentApi.dart';
+import 'package:syriaonline/service/postApi.dart';
+import 'package:syriaonline/utils/allUrl.dart';
 
 class PageComment extends StatefulWidget {
   @override
@@ -15,19 +17,18 @@ class _PageCommentState extends State<PageComment> {
   Future<List<RateModel>> fdata() async {
     CommentsApi com = CommentsApi();
 
-    List<RateModel> coms = await com.getcomment();
+    List<RateModel> coms = await com.getRate();
     comments = coms;
     return comments;
   }
   //-------------------------------------add comment----------------------------
 
-  // Future<CommentModel> addComment({Map comm}) {
-  //   CommentsApi commentapi = new CommentsApi();
-  // }
+  addComm(context, Map map) async {
+    bool result = await postdata(rate, map);
+  }
 
   void initState() {
     super.initState();
-    fdata();
   }
 
   @override
@@ -66,11 +67,11 @@ class _PageCommentState extends State<PageComment> {
                               ),
                               title: Container(
                                 margin: EdgeInsets.only(top: 17),
-                                child: Text(commentss.comment),
+                                child: Text(commentss.accountId),
                               ),
                               subtitle: Container(
                                 padding: EdgeInsets.all(10),
-                                child: Text(commentss.accountId),
+                                child: Text(commentss.comment),
                                 color: Colors.grey[100],
                               ),
                             ),
@@ -121,10 +122,14 @@ class _PageCommentState extends State<PageComment> {
                                     icon: Icon(Icons.send_outlined),
                                     //----------------comment for data-------------------
                                     onPressed: () {
-                                      // Map commts = {
-                                      //   'comment': commentController.text,
-                                      // };
-                                      // addComment(comm: commts);
+                                      setState(() {
+                                        Map commts = {
+                                          'comment': commentController.text,
+                                          'service_id': '2',
+                                          'account_id': '2',
+                                        };
+                                        addComm(context, commts);
+                                      });
                                     }),
                                 contentPadding: EdgeInsets.all(8),
                                 border: OutlineInputBorder(
