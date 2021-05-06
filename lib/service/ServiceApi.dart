@@ -6,10 +6,6 @@ import 'dart:convert';
 import 'package:syriaonline/utils/allUrl.dart';
 
 class GetServiceApi {
-  GetServiceApi(
-    this.id,
-  );
-  final int id;
   var url = Uri.parse(services);
 
   Future<List<ServicesModel>> getserv() async {
@@ -21,6 +17,9 @@ class GetServiceApi {
 
       for (var item in body) {
         servlist.add(ServicesModel.fromJson(item));
+      }
+      for (var item in servlist) {
+        print(item.serviceName);
       }
 
       return servlist;

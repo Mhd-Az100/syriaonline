@@ -18,7 +18,7 @@ class _ServiceViewState extends State<ServiceView> {
   List<ServicesModel> services = [];
 
   Future<List<ServicesModel>> fdata() async {
-    GetServiceApi type = GetServiceApi(widget.id);
+    GetServiceApi type = GetServiceApi();
     await type.getserv();
 
     List<ServicesModel> types = await type.getserv();
@@ -30,7 +30,7 @@ class _ServiceViewState extends State<ServiceView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.categoryName + '${widget.id}'),
+        title: Text(widget.categoryName),
         backgroundColor: Color(0xFFFAB028),
         actions: [
           IconButton(

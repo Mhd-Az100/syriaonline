@@ -11,10 +11,6 @@ import 'dart:convert';
 import 'package:syriaonline/utils/allUrl.dart';
 
 class ServiceView extends StatefulWidget {
-  final int id;
-  final String categoryName;
-  ServiceView(this.id, this.categoryName);
-
   @override
   _ServiceViewState createState() => _ServiceViewState();
 }
@@ -23,7 +19,7 @@ class _ServiceViewState extends State<ServiceView> {
   List<ServicesModel> services = [];
 
   Future<List<ServicesModel>> fdata() async {
-    GetServiceApi type = GetServiceApi(widget.id);
+    GetServiceApi type = GetServiceApi();
     await type.getserv();
 
     List<ServicesModel> types = await type.getserv();
@@ -63,7 +59,7 @@ class _ServiceViewState extends State<ServiceView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.id}'),
+        title: Text('asdasd'),
         backgroundColor: Color(0xFFFAB028),
         actions: [
           IconButton(

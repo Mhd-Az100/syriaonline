@@ -1,17 +1,17 @@
 // To parse this JSON data, do
 //
-//     final CommentModel = commentModelFromJson(jsonString);
+//     final rateModel = rateModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<CommentModel> commentModelFromJson(String str) => List<CommentModel>.from(
-    json.decode(str).map((x) => CommentModel.fromJson(x)));
+List<RateModel> rateModelFromJson(String str) =>
+    List<RateModel>.from(json.decode(str).map((x) => RateModel.fromJson(x)));
 
-String commentModelToJson(List<CommentModel> data) =>
+String rateModelToJson(List<RateModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class CommentModel {
-  CommentModel({
+class RateModel {
+  RateModel({
     this.rateId,
     this.rateFrom5,
     this.comment,
@@ -23,15 +23,15 @@ class CommentModel {
   });
 
   final int rateId;
-  final String rateFrom5;
+  final dynamic rateFrom5;
   final String comment;
-  final String picture;
+  final dynamic picture;
   final String serviceId;
   final String accountId;
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  factory CommentModel.fromJson(Map<String, dynamic> json) => CommentModel(
+  factory RateModel.fromJson(Map<String, dynamic> json) => RateModel(
         rateId: json["rate_id"],
         rateFrom5: json["rate_from_5"],
         comment: json["comment"],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:syriaonline/screen/page%20service%20details.dart';
 import '../screen/page%20categorylist.dart';
 
 import '../screen/page add Service.dart';
@@ -76,6 +77,15 @@ class _MyDrawerState extends State<MyDrawer> {
             )),
             child: ListTile(
               title: Text('Add Service'),
+              leading: Icon(Icons.post_add_rounded),
+            ),
+          ),
+          InkWell(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => Details(),
+            )),
+            child: ListTile(
+              title: Text('Details demo'),
               leading: Icon(Icons.post_add_rounded),
             ),
           ),
