@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/model/model%20comment.dart';
 import 'package:syriaonline/service/commentApi.dart';
 import 'package:syriaonline/service/postApi.dart';
@@ -11,16 +15,47 @@ class PageComment extends StatefulWidget {
 
 class _PageCommentState extends State<PageComment> {
   TextEditingController commentController = TextEditingController();
+  final commentformKey = new GlobalKey<FormState>();
+  String commented;
+  var iduser;
+  var firstname;
+
+  var lastname;
+
+  var email;
+  getpref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      iduser = preferences.getString('account_id');
+    });
+  }
+  //-------------------------------------get img from device--------------------
+
+  // File _image;
+  // final picker = ImagePicker();
+
+  // Future getImage(x) async {
+  //   final pickedFile = await picker.getImage(source: x);
+
+  //   setState(() {
+  //     if (pickedFile != null) {
+  //       _image = File(pickedFile.path);
+  //     } else {
+  //       print('No image selected.');
+  //     }
+  //   });
+  // }
 
   //-------------------------------------get comment----------------------------
   List<RateModel> comments = [];
   Future<List<RateModel>> fdata() async {
-    CommentsApi com = CommentsApi();
+    GetCommentsApi com = GetCommentsApi();
 
     List<RateModel> coms = await com.getRate();
     comments = coms;
     return comments;
   }
+
   //-------------------------------------add comment----------------------------
 
   addComm(context, Map map) async {
@@ -29,6 +64,8 @@ class _PageCommentState extends State<PageComment> {
 
   void initState() {
     super.initState();
+    getpref();
+    // print(preferences.getString('account_id'));
   }
 
   @override
@@ -88,7 +125,7 @@ class _PageCommentState extends State<PageComment> {
             Positioned(
               bottom: 20,
               child: Container(
-                height: 60,
+                height: 85,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
@@ -101,8 +138,12 @@ class _PageCommentState extends State<PageComment> {
                                   Border(top: BorderSide(color: Colors.grey))),
                           width: MediaQuery.of(context).size.width,
                           child: Form(
+                            key: commentformKey,
                             child: TextFormField(
                               controller: commentController,
+                              validator: (val) =>
+                                  val.length == 0 ? 'your not commented' : null,
+                              onSaved: (val) => commented = val,
                               decoration: InputDecoration(
                                 hintText: 'Comment',
                                 filled: true,
@@ -122,14 +163,20 @@ class _PageCommentState extends State<PageComment> {
                                     icon: Icon(Icons.send_outlined),
                                     //----------------comment for data-------------------
                                     onPressed: () {
-                                      setState(() {
-                                        Map commts = {
-                                          'comment': commentController.text,
-                                          'service_id': '2',
-                                          'account_id': '2',
-                                        };
-                                        addComm(context, commts);
-                                      });
+                                      // ---------map data---------------
+                                      Map commts = {
+                                        'comment': commentController.text,
+                                        'service_id': '4',
+                                        'account_id': iduser.toString(),
+                                      };
+                                      print(commts);
+                                      if (commentformKey.currentState
+                                          .validate()) {
+                                        setState(() {
+                                          addComm(context, commts);
+                                        });
+                                        commentController.text = '';
+                                      }
                                     }),
                                 contentPadding: EdgeInsets.all(8),
                                 border: OutlineInputBorder(

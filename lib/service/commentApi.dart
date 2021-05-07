@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:syriaonline/model/model%20comment.dart';
 import 'package:syriaonline/utils/allUrl.dart';
 
-class CommentsApi {
+class GetCommentsApi {
   var url = Uri.parse(rate);
   Future<List<RateModel>> getRate() async {
     List<RateModel> comlst = [];

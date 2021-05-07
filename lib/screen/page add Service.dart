@@ -48,7 +48,7 @@ class _AddServiceState extends State<AddService> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
- //-------------------------------------dropdown&&lebel-------------------------
+              //-------------------------------------dropdown&&lebel-------------------------
 
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -94,7 +94,7 @@ class _AddServiceState extends State<AddService> {
             SizedBox(
               height: 15,
             ),
- //-------------------------------------Form------------------------------------
+            //-------------------------------------Form------------------------------------
 
             Padding(
               padding: const EdgeInsets.all(25.0),
@@ -181,7 +181,7 @@ class _AddServiceState extends State<AddService> {
                 style: kTextinfo,
               ),
             ),
-            //add photo////////////////////////////
+            //------------------------------add photo---------------------------
             GestureDetector(
               onTap: () => getImage(ImageSource.gallery),
               child: Container(

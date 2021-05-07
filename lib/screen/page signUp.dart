@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:syriaonline/service/postApi.dart';
 import 'page%20choose.dart';
 import 'page%20login.dart';
 import 'package:syriaonline/utils/allUrl.dart';
@@ -26,25 +27,20 @@ class _SignUPState extends State<SignUP> {
 
   final signupformKey = new GlobalKey<FormState>();
 
-  // register sign up ////////////////
-  void register() async {
-    var firstName = firstNameController.text;
-    var lastName = lastNameController.text;
-    var email = emailController.text;
-    var phone = phoneController.text;
-    var passowrd = passwordController.text;
+  //-------------------------register sign up ----------------------------------
 
+  void register() async {
     if (signupformKey.currentState.validate()) {
       var url = Uri.parse(account);
       setState(() {
         loading = true;
       });
       var data = {
-        "first_name": firstName,
-        "last_name": lastName,
-        "e_mail": email,
-        "user_phone_number": phone,
-        "passowrd": passowrd,
+        "first_name": firstNameController.text,
+        "last_name": lastNameController.text,
+        "e_mail": emailController.text,
+        "user_phone_number": phoneController.text,
+        "passowrd": passwordController.text,
         'account_type_id': '2',
       };
 
@@ -66,14 +62,14 @@ class _SignUPState extends State<SignUP> {
     }
   }
 
-  //shared preferences////////////////////
+  //------------------shared preferences----------------------------------------
   savepref(
       String firstName, String lastName, String email, int accountId) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString('first_name', firstName);
     preferences.setString('last_name', lastName);
     preferences.setString('e_mail', email);
-    preferences.setString('account_id', '$accountId');
+    preferences.setString('account_id', accountId.toString());
 
     // مشان اتاكد
     print(preferences.getString('first_name'));
@@ -249,7 +245,8 @@ class _SignUPState extends State<SignUP> {
                                 ),
                               ),
 
-                              //////////////////////////////////////////////
+                              //------------------------------button Sign Up----------------
+
                               SizedBox(height: 40),
                               ReusableRaisedButton(
                                 onpressed: () {
@@ -258,7 +255,10 @@ class _SignUPState extends State<SignUP> {
                                 text: 'SignUp',
                                 color: kgradientColor,
                               ),
+                              //------------------------------button login----------------
+
                               SizedBox(height: 20),
+
                               InkWell(
                                 onTap: () {
                                   Navigator.of(context)

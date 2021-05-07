@@ -10,16 +10,11 @@ void main() async {
   var firstname = preferences.getString('first_name');
   var lastname = preferences.getString('last_name');
 
-  // runApp(firstname != null && lastname != null ? Home() : Sign());
-  runApp(Test());
+  runApp(firstname != null && lastname != null ? Home() : Sign());
+  // runApp(Test());
 }
 
-class Home extends StatefulWidget {
-  @override
-  HomeState createState() => HomeState();
-}
-
-class HomeState extends State<Home> {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,13 +24,7 @@ class HomeState extends State<Home> {
   }
 }
 
-class Sign extends StatefulWidget {
-  @override
-  SignState createState() => SignState();
-}
-
-class SignState extends State<Sign> {
-  @override
+class Sign extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -44,15 +33,7 @@ class SignState extends State<Sign> {
   }
 }
 
-class Test extends StatefulWidget {
-  Test({Key key}) : super(key: key);
-
-  @override
-  _TestState createState() => _TestState();
-}
-
-class _TestState extends State<Test> {
-  @override
+class Test extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
