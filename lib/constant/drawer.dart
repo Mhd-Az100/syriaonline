@@ -82,15 +82,6 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           InkWell(
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ServiceInfo(),
-            )),
-            child: ListTile(
-              title: Text('Details demo'),
-              leading: Icon(Icons.post_add_rounded),
-            ),
-          ),
-          InkWell(
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => CategoryListPage(),
             )),
             child: ListTile(

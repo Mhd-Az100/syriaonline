@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/////////////////////////////card////////////////////////////////////////
+//--------------------------------------card------------------------------------
 
 final kCardColor = LinearGradient(
   begin: Alignment.topLeft,
@@ -13,7 +13,7 @@ final kCardHomeColor = Color(0xA4FFFAFA);
 final kTitleCardText = GoogleFonts.alegreya(
     fontSize: 35, fontWeight: FontWeight.bold, color: Color(0xFFF3C52E));
 
-/////////////////////////////Appbar////////////////////////////////////////
+//------------------------------------Appbar------------------------------------
 
 final kTitleAppbarStyle = GoogleFonts.pacifico(
   fontSize: 20,
@@ -27,7 +27,7 @@ final kTitleTextBody = GoogleFonts.pacifico(
   color: Colors.white,
 );
 
-/////////////////////////////body////////////////////////////////////////
+//--------------------------------------body------------------------------------
 
 final kTextBody = GoogleFonts.petrona(fontSize: 17, color: Colors.black);
 final kBackTextColor = Color(0xFFF3C52E);
@@ -44,13 +44,13 @@ final kTextinfo = TextStyle();
 final kColorbackCircleAvatar = Color(0xFF58637A);
 final kBackCardColordrawer = Color(0xFF0880D1);
 
-/////////////////////////////button////////////////////////////////////////
+//------------------------------------button------------------------------------
 
 final kButtonColor = Color(0xFF3159DA);
 final kTextButton = GoogleFonts.petrona(
     fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold);
 
-//login////////////////////////////////////////////////////
+//-------------------------------------login------------------------------------
 
 const kBottomContainerHight = 30.0;
 const klabelColor = Color(0xFFF3C52E);
@@ -61,7 +61,7 @@ const kLabelTextStyle = TextStyle(
   color: Color(0xFFA5EAEE),
 );
 
-//signup/////////////////////////////////////////////////////////
+//------------------------------------signup------------------------------------
 
 const kTitleTextStyle = TextStyle(
   fontSize: 35,
