@@ -4,3 +4,4 @@
 3-تمرير service_id لصفحة  pageComment بواسطة الباني مشان اعرض من api ال comments يلي بتملك نفس ال service_id
 4-تمرير بواسطة shared preferences و ربط account_id ليجبلي اسم صاحب الخدمة عن طريقو 
 5-نفس الحكي لgoogle map
+6-send photo to data from add comment & add service
