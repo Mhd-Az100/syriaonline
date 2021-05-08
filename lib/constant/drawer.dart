@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:syriaonline/screen/page%20service%20details.dart';
+import 'package:syriaonline/screen/page%20service%20info.dart';
 import '../screen/page%20categorylist.dart';
 
 import '../screen/page add Service.dart';
@@ -82,7 +82,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           InkWell(
             onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => Details(),
+              builder: (context) => ServiceInfo(),
             )),
             child: ListTile(
               title: Text('Details demo'),

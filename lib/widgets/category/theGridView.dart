@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syriaonline/screen/page%20service%20details.dart';
+import 'package:syriaonline/screen/page%20service%20info.dart';
 import 'restaurantS.dart';
 
 class RS extends StatelessWidget {
@@ -41,7 +41,7 @@ class ReusubleCard extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => Details(),
+              builder: (context) => ServiceInfo(),
             ),
           );
         },

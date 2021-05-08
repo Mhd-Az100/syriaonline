@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:syriaonline/service/postApi.dart';
 import 'page%20choose.dart';
 import 'page%20login.dart';
 import 'package:syriaonline/utils/allUrl.dart';

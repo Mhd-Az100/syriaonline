@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/model/model%20comment.dart';
 import 'package:syriaonline/service/commentApi.dart';
@@ -18,11 +17,7 @@ class _PageCommentState extends State<PageComment> {
   final commentformKey = new GlobalKey<FormState>();
   String commented;
   var iduser;
-  var firstname;
 
-  var lastname;
-
-  var email;
   getpref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
