@@ -55,8 +55,9 @@ class CategoryListPage extends StatelessWidget {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ServiceView(
-                                      categoreis.serviceCatogaryId,
-                                      categoreis.servicesCatogaryName),
+                                      id: categoreis.serviceCatogaryId,
+                                      categoryName:
+                                          categoreis.servicesCatogaryName),
                                 ),
                               );
                             },

@@ -7,7 +7,7 @@ import 'package:syriaonline/widgets/category/gridViewCards.dart';
 import 'package:syriaonline/widgets/category/horisantal.dart';
 
 class ServiceView extends StatefulWidget {
-  ServiceView(this.id, this.categoryName);
+  ServiceView({this.id, this.categoryName});
   int id;
   String categoryName;
 
@@ -30,14 +30,15 @@ class _ServiceViewState extends State<ServiceView> {
   void initState() {
     super.initState();
     fdata();
-    print(services);
+    GetServiceApi(
+        n: widget.id.toString()); //////---------------teeestttt---------
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.id}'),
+        title: Text(widget.categoryName),
         backgroundColor: Color(0xFFFAB028),
         actions: [
           IconButton(
