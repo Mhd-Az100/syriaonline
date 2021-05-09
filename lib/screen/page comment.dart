@@ -88,6 +88,7 @@ class _PageCommentState extends State<PageComment> {
                   } else {
                     return ListView.builder(
                       padding: EdgeInsets.only(bottom: 120),
+                      itemCount: comments.length,
                       itemBuilder: (BuildContext ctx, int index) {
                         RateModel commentss = snapshot.data[index];
                         return Column(
@@ -110,7 +111,6 @@ class _PageCommentState extends State<PageComment> {
                           ],
                         );
                       },
-                      itemCount: comments.length,
                     );
                   }
                 },

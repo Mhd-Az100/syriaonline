@@ -4,7 +4,7 @@ import '../constant/constent.dart';
 import '../constant/drawer.dart';
 import 'package:jumping_bottom_nav_bar/jumping_bottom_nav_bar.dart';
 import 'page comment.dart';
-import 'page googlemap.dart';
+import 'page googlemap view.dart';
 
 class ServiceInfo extends StatefulWidget {
   @override

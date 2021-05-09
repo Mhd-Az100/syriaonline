@@ -31,6 +31,8 @@ final kTitleTextBody = GoogleFonts.pacifico(
 
 final kTextBody = GoogleFonts.petrona(fontSize: 17, color: Colors.black);
 final kBackTextColor = Color(0xFFF3C52E);
+final kTextBodyApp = GoogleFonts.petrona(
+    fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold);
 
 final kTitleText = GoogleFonts.pacifico(
   fontSize: 30,
@@ -39,7 +41,7 @@ final kTitleText = GoogleFonts.pacifico(
 final kTextFaild = TextStyle();
 final kTextinfo = TextStyle();
 
-/////////////////////////////drawer////////////////////////////////////////
+//---------------------------------drawer---------------------------------------
 
 final kColorbackCircleAvatar = Color(0xFF58637A);
 final kBackCardColordrawer = Color(0xFF0880D1);

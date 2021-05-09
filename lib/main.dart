@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/screen/page%20comment.dart';
-import 'package:syriaonline/screen/page%20googlemap.dart';
 import 'package:syriaonline/screen/page%20signUp.dart';
 import 'screen/page choose.dart';
 
@@ -38,7 +37,7 @@ class Test extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Googlemaps(),
+      home: PageComment(),
     );
   }
 }

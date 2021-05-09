@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:syriaonline/screen/page%20service%20info.dart';
+import 'package:syriaonline/screen/Page%20AddService.dart';
 import '../screen/page%20categorylist.dart';
-
-import '../screen/page add Service.dart';
 import '../screen/page choose.dart';
 import '../screen/page login.dart';
 import 'constent.dart';

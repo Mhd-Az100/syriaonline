@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:syriaonline/constant/drawer.dart';
 import 'package:syriaonline/model/model%20services.dart';
 import 'package:syriaonline/service/ServiceApi.dart';
-import '../widgets/category/horisantal.dart';
-import '../widgets/category/theGridView.dart';
+import 'package:syriaonline/utils/allUrl.dart';
+import 'package:syriaonline/widgets/category/gridViewCards.dart';
+import 'package:syriaonline/widgets/category/horisantal.dart';
 
 class ServiceView extends StatefulWidget {
-  final int id;
-  final String categoryName;
   ServiceView(this.id, this.categoryName);
+  int id;
+  String categoryName;
 
   @override
   _ServiceViewState createState() => _ServiceViewState();
@@ -16,7 +17,6 @@ class ServiceView extends StatefulWidget {
 
 class _ServiceViewState extends State<ServiceView> {
   List<ServicesModel> services = [];
-
   Future<List<ServicesModel>> fdata() async {
     GetServiceApi type = GetServiceApi();
     await type.getserv();
@@ -27,10 +27,17 @@ class _ServiceViewState extends State<ServiceView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    fdata();
+    print(services);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.categoryName),
+        title: Text('${widget.id}'),
         backgroundColor: Color(0xFFFAB028),
         actions: [
           IconButton(
@@ -52,7 +59,37 @@ class _ServiceViewState extends State<ServiceView> {
             padding: EdgeInsets.only(top: 15, left: 10),
             child: Text('Resent :', style: TextStyle(color: Colors.grey)),
           ),
-          Container(child: RS()),
+          Container(
+              child: FutureBuilder<List<ServicesModel>>(
+                  future: fdata(),
+                  builder: (BuildContext ctx,
+                      AsyncSnapshot<List<ServicesModel>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(
+                          child: Center(child: CircularProgressIndicator()));
+                    } else {
+                      return GridView.builder(
+                          shrinkWrap: true,
+                          itemCount: services.length,
+                          gridDelegate:
+                              new SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 2 / 2,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
+                          ),
+                          itemBuilder: (context, index) {
+                            ServicesModel c = snapshot.data[index];
+                            return ReusubleCard(
+                              img: Image.network(
+                                c.picture,
+                                fit: BoxFit.cover,
+                              ),
+                              name: c.serviceName,
+                            );
+                          });
+                    }
+                  }))
         ]),
       ]),
     );

@@ -5,3 +5,7 @@
 4-تمرير بواسطة shared preferences و ربط account_id ليجبلي اسم صاحب الخدمة عن طريقو 
 5-نفس الحكي لgoogle map
 6-send photo to data from add comment & add service
+7-data rate from 5
+8-save marker for some service in google map 
+9-get all marker service by service_category_id sort by current location 
+ 

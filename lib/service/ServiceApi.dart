@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import '../model/model services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -6,7 +5,10 @@ import 'dart:convert';
 import 'package:syriaonline/utils/allUrl.dart';
 
 class GetServiceApi {
-  var url = Uri.parse(services);
+  final String id;
+  final String categoryName;
+  GetServiceApi({this.id, this.categoryName});
+  var url = Uri.parse(catogarytype+'2');
 
   Future<List<ServicesModel>> getserv() async {
     List<ServicesModel> servlist = [];

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syriaonline/screen/page%20service%20info.dart';
 
 class ReusubleCard extends StatelessWidget {
   final img;
@@ -7,7 +8,13 @@ class ReusubleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ServiceInfo(),
+            ),
+          );
+        },
         child: GridTile(
           child: Container(
             decoration: BoxDecoration(

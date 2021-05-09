@@ -1,6 +1,7 @@
 class ServicesModel {
   ServicesModel({
     this.serviceId,
+    this.accountId,
     this.serviceName,
     this.serviceDescription,
     this.x,
@@ -14,6 +15,7 @@ class ServicesModel {
   });
 
   final int serviceId;
+  final String accountId;
   final String serviceName;
   final String serviceDescription;
   final String x;
@@ -29,6 +31,7 @@ class ServicesModel {
 
   factory ServicesModel.fromJson(Map<String, dynamic> json) => ServicesModel(
         serviceId: json["service_id"],
+        accountId: json["account_id"],
         serviceName: json["service_name"],
         serviceDescription: json["service_description"],
         x: json["x"],
