@@ -42,11 +42,11 @@ class _PageCommentState extends State<PageComment> {
   // }
 
   //-------------------------------------get comment----------------------------
-  List<RateModel> comments = [];
-  Future<List<RateModel>> fdata() async {
+  List<CommentModel> comments = [];
+  Future<List<CommentModel>> fdata() async {
     GetCommentsApi com = GetCommentsApi();
 
-    List<RateModel> coms = await com.getRate();
+    List<CommentModel> coms = await com.getRate();
     comments = coms;
     return comments;
   }
@@ -54,7 +54,7 @@ class _PageCommentState extends State<PageComment> {
   //-------------------------------------add comment----------------------------
 
   addComm(context, Map map) async {
-    bool result = await postdata(rate, map);
+    bool result = await postdata(comment, map);
   }
 
   void initState() {
@@ -81,7 +81,7 @@ class _PageCommentState extends State<PageComment> {
               child: FutureBuilder(
                 future: fdata(),
                 builder: (BuildContext ctxx,
-                    AsyncSnapshot<List<RateModel>> snapshot) {
+                    AsyncSnapshot<List<CommentModel>> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Container(
                         child: Center(child: CircularProgressIndicator()));
@@ -90,7 +90,7 @@ class _PageCommentState extends State<PageComment> {
                       padding: EdgeInsets.only(bottom: 120),
                       itemCount: comments.length,
                       itemBuilder: (BuildContext ctx, int index) {
-                        RateModel commentss = snapshot.data[index];
+                        CommentModel commentss = snapshot.data[index];
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [

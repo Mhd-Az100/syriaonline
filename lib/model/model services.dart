@@ -10,8 +10,6 @@ class ServicesModel {
     this.picture,
     this.servicePhoneNumber,
     this.serviceCatogaryId,
-    this.createdAt,
-    this.updatedAt,
   });
 
   final int serviceId;
@@ -24,8 +22,6 @@ class ServicesModel {
   final String picture;
   final String servicePhoneNumber;
   final String serviceCatogaryId;
-  final DateTime createdAt;
-  final DateTime updatedAt;
 
 //to get service///////////////
 
@@ -40,8 +36,6 @@ class ServicesModel {
         picture: json["picture"],
         servicePhoneNumber: json["service_phone_number"],
         serviceCatogaryId: json["service_catogary_id"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
       );
 //to add service///////////////
   Map<String, dynamic> toJson() => {
@@ -54,7 +48,5 @@ class ServicesModel {
         "picture": picture,
         "service_phone_number": servicePhoneNumber,
         "service_catogary_id": serviceCatogaryId,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
       };
 }

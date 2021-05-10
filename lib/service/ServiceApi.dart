@@ -12,7 +12,7 @@ class GetServiceApi {
   Future<List<ServicesModel>> getserv() async {
     print(n);
     List<ServicesModel> servlist = [];
-    var url = Uri.parse(catogarytype + n);
+    var url = Uri.parse(catogarytype);
     http.Response res = await http.get(url);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
