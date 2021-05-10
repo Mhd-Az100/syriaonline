@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/model/model%20comment.dart';
 import 'package:syriaonline/service/commentApi.dart';
@@ -26,20 +28,28 @@ class _PageCommentState extends State<PageComment> {
   }
   //-------------------------------------get img from device--------------------
 
-  // File _image;
-  // final picker = ImagePicker();
+  File _file;
+  final picker = ImagePicker();
 
-  // Future getImage(x) async {
-  //   final pickedFile = await picker.getImage(source: x);
+  Future getImage(x) async {
+    final pickedFile = await picker.getImage(source: x);
 
-  //   setState(() {
-  //     if (pickedFile != null) {
-  //       _image = File(pickedFile.path);
-  //     } else {
-  //       print('No image selected.');
-  //     }
-  //   });
-  // }
+    setState(() {
+      if (pickedFile != null) {
+        _file = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future uploadimg() async {
+    if (_file == null) return;
+    String base64 = base64Encode(_file.readAsBytesSync());
+    String imgname = _file.path.split('/').last;
+    print(base64);
+    print(imgname);
+  }
 
   //-------------------------------------get comment----------------------------
   List<CommentModel> comments = [];
@@ -182,6 +192,24 @@ class _PageCommentState extends State<PageComment> {
                             ),
                           ),
                         ),
+                        //  IconButton(icon: Icon(Icons.image),
+                        //  onPressed:   () => getImage(ImageSource.gallery),
+                        //  ),
+
+                        //   child: Container(
+                        //     margin: EdgeInsets.all(0),
+                        //     width: MediaQuery.of(context).size.width,
+                        //     height: MediaQuery.of(context).size.width,
+                        //     decoration: BoxDecoration(),
+                        //     padding: EdgeInsets.all(5.0),
+                        //     child: _file == null
+                        //         ? Icon(
+                        //             Icons.add_photo_alternate_outlined,
+                        //             color: Color(0xFF349DAF),
+                        //           )
+                        //         : Image.file(_file),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],

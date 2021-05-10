@@ -13,6 +13,8 @@ class Detailes extends StatefulWidget {
 class _DetailesState extends State<Detailes> {
   var iduser;
   double ratingX = 2.5;
+//-------------------------------------get id user----------------------------
+
   getpref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {

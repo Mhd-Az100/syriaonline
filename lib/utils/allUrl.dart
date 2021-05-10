@@ -8,7 +8,7 @@ String servicescatogary =
     "https://gp-tcc.000webhostapp.com/public/api/servicescatogary";
 
 String catogarytype =
-    "https://gp-tcc.000webhostapp.com/public/api/catogarytype/1";
+    "https://gp-tcc.000webhostapp.com/public/api/catogarytype/";
 
 String accountregistrations =
     "https://gp-tcc.000webhostapp.com/public/api/accountregistrations";

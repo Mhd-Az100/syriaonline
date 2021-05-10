@@ -17,48 +17,33 @@ class HorisantalListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 60.0,
-      child: FutureBuilder<List<CategoryModel>>(
-        future: fdata(),
-        builder:
-            (BuildContext ctx, AsyncSnapshot<List<CategoryModel>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Container(child: Center(child: CircularProgressIndicator()));
-          } else {
-            return ListView.builder(
-              padding: EdgeInsets.only(bottom: 120),
-              itemBuilder: (BuildContext ctx, int index) {
-                CategoryModel categoreis = snapshot.data[index];
-                return ReusubleTextButton(
-                    textChild: categoreis.servicesCatogaryName,
-                    categ: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ServiceView(
-                              id: categoreis.serviceCatogaryId,
-                              categoryName: categoreis.servicesCatogaryName),
-                        ),
-                      );
-                    });
-              },
-              itemCount: categories.length,
-            );
-          }
-        },
-      ),
-
-      //   child: ListView(
-      //     scrollDirection: Axis.horizontal,
-      //     children: [
-      //       ReusubleTextButton(textChild: 'Hotels', categ: () {}),
-      //       ReusubleTextButton(textChild: 'Restaurants', categ: () {}),
-      //       ReusubleTextButton(textChild: 'Hospitals', categ: () {}),
-      //       ReusubleTextButton(textChild: 'Pharmacies', categ: () {}),
-      //       ReusubleTextButton(textChild: 'Schools', categ: () {}),
-      //       ReusubleTextButton(textChild: 'Centers', categ: () {}),
-      //     ],
-      //   ),
+    return FutureBuilder<List<CategoryModel>>(
+      future: fdata(),
+      builder: (BuildContext ctx, AsyncSnapshot<List<CategoryModel>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container();
+        } else {
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemBuilder: (BuildContext ctx, int index) {
+              CategoryModel categoreis = snapshot.data[index];
+              return ReusubleTextButton(
+                  textChild: categoreis.servicesCatogaryName,
+                  categ: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ServiceView(
+                            id: categoreis.serviceCatogaryId,
+                            categoryName: categoreis.servicesCatogaryName),
+                      ),
+                    );
+                  });
+            },
+            itemCount: categories.length,
+          );
+        }
+      },
     );
   }
 }

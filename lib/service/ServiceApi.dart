@@ -1,5 +1,3 @@
-import 'package:syriaonline/screen/page%20category%20view.dart';
-
 import '../model/model services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -12,7 +10,7 @@ class GetServiceApi {
   Future<List<ServicesModel>> getserv() async {
     print(n);
     List<ServicesModel> servlist = [];
-    var url = Uri.parse(catogarytype);
+    var url = Uri.parse(catogarytype + n);
     http.Response res = await http.get(url);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);

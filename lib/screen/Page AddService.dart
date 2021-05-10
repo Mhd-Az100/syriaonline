@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -19,7 +21,7 @@ class _AddServiceState extends State<AddService> {
 
   //----------------------img from device---------------------------------------
 
-  File _image;
+  File _file;
   final picker = ImagePicker();
 
   Future getImage(x) async {
@@ -27,7 +29,7 @@ class _AddServiceState extends State<AddService> {
 
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        _file = File(pickedFile.path);
       } else {
         print('No image selected.');
       }
@@ -45,6 +47,14 @@ class _AddServiceState extends State<AddService> {
     bool result = await postdata(services, map);
     print(result);
     print(map);
+  }
+
+  Future uploadimg() async {
+    if (_file == null) return;
+    String base64 = base64Encode(_file.readAsBytesSync());
+    String imgname = _file.path.split('/').last;
+    print(base64);
+    print(imgname);
   }
 
   void initState() {
@@ -252,13 +262,13 @@ class _AddServiceState extends State<AddService> {
                   height: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(),
                   padding: EdgeInsets.all(5.0),
-                  child: _image == null
+                  child: _file == null
                       ? Icon(
                           Icons.add_photo_alternate_outlined,
                           size: 100,
                           color: Color(0xFF349DAF),
                         )
-                      : Image.file(_image),
+                      : Image.file(_file),
                 ),
               ),
               SizedBox(
@@ -292,6 +302,7 @@ class _AddServiceState extends State<AddService> {
                         addseRvice(context, addservices);
                         print("Add");
                         print(addseRvice);
+                        uploadimg();
                       });
                       // Validate will return true if the form is valid, or false if
                       // the form is invalid.
