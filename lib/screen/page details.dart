@@ -38,7 +38,7 @@ class _DetailesState extends State<Detailes> {
     return Scaffold(
       body: ListView(
         children: [
-          //details service/////////////////////////
+          //--------------------details service---------------------------------
 
           Container(
             height: 250,
@@ -78,7 +78,7 @@ class _DetailesState extends State<Detailes> {
           SizedBox(
             height: 25,
           ),
-          //stars rate/////////////////////////
+          //-------------------------------stars rate--------------------------
 
           Center(
             child: SmoothStarRating(
@@ -107,7 +107,7 @@ class _DetailesState extends State<Detailes> {
           SizedBox(
             height: 25,
           ),
-          //descrubtion/////////////////////////
+          //-----------------------------descrubtion----------------------------
 
           Container(
             width: double.infinity,
