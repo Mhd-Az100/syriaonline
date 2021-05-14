@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:syriaonline/constant/constent.dart';
+import 'package:syriaonline/model/model%20services.dart';
+import 'package:syriaonline/screen/page%20details.dart';
+import 'package:syriaonline/service/ServiceApi.dart';
 
 const kGoogleApiKey = "AIzaSyDELVyIyOWK-s4frDfUmU81fBESRMsEkRE";
 
@@ -12,6 +15,29 @@ class Googlemaps extends StatefulWidget {
 
 class _GooglemapsState extends State<Googlemaps> {
   GoogleMapController mapController;
+//-------------------------------get markers------------------------------------
+  List<Marker> markers = [];
+  List<ServicesModel> allserv;
+  allServiceMarker() async {
+    GetServiceApi getServiceApi = new GetServiceApi();
+    List<ServicesModel> servLst = await getServiceApi.getserv();
+    setState(() {
+      allserv = servLst;
+    });
+    for (ServicesModel item in allserv) {
+      markers.add(Marker(
+          markerId: MarkerId(item.serviceId.toString()),
+          position: LatLng(double.parse(item.x), double.parse(item.y)),
+          infoWindow: InfoWindow(
+              title: "${item.serviceName}",
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Detailes()));
+              })));
+      print('************************************************');
+      print(item.x);
+    }
+  }
   //----------------------------map type----------------------------------------
 
   var maptype = MapType.normal;
@@ -36,6 +62,13 @@ class _GooglemapsState extends State<Googlemaps> {
     zoom: 15,
   );
   @override
+  void initState() {
+    super.initState();
+
+    allServiceMarker();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
@@ -49,6 +82,7 @@ class _GooglemapsState extends State<Googlemaps> {
             });
             currentlocatorPosition();
           },
+          markers: markers.toSet(),
           myLocationEnabled: true,
           zoomGesturesEnabled: true,
           zoomControlsEnabled: true,

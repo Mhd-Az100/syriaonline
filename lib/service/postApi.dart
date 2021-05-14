@@ -6,7 +6,7 @@ Future<bool> postdata(String pathapi, Map map) async {
 
   var response = await http.post(url, body: map);
 
-  if (response.statusCode == 200) {
+  if (response.statusCode == 201) {
     return true;
   } else {
     return false;

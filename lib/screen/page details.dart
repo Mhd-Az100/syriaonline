@@ -11,9 +11,9 @@ class Detailes extends StatefulWidget {
 }
 
 class _DetailesState extends State<Detailes> {
-  var iduser;
   double ratingX = 2.5;
 //-------------------------------------get id user----------------------------
+  var iduser;
 
   getpref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -30,7 +30,6 @@ class _DetailesState extends State<Detailes> {
 
   void initState() {
     getpref();
-    // print(preferences.getString('account_id'));
   }
 
   @override

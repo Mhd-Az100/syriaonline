@@ -17,6 +17,8 @@ class _PageCommentState extends State<PageComment> {
   TextEditingController commentController = TextEditingController();
   final commentformKey = new GlobalKey<FormState>();
   String commented;
+  //-------------------------------------get id user----------------------------
+
   var iduser;
 
   getpref() async {
@@ -68,8 +70,8 @@ class _PageCommentState extends State<PageComment> {
 
   void initState() {
     super.initState();
+
     getpref();
-    // print(preferences.getString('account_id'));
   }
 
   @override
@@ -100,6 +102,7 @@ class _PageCommentState extends State<PageComment> {
                       itemCount: comments.length,
                       itemBuilder: (BuildContext ctx, int index) {
                         CommentModel commentss = snapshot.data[index];
+                        print(commentss.picture);
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -111,12 +114,28 @@ class _PageCommentState extends State<PageComment> {
                                 margin: EdgeInsets.only(top: 17),
                                 child: Text(commentss.accountId),
                               ),
-                              subtitle: Container(
-                                padding: EdgeInsets.all(10),
-                                child: Text(commentss.comment),
-                                color: Colors.grey[100],
+                              subtitle: Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(commentss.comment),
+                                    color: Colors.grey[100],
+                                  ),
+                                  if (commentss.picture != null)
+                                    Image.network(
+                                      commentss.picture,
+                                      fit: BoxFit.cover,
+                                    ),
+                                ],
                               ),
                             ),
+                            // Container(
+                            //   width: 50,
+                            //   height: 50,
+                            //   child: Image.network(
+                            //     commentss.picture,
+                            //   ),
+                            // )
                           ],
                         );
                       },
@@ -127,88 +146,117 @@ class _PageCommentState extends State<PageComment> {
             ),
             //--------------------------------add comment-----------------------
             Positioned(
-              bottom: 20,
+              bottom: 0,
               child: Container(
+                color: Colors.white,
                 height: 85,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
                     Row(
                       children: [
-                        Container(
-                          padding: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border(top: BorderSide(color: Colors.grey))),
-                          width: MediaQuery.of(context).size.width,
-                          child: Form(
-                            key: commentformKey,
-                            child: TextFormField(
-                              controller: commentController,
-                              validator: (val) =>
-                                  val.length == 0 ? 'your not commented' : null,
-                              onSaved: (val) => commented = val,
-                              decoration: InputDecoration(
-                                hintText: 'Comment',
-                                filled: true,
-                                fillColor: Colors.grey[200],
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide:
-                                      BorderSide(style: BorderStyle.none),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide:
-                                      BorderSide(style: BorderStyle.none),
-                                ),
-                                errorBorder: InputBorder.none,
-                                suffixIcon: IconButton(
-                                    icon: Icon(Icons.send_outlined),
-                                    //----------------comment for data-------------------
-                                    onPressed: () {
-                                      // ---------map data---------------
-                                      Map commts = {
-                                        'comment': commentController.text,
-                                        'service_id': '4',
-                                        'account_id': iduser.toString(),
-                                      };
-                                      print(commts);
-                                      if (commentformKey.currentState
-                                          .validate()) {
-                                        setState(() {
-                                          addComm(context, commts);
-                                        });
-                                        commentController.text = '';
-                                      }
-                                    }),
-                                contentPadding: EdgeInsets.all(8),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.yellow),
-                                  borderRadius: BorderRadius.circular(25),
+                        Expanded(
+                          flex: 4,
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    top: BorderSide(color: Colors.grey))),
+                            width: MediaQuery.of(context).size.width,
+                            child: Form(
+                              key: commentformKey,
+                              child: TextFormField(
+                                controller: commentController,
+                                validator: (val) => val.length == 0
+                                    ? 'your not commented'
+                                    : null,
+                                onSaved: (val) => commented = val,
+                                decoration: InputDecoration(
+                                  hintText: 'Comment',
+                                  filled: true,
+                                  fillColor: Colors.grey[200],
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide:
+                                        BorderSide(style: BorderStyle.none),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide:
+                                        BorderSide(style: BorderStyle.none),
+                                  ),
+                                  errorBorder: InputBorder.none,
+                                  contentPadding: EdgeInsets.all(8),
+                                  border: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.yellow),
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        //  IconButton(icon: Icon(Icons.image),
-                        //  onPressed:   () => getImage(ImageSource.gallery),
-                        //  ),
+                        Expanded(
+                          child: IconButton(
+                            icon: Icon(Icons.image),
+                            onPressed: () => getImage(ImageSource.gallery),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.all(0),
+                            decoration: BoxDecoration(),
+                            padding: EdgeInsets.all(5.0),
+                            child:
+                                _file == null ? Container() : Image.file(_file),
+                          ),
+                        ),
+                        Expanded(
+                          child: IconButton(
+                              icon: Icon(Icons.send_outlined),
+                              //----------------comment for data-------------------
+                              onPressed: () {
+                                // ---------map data---------------
+                                if (_file != null) {
+                                  String base64 =
+                                      base64Encode(_file.readAsBytesSync());
+                                  String imgname = _file.path.split('/').last;
 
-                        //   child: Container(
-                        //     margin: EdgeInsets.all(0),
-                        //     width: MediaQuery.of(context).size.width,
-                        //     height: MediaQuery.of(context).size.width,
-                        //     decoration: BoxDecoration(),
-                        //     padding: EdgeInsets.all(5.0),
-                        //     child: _file == null
-                        //         ? Icon(
-                        //             Icons.add_photo_alternate_outlined,
-                        //             color: Color(0xFF349DAF),
-                        //           )
-                        //         : Image.file(_file),
-                        //   ),
-                        // ),
+                                  Map commts = {
+                                    'comment': commentController.text,
+                                    'service_id': '4',
+                                    'account_id': iduser.toString(),
+                                    'imgname': imgname,
+                                    'base64': base64,
+                                  };
+
+                                  if (commentformKey.currentState.validate()) {
+                                    setState(() {
+                                      addComm(context, commts);
+                                    });
+                                    commentController.text = '';
+                                    _file = null;
+                                    print(commts);
+                                  }
+                                } else {
+                                  Map commts = {
+                                    'comment': commentController.text,
+                                    'service_id': '6',
+                                    'account_id': iduser.toString(),
+                                  };
+
+                                  if (commentformKey.currentState.validate()) {
+                                    setState(() {
+                                      addComm(context, commts);
+                                    });
+                                    commentController.text = '';
+                                    _file = null;
+                                    print(commts);
+                                  }
+                                }
+                              }),
+                        ),
                       ],
                     ),
                   ],

@@ -8,11 +8,13 @@
 
    <application
         android:label="syriaonline"
+   
         android:icon="@mipmap/ic_launcher">
 
-    <!-- this is  googleMap-->>
+    <!-- this is  googleMap--> >
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyDELVyIyOWK-s4frDfUmU81fBESRMsEkRE"/>
+  
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

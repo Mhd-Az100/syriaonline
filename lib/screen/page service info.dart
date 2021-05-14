@@ -7,6 +7,8 @@ import 'page comment.dart';
 import 'page googlemap view.dart';
 
 class ServiceInfo extends StatefulWidget {
+  int id;
+  ServiceInfo({this.id});
   @override
   _ServiceInfoState createState() => _ServiceInfoState();
 }
@@ -14,7 +16,7 @@ class ServiceInfo extends StatefulWidget {
 class _ServiceInfoState extends State<ServiceInfo> {
   List<Map<String, Object>> _pages = [
     {},
-    //pagecomment/////////////////////////
+    //--------------------------------pagecomment-------------------------------
     {
       'page': PageComment(),
       'title': Text(
@@ -22,7 +24,7 @@ class _ServiceInfoState extends State<ServiceInfo> {
         style: kTitleAppbarStyle,
       )
     },
-    //details/////////////////////////
+    //----------------------------------details---------------------------------
 
     {
       'page': Detailes(),
@@ -31,8 +33,7 @@ class _ServiceInfoState extends State<ServiceInfo> {
         style: kTitleAppbarStyle,
       )
     },
-    //google map/////////////////////////
-
+    //-----------------------------google map-----------------------------------
     {
       'page': Googlemaps(),
       'title': Text(

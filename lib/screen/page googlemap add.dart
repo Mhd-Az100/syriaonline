@@ -17,13 +17,13 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
 
   var maptype = MapType.normal;
   //-----------------------------for marker-------------------------------------
+  Marker marker = Marker(markerId: MarkerId("0"));
+  int id = Random().nextInt(100);
+  LatLng fposition;
   List<Marker> markers = [];
   addmarker(cordinate) {
-    int id = Random().nextInt(100);
     setState(() {
-      markers = [];
-      markers
-          .add(Marker(markerId: MarkerId(id.toString()), position: cordinate));
+      marker = Marker(markerId: MarkerId(id.toString()), position: cordinate);
     });
   }
 
@@ -63,13 +63,18 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
           zoomGesturesEnabled: true,
           zoomControlsEnabled: true,
           //--------------------------marker------------------------------------
-          markers: markers.toSet(),
+          markers: marker != null ? <Marker>[marker].toSet() : null,
           onTap: (cordinate) async {
             mapController.animateCamera(CameraUpdate.newLatLng(cordinate));
             addmarker(cordinate);
+            print('/////////////////////////////////////////////////');
+
+            print(cordinate);
           },
           initialCameraPosition: _cameraPosition,
         ),
+        //---------------------------change map type----------------------------
+
         Positioned(
           bottom: 10,
           right: 100,
@@ -101,6 +106,33 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
             ),
           ),
         ),
+        //---------------------------save location------------------------------
+        Positioned(
+          bottom: 20,
+          left: 20,
+          child: Container(
+            width: 150,
+            height: 40,
+            child: ElevatedButton(
+              child: Text("Save"),
+              onPressed: () {
+                fposition = marker.position;
+                if (fposition != null) {
+                  Navigator.pop(context, fposition);
+                } else {
+                  print("postion is null");
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue[300],
+                onPrimary: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32.0),
+                ),
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
