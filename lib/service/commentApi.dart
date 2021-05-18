@@ -4,8 +4,12 @@ import 'package:syriaonline/model/model%20comment.dart';
 import 'package:syriaonline/utils/allUrl.dart';
 
 class GetCommentsApi {
-  var url = Uri.parse(comment);
+  String id;
+  GetCommentsApi({this.id});
   Future<List<CommentModel>> getRate() async {
+    var url = Uri.parse(commentId + id);
+    print('from comment api');
+    print(id);
     List<CommentModel> comlst = [];
 
     http.Response res = await http.get(url);

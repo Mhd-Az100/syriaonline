@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/model/model%20comment.dart';
+import 'package:syriaonline/screen/page%20service%20info.dart';
 import 'package:syriaonline/service/commentApi.dart';
 import 'package:syriaonline/service/postApi.dart';
 import 'package:syriaonline/utils/allUrl.dart';
@@ -11,6 +12,8 @@ import 'package:syriaonline/utils/allUrl.dart';
 class PageComment extends StatefulWidget {
   @override
   _PageCommentState createState() => _PageCommentState();
+  int id;
+  PageComment({this.id});
 }
 
 class _PageCommentState extends State<PageComment> {
@@ -55,7 +58,14 @@ class _PageCommentState extends State<PageComment> {
   //-------------------------------------get comment----------------------------
   List<CommentModel> comments = [];
   Future<List<CommentModel>> fdata() async {
-    GetCommentsApi com = GetCommentsApi();
+    //--------------get id from service info ---------------
+    ServiceInfo getid = ServiceInfo();
+    var iD = getid.idget();
+    //--------------- --------------- ---------------
+    GetCommentsApi com = GetCommentsApi(id: iD.toString());
+    print('form page comment');
+
+    print(iD);
 
     List<CommentModel> coms = await com.getRate();
     comments = coms;
@@ -70,7 +80,7 @@ class _PageCommentState extends State<PageComment> {
 
   void initState() {
     super.initState();
-
+    fdata();
     getpref();
   }
 
@@ -129,13 +139,6 @@ class _PageCommentState extends State<PageComment> {
                                 ],
                               ),
                             ),
-                            // Container(
-                            //   width: 50,
-                            //   height: 50,
-                            //   child: Image.network(
-                            //     commentss.picture,
-                            //   ),
-                            // )
                           ],
                         );
                       },
@@ -225,7 +228,7 @@ class _PageCommentState extends State<PageComment> {
 
                                   Map commts = {
                                     'comment': commentController.text,
-                                    'service_id': '4',
+                                    'service_id': '61',
                                     'account_id': iduser.toString(),
                                     'imgname': imgname,
                                     'base64': base64,
@@ -242,7 +245,7 @@ class _PageCommentState extends State<PageComment> {
                                 } else {
                                   Map commts = {
                                     'comment': commentController.text,
-                                    'service_id': '6',
+                                    'service_id': '61',
                                     'account_id': iduser.toString(),
                                   };
 

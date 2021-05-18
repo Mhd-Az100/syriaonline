@@ -4,12 +4,10 @@ import 'dart:convert';
 
 import 'package:syriaonline/utils/allUrl.dart';
 
-class GetServiceApi {
-  String n;
-  GetServiceApi({this.n});
-  Future<List<ServicesModel>> getserv() async {
+class GetServiceMarker {
+  Future<List<ServicesModel>> getmark() async {
     List<ServicesModel> servlist = [];
-    var url = Uri.parse(catogarytype + n);
+    var url = Uri.parse(services);
     http.Response res = await http.get(url);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);

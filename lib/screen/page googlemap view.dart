@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:syriaonline/constant/constent.dart';
 import 'package:syriaonline/model/model%20services.dart';
 import 'package:syriaonline/screen/page%20details.dart';
-import 'package:syriaonline/service/ServiceApi.dart';
+import 'package:syriaonline/service/getAllService.dart';
 
 const kGoogleApiKey = "AIzaSyDELVyIyOWK-s4frDfUmU81fBESRMsEkRE";
 
@@ -19,8 +19,8 @@ class _GooglemapsState extends State<Googlemaps> {
   List<Marker> markers = [];
   List<ServicesModel> allserv;
   allServiceMarker() async {
-    GetServiceApi getServiceApi = new GetServiceApi();
-    List<ServicesModel> servLst = await getServiceApi.getserv();
+    GetServiceMarker getServiceApi = new GetServiceMarker();
+    List<ServicesModel> servLst = await getServiceApi.getmark();
     setState(() {
       allserv = servLst;
     });
@@ -38,6 +38,7 @@ class _GooglemapsState extends State<Googlemaps> {
       print(item.x);
     }
   }
+
   //----------------------------map type----------------------------------------
 
   var maptype = MapType.normal;

@@ -1,6 +1,7 @@
 String rate = "https://gp-tcc.000webhostapp.com/public/api/rate";
-String comment =
+String commentId =
     "https://gp-tcc.000webhostapp.com/public/api/commentforthisservice/";
+String comment = "https://gp-tcc.000webhostapp.com/public/api/comment";
 
 String account = "https://gp-tcc.000webhostapp.com/public/api/account";
 
