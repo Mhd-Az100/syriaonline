@@ -9,19 +9,27 @@ import 'page googlemap view.dart';
 class ServiceInfo extends StatefulWidget {
   int id;
   ServiceInfo({this.id});
-  idget() {
-    var iD = this.id;
-    print('from idget');
-    print(iD);
+  // idget() {
+  //   var iD = this.id;
+  //   print('from idget');
+  //   print(iD);
 
-    return iD;
-  }
+  //   return iD;
+  // }
 
   @override
   _ServiceInfoState createState() => _ServiceInfoState();
 }
 
 class _ServiceInfoState extends State<ServiceInfo> {
+  @override
+  void initState() {
+    print('form page info');
+    print(widget.id);
+
+    super.initState();
+  }
+
   List<Map<String, Object>> _pages = [
     {},
     //--------------------------------pagecomment-------------------------------
@@ -56,14 +64,6 @@ class _ServiceInfoState extends State<ServiceInfo> {
     setState(() {
       indexpage = index;
     });
-  }
-
-  @override
-  void initState() {
-    print('form page info');
-    print(widget.id);
-
-    super.initState();
   }
 
   @override

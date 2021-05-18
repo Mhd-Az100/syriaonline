@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/model/model%20comment.dart';
+import 'package:syriaonline/provider/providerData.dart';
 import 'package:syriaonline/screen/page%20service%20info.dart';
 import 'package:syriaonline/service/commentApi.dart';
 import 'package:syriaonline/service/postApi.dart';
@@ -12,14 +14,19 @@ import 'package:syriaonline/utils/allUrl.dart';
 class PageComment extends StatefulWidget {
   @override
   _PageCommentState createState() => _PageCommentState();
-  int id;
-  PageComment({this.id});
 }
 
 class _PageCommentState extends State<PageComment> {
   TextEditingController commentController = TextEditingController();
   final commentformKey = new GlobalKey<FormState>();
   String commented;
+  String id;
+  void initState() {
+    super.initState();
+    id = Provider.of<Providerdata>(context, listen: false).serviceID;
+    fdata();
+    getpref();
+  }
   //-------------------------------------get id user----------------------------
 
   var iduser;
@@ -59,13 +66,13 @@ class _PageCommentState extends State<PageComment> {
   List<CommentModel> comments = [];
   Future<List<CommentModel>> fdata() async {
     //--------------get id from service info ---------------
-    ServiceInfo getid = ServiceInfo();
-    var iD = getid.idget();
+    // ServiceInfo getid = ServiceInfo();
+    // var iD = getid.idget();
     //--------------- --------------- ---------------
-    GetCommentsApi com = GetCommentsApi(id: iD.toString());
+    GetCommentsApi com = GetCommentsApi(id: id);
     print('form page comment');
 
-    print(iD);
+    print(id);
 
     List<CommentModel> coms = await com.getRate();
     comments = coms;
@@ -76,12 +83,6 @@ class _PageCommentState extends State<PageComment> {
 
   addComm(context, Map map) async {
     bool result = await postdata(comment, map);
-  }
-
-  void initState() {
-    super.initState();
-    fdata();
-    getpref();
   }
 
   @override
@@ -228,7 +229,7 @@ class _PageCommentState extends State<PageComment> {
 
                                   Map commts = {
                                     'comment': commentController.text,
-                                    'service_id': '61',
+                                    'service_id': id,
                                     'account_id': iduser.toString(),
                                     'imgname': imgname,
                                     'base64': base64,
@@ -245,7 +246,7 @@ class _PageCommentState extends State<PageComment> {
                                 } else {
                                   Map commts = {
                                     'comment': commentController.text,
-                                    'service_id': '61',
+                                    'service_id': id,
                                     'account_id': iduser.toString(),
                                   };
 

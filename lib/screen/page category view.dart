@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:syriaonline/constant/drawer.dart';
 import 'package:syriaonline/model/model%20services.dart';
 import 'package:syriaonline/provider/providerData.dart';
-import 'package:syriaonline/screen/page%20details.dart';
 import 'package:syriaonline/screen/page%20service%20info.dart';
 import 'package:syriaonline/service/ServiceApi.dart';
 import 'package:syriaonline/widgets/category/horisantal.dart';
