@@ -19,7 +19,7 @@ class _ServiceViewState extends State<ServiceView> {
   List<ServicesModel> services = [];
   Future<List<ServicesModel>> fdata() async {
     GetServiceApi type = GetServiceApi(n: widget.id.toString());
-    await type.getserv();
+    // await type.getserv();
 
     List<ServicesModel> types = await type.getserv();
     services = types;

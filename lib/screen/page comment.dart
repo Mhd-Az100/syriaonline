@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/model/model%20comment.dart';
 import 'package:syriaonline/provider/providerData.dart';
-import 'package:syriaonline/screen/page%20service%20info.dart';
 import 'package:syriaonline/service/commentApi.dart';
 import 'package:syriaonline/service/postApi.dart';
 import 'package:syriaonline/utils/allUrl.dart';
@@ -254,6 +253,7 @@ class _PageCommentState extends State<PageComment> {
                                     setState(() {
                                       addComm(context, commts);
                                     });
+
                                     commentController.text = '';
                                     _file = null;
                                     print(commts);

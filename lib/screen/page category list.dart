@@ -12,7 +12,7 @@ class CategoryListPage extends StatelessWidget {
 
   Future<List<CategoryModel>> fdata() async {
     GetCategoryApi cat = GetCategoryApi();
-    await cat.getcateg();
+    // await cat.getcateg();
 
     List<CategoryModel> cats = await cat.getcateg();
     categories = cats;

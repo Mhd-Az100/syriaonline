@@ -73,3 +73,5 @@ const kTitleTextStyle = TextStyle(
 );
 const kgradientColor = LinearGradient(
     colors: <Color>[Color(0xFFFAC310), Color(0xFFFCD31D), Color(0xFFFAEB64)]);
+//------------------------------------icon--------------------------------------
+const kiconColor = Color(0xFF0675B1);

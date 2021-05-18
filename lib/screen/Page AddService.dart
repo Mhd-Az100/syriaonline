@@ -8,6 +8,7 @@ import 'package:syriaonline/constant/constent.dart';
 import 'package:syriaonline/constant/drawer.dart';
 import 'package:syriaonline/model/model%20category%20.dart';
 import 'package:syriaonline/screen/page%20category%20view.dart';
+import 'package:syriaonline/screen/page%20choose.dart';
 import 'package:syriaonline/screen/page%20googlemap%20add.dart';
 import 'package:syriaonline/service/categoryApi.dart';
 import 'package:syriaonline/service/postApi.dart';
@@ -25,18 +26,19 @@ class _AddServiceState extends State<AddService> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   //--------------------------------dropDownButton------------------------------
-  String defultSelect = 'Select Type ';
-  var items = ['Other', 'Restaurants', 'Clothes', 'Markets', 'Pharmacies'];
-  List typeCats = [];
-  List<CategoryModel> categories = [];
+  int idcate;
+  CategoryModel defultSelect;
+  int selectCatesID = 0;
 
-  Future<List<CategoryModel>> getdroplst() async {
+  List<CategoryModel> categories;
+
+  getdroplst() async {
     GetCategoryApi cat = GetCategoryApi();
-    await cat.getcateg();
 
-    List<CategoryModel> cats = await cat.getcateg();
-    categories = cats;
-    return categories;
+    List<CategoryModel> catsRes = await cat.getcateg();
+    setState(() {
+      categories = catsRes;
+    });
   }
 
   //-------------------------------------get id user----------------------------
@@ -140,53 +142,37 @@ class _AddServiceState extends State<AddService> {
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 52.0, right: 52.0, top: 20),
-                  child: FutureBuilder<List<CategoryModel>>(
-                    future: getdroplst(),
-                    builder: (BuildContext ctx,
-                        AsyncSnapshot<List<CategoryModel>> snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Container();
-                      } else {
-                        return ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemBuilder: (BuildContext ctx, int index) {
-                            List<CategoryModel> categoreiss = [
-                              snapshot.data[index]
-                            ];
-                            return DropdownButton<String>(
-                              value: defultSelect,
-                              icon: Padding(
-                                padding: const EdgeInsets.only(left: 100.0),
-                                child: const Icon(
-                                  Icons.arrow_drop_down_rounded,
-                                  color: Color((0xEA349CAF)),
-                                ),
-                              ),
-                              iconSize: 40,
-                              elevation: 10,
-                              style: kTextBody,
-                              underline:
-                                  Container(height: 3, color: kBackTextColor),
-                              items: categoreiss.map((categoreis) {
-                                return DropdownMenuItem<String>(
-                                  value: categoreis.servicesCatogaryName
-                                      .toString(),
-                                  child: Text(
-                                    categoreis.servicesCatogaryName.toString(),
-                                  ),
-                                );
-                              }),
-                              onChanged: (newValue) {
-                                setState(() {
-                                  defultSelect = newValue;
-                                });
-                              },
-                            );
-                          },
-                          itemCount: categories.length,
-                        );
-                      }
+                  child: DropdownButton(
+                    isExpanded: true,
+                    value: defultSelect,
+                    icon: Padding(
+                      padding: const EdgeInsets.only(left: 100.0),
+                      child: const Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: Color((0xEA349CAF)),
+                      ),
+                    ),
+                    iconSize: 40,
+                    elevation: 10,
+                    style: kTextBody,
+                    underline: Container(height: 3, color: kBackTextColor),
+                    items: categories?.map((CategoryModel cates) {
+                          return DropdownMenuItem<CategoryModel>(
+                            value: cates,
+                            child: Text(
+                              cates.servicesCatogaryName.toString(),
+                            ),
+                          );
+                        })?.toList() ??
+                        [],
+                    hint: Text("SelectType", style: kTextFaild),
+                    onChanged: (newValue) {
+                      setState(() {
+                        this.defultSelect = newValue;
+                        this.selectCatesID = defultSelect.serviceCatogaryId;
+                        idcate = this.selectCatesID;
+                        print(idcate);
+                      });
                     },
                   ),
                 ),
@@ -358,7 +344,7 @@ class _AddServiceState extends State<AddService> {
                             'service_name': nameController.text,
                             'service_phone_number': numberController.text,
                             'service_description': descriptionController.text,
-                            'service_catogary_id': defultSelect,
+                            'service_catogary_id': idcate.toString(),
                             'x': positioned.latitude.toString(),
                             'y': positioned.longitude.toString(),
                             'manger_accept': '1',
@@ -384,7 +370,7 @@ class _AddServiceState extends State<AddService> {
                             'service_name': nameController.text,
                             'service_phone_number': numberController.text,
                             'service_description': descriptionController.text,
-                            'service_catogary_id': '2',
+                            'service_catogary_id': idcate.toString(),
                             'x': positioned.latitude.toString(),
                             'y': positioned.longitude.toString(),
                             'manger_accept': '1',
@@ -405,6 +391,9 @@ class _AddServiceState extends State<AddService> {
                         //     builder: (context) => ServiceView(),
                         //   ),
                         // );
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => ChoosePage()),
+                        );
                       },
                       child: Text('Add Service'),
                     ),
