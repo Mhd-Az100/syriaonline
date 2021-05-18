@@ -1,5 +1,6 @@
 
-1- تمرير بواسطة shared preferences و ربط account_id ليجبلي اسم صاحب الكومنت عن طريقو 
+1- user name comment 
+2/3/4/5/6/7/8/9/10 finished
 11-valedation 
 12-login full page
 13-search in category view
