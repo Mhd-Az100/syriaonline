@@ -27,6 +27,9 @@ class _DetailesState extends State<Detailes> {
     getpref();
   }
 
+//-------------------------------------get rate---------------------------------
+
+
 //-------------------------------------get service info-------------------------
   ServicesModel serviceinfo;
   Future<ServicesModel> fdata() async {
@@ -70,7 +73,7 @@ class _DetailesState extends State<Detailes> {
                         //--------------------details service---------------------------------
 
                         Container(
-                          height: 250,
+                          height: 220,
                           child: GridTile(
                             child: Image.network(servic.picture),
                             footer: Container(
@@ -97,6 +100,10 @@ class _DetailesState extends State<Detailes> {
                         ),
                         SizedBox(
                           height: 25,
+                        ),
+                        Container(
+                          child: Text(
+                              'Phone Number : ${servic.servicePhoneNumber}'),
                         ),
                         Center(
                             child: ratingX == 0
@@ -175,118 +182,6 @@ class _DetailesState extends State<Detailes> {
                   ],
                 );
               }
-              //  Stack(
-              //   children: [
-              //     ListView(
-              //       children: [
-              //         //--------------------details service---------------------------------
-
-              //         Container(
-              //           height: 250,
-              //           child: GridTile(
-              //             child: Image.asset('img/S3.jpg'),
-              //             footer: Container(
-              //               color: Colors.white70,
-              //               child: ListTile(
-              //                 leading: Text('name type servic '),
-              //                 title: Row(
-              //                   children: [
-              //                     Expanded(child: Text('name service')),
-              //                     Expanded(
-              //                         child: SmoothStarRating(
-              //                             allowHalfRating: false,
-              //                             starCount: 5,
-              //                             rating: 2.5, //from data
-              //                             size: 20,
-              //                             isReadOnly: true,
-              //                             color: Colors.red,
-              //                             borderColor: Colors.red,
-              //                             spacing: 0.0)),
-              //                   ],
-              //                 ),
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //         SizedBox(
-              //           height: 25,
-              //         ),
-              //         Center(
-              //             child: ratingX == 0
-              //                 ? Text(
-              //                     'Rate This Service ',
-              //                     style: kTextBody,
-              //                   )
-              //                 : Container()),
-              //         SizedBox(
-              //           height: 25,
-              //         ),
-              //         //-------------------------------stars rate--------------------------
-
-              //         Row(
-              //           mainAxisAlignment: MainAxisAlignment.center,
-              //           children: [
-              //             Center(
-              //               child: ratingX == 0
-              //                   ? SmoothStarRating(
-              //                       allowHalfRating: false,
-              //                       onRated: (v) {
-              //                         ratingX = v;
-
-              //                         //for data
-              //                       },
-              //                       starCount: 5,
-              //                       rating: ratingX,
-              //                       size: 40.0,
-              //                       isReadOnly: false,
-              //                       color: Colors.yellow,
-              //                       borderColor: Colors.yellow,
-              //                       spacing: 0.0)
-              //                   : Container(),
-              //             ),
-              //             SizedBox(
-              //               width: 15,
-              //             ),
-              //             ratingX == 0
-              //                 ? IconButton(
-              //                     icon: Icon(
-              //                       Icons.check,
-              //                       color: kiconColor,
-              //                       size: 35,
-              //                     ),
-              //                     onPressed: () {
-              //                       Map rated = {
-              //                         'rate_from_5': '$ratingX',
-              //                         'service_id': id.toString(),
-              //                         'account_id': iduser.toString(),
-              //                       };
-              //                       print(rated);
-              //                       setState(() {
-              //                         addrate(context, rated);
-              //                       });
-              //                     })
-              //                 : Container()
-              //           ],
-              //         ),
-              //         SizedBox(
-              //           height: 25,
-              //         ),
-              //         //-----------------------------descrubtion------------------------
-
-              //         Container(
-              //           width: double.infinity,
-              //           child: Padding(
-              //             padding: const EdgeInsets.all(10),
-              //             child: Text(
-              //               'A restaurant or an eatery, is a business that prepares and serves food and drinks to customers. ... By 1723 there were nearly four hundred cafés in Paris, but their menu was limited to simpler dishes or confectionaries, such as coffee, tea ',
-              //               style: kTextBody,
-              //             ),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ],
-              // ),
             }));
   }
 }
