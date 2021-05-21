@@ -10,7 +10,7 @@ class GetInfo {
   Future<ServicesModel> getservinfo() async {
     print(n);
     ServicesModel servinfo;
-    var url = Uri.parse(services + n);
+    var url = Uri.parse(servicesinfo + n);
     http.Response res = await http.get(url);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);

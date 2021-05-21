@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/constant/constent.dart';
 import 'package:syriaonline/constant/drawer.dart';
 import 'package:syriaonline/model/model%20category%20.dart';
-import 'package:syriaonline/screen/page%20category%20view.dart';
 import 'package:syriaonline/screen/page%20choose.dart';
 import 'package:syriaonline/screen/page%20googlemap%20add.dart';
 import 'package:syriaonline/service/categoryApi.dart';

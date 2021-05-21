@@ -7,9 +7,8 @@ class GetRate {
   String id;
   GetRate({this.id});
   Future<List<RateModel>> getRate() async {
-    var url = Uri.parse(rateId + id);
-    print('from rate api');
-    print(id);
+    var url = Uri.parse(rateId + '67');
+
     List<RateModel> comlst = [];
 
     http.Response res = await http.get(url);
@@ -20,6 +19,11 @@ class GetRate {
         comlst.add(RateModel.fromJson(item));
       }
 
+      for (var item in comlst) {
+        print('from rate api');
+
+        print('${item.rateFrom5}');
+      }
       return comlst;
     } else {
       print('statuscode=${res.statusCode}');

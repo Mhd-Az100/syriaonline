@@ -64,10 +64,6 @@ class _PageCommentState extends State<PageComment> {
   //-------------------------------------get comment----------------------------
   List<CommentModel> comments = [];
   Future<List<CommentModel>> fdata() async {
-    //--------------get id from service info ---------------
-    // ServiceInfo getid = ServiceInfo();
-    // var iD = getid.idget();
-    //--------------- --------------- ---------------
     GetCommentsApi com = GetCommentsApi(id: id);
     print('form page comment');
 
@@ -112,7 +108,6 @@ class _PageCommentState extends State<PageComment> {
                       itemCount: comments.length,
                       itemBuilder: (BuildContext ctx, int index) {
                         CommentModel commentss = snapshot.data[index];
-                        print(commentss.picture);
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [

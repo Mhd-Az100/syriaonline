@@ -13,7 +13,7 @@ class RateModel {
   });
 
   final int rateId;
-  final String rateFrom5;
+  final double rateFrom5;
   final String serviceId;
   final String accountId;
   final DateTime createdAt;

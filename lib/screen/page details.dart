@@ -3,9 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:syriaonline/constant/constent.dart';
+import 'package:syriaonline/model/model%20rate.dart';
 import 'package:syriaonline/model/model%20services.dart';
 import 'package:syriaonline/provider/providerData.dart';
-import 'package:syriaonline/service/ServiceApi.dart';
+import 'package:syriaonline/service/RateApi.dart';
 import 'package:syriaonline/service/detailsApi.dart';
 import 'package:syriaonline/service/postApi.dart';
 import 'package:syriaonline/utils/allUrl.dart';
@@ -24,11 +25,21 @@ class _DetailesState extends State<Detailes> {
   void initState() {
     super.initState();
     id = Provider.of<Providerdata>(context, listen: false).serviceID;
-    getpref();
+    // getpref();
+    ratedata();
   }
 
 //-------------------------------------get rate---------------------------------
+  double sumrate;
+  List<RateModel> ratees = [];
+  Future<List<RateModel>> ratedata() async {
+    GetRate rat = GetRate(id: id);
 
+    List<RateModel> rates = await rat.getRate();
+    ratees = rates;
+
+    return ratees;
+  }
 
 //-------------------------------------get service info-------------------------
   ServicesModel serviceinfo;
@@ -81,17 +92,47 @@ class _DetailesState extends State<Detailes> {
                               child: ListTile(
                                 title: Row(
                                   children: [
-                                    Expanded(child: Text(servic.serviceName)),
                                     Expanded(
-                                        child: SmoothStarRating(
-                                            allowHalfRating: false,
-                                            starCount: 5,
-                                            rating: 2.5, //from data
-                                            size: 20,
-                                            isReadOnly: true,
-                                            color: Colors.red,
-                                            borderColor: Colors.red,
-                                            spacing: 0.0)),
+                                        flex: 2,
+                                        child: Text(servic.serviceName)),
+                                    Expanded(child: StarsRate()),
+                                    // FutureBuilder<List<RateModel>>(
+                                    //   future: ratedata(),
+                                    //   builder: (BuildContext ctx,
+                                    //       AsyncSnapshot<List<RateModel>>
+                                    //           snapshot) {
+                                    //     if (snapshot.connectionState ==
+                                    //         ConnectionState.waiting) {
+                                    //       return Container();
+                                    //     } else {
+                                    //       return ListView.builder(
+                                    //           itemCount: ratees.length,
+                                    //           itemBuilder: (BuildContext ctx,
+                                    //               int index) {
+                                    //             RateModel rats =
+                                    //                 snapshot.data[index];
+                                    //             for (int i = 0;
+                                    //                 i <= ratees.length;
+                                    //                 i++) {
+                                    //               sumrate += rats.rateFrom5;
+                                    //             }
+                                    //             print(
+                                    //                 'from futur builder $sumrate');
+                                    //             return Expanded(
+                                    //                 child: SmoothStarRating(
+                                    //                     allowHalfRating: false,
+                                    //                     starCount: 5,
+                                    //                     rating: sumrate /
+                                    //                         ratees.length,
+                                    //                     size: 20,
+                                    //                     isReadOnly: true,
+                                    //                     color: Colors.red,
+                                    //                     borderColor: Colors.red,
+                                    //                     spacing: 0.0));
+                                    //           });
+                                    //     }
+                                    //   },
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -183,5 +224,20 @@ class _DetailesState extends State<Detailes> {
                 );
               }
             }));
+  }
+}
+
+class StarsRate extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SmoothStarRating(
+        allowHalfRating: false,
+        starCount: 5,
+        rating: 2.5,
+        size: 20,
+        isReadOnly: true,
+        color: Colors.red,
+        borderColor: Colors.red,
+        spacing: 0.0);
   }
 }
