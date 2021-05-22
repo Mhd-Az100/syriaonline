@@ -1,10 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:syriaonline/constant/constent.dart';
 import 'package:syriaonline/model/model%20services.dart';
+import 'package:syriaonline/provider/providerData.dart';
 import 'package:syriaonline/screen/page%20details.dart';
 import 'package:syriaonline/service/getAllService.dart';
+import 'package:syriaonline/utils/allUrl.dart';
 
 const kGoogleApiKey = "AIzaSyDELVyIyOWK-s4frDfUmU81fBESRMsEkRE";
 
@@ -15,6 +20,38 @@ class Googlemaps extends StatefulWidget {
 
 class _GooglemapsState extends State<Googlemaps> {
   GoogleMapController mapController;
+  ServicesModel service;
+  @override
+  void initState() {
+    super.initState();
+    service = Provider.of<Providerdata>(context, listen: false).service;
+
+    latLng = LatLng(double.parse(service.x), double.parse(service.y));
+    onemarker.add(Marker(
+        markerId: MarkerId(
+          id.toString(),
+        ),
+        position: latLng,
+        infoWindow: InfoWindow(
+            title: service.serviceName,
+            onTap: () {
+              setService(context: context, val: service);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Detailes(
+                          // service: service,
+                          )));
+            })));
+    allServiceMarker();
+  }
+
+//-------------------------------get service marker-----------------------------
+  int id = Random().nextInt(100);
+
+  List<Marker> onemarker = [];
+  LatLng latLng;
+
 //-------------------------------get markers------------------------------------
   List<Marker> markers = [];
   List<ServicesModel> allserv;
@@ -31,18 +68,21 @@ class _GooglemapsState extends State<Googlemaps> {
           infoWindow: InfoWindow(
               title: "${item.serviceName}",
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Detailes()));
+                setService(context: context, val: service);
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Detailes(
+                            // service: service,
+                            )));
               })));
-      print('************************************************');
-      print(item.x);
     }
   }
 
   //----------------------------map type----------------------------------------
 
   var maptype = MapType.normal;
-  //-----------------------------for marker-------------------------------------
 
 //---------------------for current location-------------------------------------
   Position currentPosition;
@@ -62,33 +102,38 @@ class _GooglemapsState extends State<Googlemaps> {
     target: LatLng(33.51396767600139, 36.27581804468471),
     zoom: 15,
   );
-  @override
-  void initState() {
-    super.initState();
-
-    allServiceMarker();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         GoogleMap(
-          mapType: maptype,
-
           onMapCreated: (controller) {
             setState(() {
-              bottomPaddingOfMap = 300;
               mapController = controller;
+              // currentlocatorPosition();
             });
-            currentlocatorPosition();
           },
-          markers: markers.toSet(),
+          markers: onemarker.toSet(),
+
+          initialCameraPosition: CameraPosition(
+              target: LatLng(double.parse(service.x), double.parse(service.y)),
+              zoom: 16),
+          // mapType: maptype,
+
+          // onMapCreated: (controller) {
+          //   setState(() {
+          //     bottomPaddingOfMap = 300;
+          //     mapController = controller;
+          //   });
+          // },
+          //------------------------------marker-------------------------------
+
+          // markers: markers.toSet(),
           myLocationEnabled: true,
           zoomGesturesEnabled: true,
           zoomControlsEnabled: true,
-          //------------------------------marker-------------------------------
-          initialCameraPosition: _cameraPosition,
+          // initialCameraPosition: _cameraPosition,
         ),
         Positioned(
           bottom: 10,
@@ -108,7 +153,7 @@ class _GooglemapsState extends State<Googlemaps> {
               height: 70,
               width: 150,
               decoration: BoxDecoration(
-                  gradient: kgradientColor,
+                  gradient: kButtongradientColor,
                   borderRadius: BorderRadius.all(
                     Radius.circular(80.0),
                   )),

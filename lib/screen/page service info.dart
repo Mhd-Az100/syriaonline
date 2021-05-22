@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syriaonline/model/model%20services.dart';
 import 'package:syriaonline/screen/page%20details.dart';
 import '../constant/constent.dart';
 import '../constant/drawer.dart';
@@ -7,15 +8,11 @@ import 'page comment.dart';
 import 'page googlemap view.dart';
 
 class ServiceInfo extends StatefulWidget {
-  int id;
-  ServiceInfo({this.id});
-  // idget() {
-  //   var iD = this.id;
-  //   print('from idget');
-  //   print(iD);
+  // ServicesModel service;
+  // ServiceInfo({this.service});
 
-  //   return iD;
-  // }
+  // int id;
+  // ServiceInfo({this.id});
 
   @override
   _ServiceInfoState createState() => _ServiceInfoState();
@@ -24,8 +21,9 @@ class ServiceInfo extends StatefulWidget {
 class _ServiceInfoState extends State<ServiceInfo> {
   @override
   void initState() {
-    print('form page info');
-    print(widget.id);
+    // print('form page info');
+    // // print(widget.id);
+    // print(widget.service.serviceCatogaryId);
 
     super.initState();
   }
@@ -79,7 +77,7 @@ class _ServiceInfoState extends State<ServiceInfo> {
 
       bottomNavigationBar: JumpingTabBar(
         onChangeTab: onchangetab,
-        backgroundColor: Color(0xFF005B72),
+        backgroundColor: kBackgroundNAVcolor,
         circleGradient: LinearGradient(
           colors: [
             Colors.purpleAccent,
@@ -90,20 +88,21 @@ class _ServiceInfoState extends State<ServiceInfo> {
         ),
         items: [
           TabItemIcon(
-              iconData: Icons.comment_rounded,
-              curveColor: Colors.blue,
-              startColor: Colors.yellow,
-              endColor: Colors.blue),
+            iconData: Icons.comment_rounded,
+            curveColor: kCurveColorNAV,
+            startColor: kStartColorNAV,
+            endColor: kEndColorNAV,
+          ),
           TabItemIcon(
               iconData: Icons.store_mall_directory_rounded,
-              curveColor: Colors.orange,
-              startColor: Colors.yellow,
-              endColor: Colors.blue),
+              curveColor: kCurveColorNAV,
+              startColor: kStartColorNAV,
+              endColor: kEndColorNAV),
           TabItemIcon(
               iconData: Icons.location_on,
-              curveColor: Colors.blue,
-              startColor: Colors.yellow,
-              endColor: Colors.blue),
+              curveColor: kCurveColorNAV,
+              startColor: kStartColorNAV,
+              endColor: kEndColorNAV),
         ],
         selectedIndex: indexpage,
       ),

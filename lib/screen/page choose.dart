@@ -58,7 +58,8 @@ class ChoosePage extends StatelessWidget {
                           color: kCardHomeColor),
                       margin: EdgeInsets.all(50),
                       child: Center(
-                          child: Text('Veiw Service', style: kTitleCardText)),
+                          child:
+                              Text('Veiw Service', style: kTitleCardHomeText)),
                     ),
                   ),
 
@@ -77,7 +78,8 @@ class ChoosePage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30)),
                       margin: EdgeInsets.all(50),
                       child: Center(
-                          child: Text('Add Service', style: kTitleCardText)),
+                          child:
+                              Text('Add Service', style: kTitleCardHomeText)),
                     ),
                   ),
                 ],

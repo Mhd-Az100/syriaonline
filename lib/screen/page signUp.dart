@@ -134,9 +134,7 @@ class _SignUPState extends State<SignUP> {
                                       color: klabelTextColor.withOpacity(0.5),
                                     ),
                                     hintText: 'First Name',
-                                    hintStyle: TextStyle(
-                                      color: klabelTextColor.withOpacity(0.5),
-                                    ),
+                                    hintStyle: kHintStyle,
                                   ),
                                 ),
                               ),
@@ -168,9 +166,7 @@ class _SignUPState extends State<SignUP> {
                                       color: klabelTextColor.withOpacity(0.5),
                                     ),
                                     hintText: 'Last Name',
-                                    hintStyle: TextStyle(
-                                      color: klabelTextColor.withOpacity(0.5),
-                                    ),
+                                    hintStyle: kHintStyle,
                                   ),
                                 ),
                               ),
@@ -202,9 +198,7 @@ class _SignUPState extends State<SignUP> {
                                       color: klabelTextColor.withOpacity(0.5),
                                     ),
                                     hintText: 'E_mail',
-                                    hintStyle: TextStyle(
-                                      color: klabelTextColor.withOpacity(0.5),
-                                    ),
+                                    hintStyle: kHintStyle,
                                   ),
                                 ),
                               ),
@@ -236,9 +230,8 @@ class _SignUPState extends State<SignUP> {
                                       color: klabelTextColor.withOpacity(0.5),
                                     ),
                                     hintText: 'Phone Number',
-                                    hintStyle: TextStyle(
-                                      color: klabelTextColor.withOpacity(0.5),
-                                    ),
+                                    prefixText: '+963  ',
+                                    hintStyle: kHintStyle,
                                   ),
                                 ),
                               ),
@@ -251,7 +244,7 @@ class _SignUPState extends State<SignUP> {
                                   register();
                                 },
                                 text: 'SignUp',
-                                color: kgradientColor,
+                                color: kButtongradientColor,
                               ),
                               //------------------------------button login----------------
 

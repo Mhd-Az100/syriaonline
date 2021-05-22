@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syriaonline/constant/constent.dart';
 import 'package:syriaonline/constant/drawer.dart';
 import 'package:syriaonline/model/model%20services.dart';
 import 'package:syriaonline/provider/providerData.dart';
@@ -37,7 +38,7 @@ class _ServiceViewState extends State<ServiceView> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.categoryName),
-          backgroundColor: Color(0xFFFAB028),
+          backgroundColor: kAppBarColor,
           actions: [
             IconButton(
               icon: Icon(Icons.search),
@@ -72,42 +73,39 @@ class _ServiceViewState extends State<ServiceView> {
                         itemBuilder: (context, index) {
                           ServicesModel c = snapshot.data[index];
                           return InkWell(
-                              onTap: () {
-                                setServiceID(
-                                    context: context,
-                                    val: c.serviceId.toString());
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (context) => ServiceInfo(
-                                            id: c.serviceId,
-                                          )),
-                                );
-                              },
-                              child: GridTile(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                  child: Image.network(
-                                    c.picture,
-                                    fit: BoxFit.cover,
+                            onTap: () {
+                              setService(context: context, val: c);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => ServiceInfo(
+                                        // service: c,
+                                        )),
+                              );
+                            },
+                            child: GridTile(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                child: Image.network(
+                                  c.picture,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              footer: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white70,
+                                ),
+                                height: 50,
+                                child: ListTile(
+                                  leading: Text(
+                                    c.serviceName,
+                                    style: kTitleGridText,
                                   ),
                                 ),
-                                footer: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white70,
-                                  ),
-                                  height: 50,
-                                  child: ListTile(
-                                    leading: Text(
-                                      c.serviceName,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
-                              ));
+                              ),
+                            ),
+                          );
                         }),
                   );
                 }

@@ -22,7 +22,10 @@ class _PageCommentState extends State<PageComment> {
   String id;
   void initState() {
     super.initState();
-    id = Provider.of<Providerdata>(context, listen: false).serviceID;
+    id = Provider.of<Providerdata>(context, listen: false)
+        .service
+        .serviceId
+        .toString();
     fdata();
     getpref();
   }
@@ -65,9 +68,9 @@ class _PageCommentState extends State<PageComment> {
   List<CommentModel> comments = [];
   Future<List<CommentModel>> fdata() async {
     GetCommentsApi com = GetCommentsApi(id: id);
-    print('form page comment');
+    // print('form page comment');
 
-    print(id);
+    // print(id);
 
     List<CommentModel> coms = await com.getRate();
     comments = coms;

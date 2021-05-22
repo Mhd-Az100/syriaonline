@@ -7,7 +7,7 @@ class GetRate {
   String id;
   GetRate({this.id});
   Future<List<RateModel>> getRate() async {
-    var url = Uri.parse(rateId + '67');
+    var url = Uri.parse(rateId + id);
 
     List<RateModel> comlst = [];
 
@@ -24,6 +24,7 @@ class GetRate {
 
         print('${item.rateFrom5}');
       }
+
       return comlst;
     } else {
       print('statuscode=${res.statusCode}');

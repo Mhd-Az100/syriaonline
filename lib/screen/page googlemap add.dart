@@ -93,7 +93,7 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
               height: 70,
               width: 150,
               decoration: BoxDecoration(
-                  gradient: kgradientColor,
+                  gradient: kButtongradientColor,
                   borderRadius: BorderRadius.all(
                     Radius.circular(80.0),
                   )),
@@ -109,7 +109,7 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
         //---------------------------save location------------------------------
         Positioned(
           bottom: 20,
-          left: 20,
+          left: 10,
           child: Container(
             width: 150,
             height: 40,
@@ -124,7 +124,7 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.blue[300],
+                primary: kButtonSaveLocationColor,
                 onPrimary: Colors.black,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(32.0),

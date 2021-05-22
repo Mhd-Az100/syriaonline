@@ -148,7 +148,7 @@ class _AddServiceState extends State<AddService> {
                       padding: const EdgeInsets.only(left: 100.0),
                       child: const Icon(
                         Icons.arrow_drop_down_rounded,
-                        color: Color((0xEA349CAF)),
+                        color: kiconColor,
                       ),
                     ),
                     iconSize: 40,
@@ -204,9 +204,7 @@ class _AddServiceState extends State<AddService> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Name of Service',
-                              hintStyle: TextStyle(
-                                color: Color(0xE8349CAF),
-                              ),
+                              hintStyle: kHintStyle,
                             ),
                             controller: nameController,
                             validator: (String value) {
@@ -237,12 +235,12 @@ class _AddServiceState extends State<AddService> {
                             keyboardType: TextInputType.numberWithOptions(),
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: '+963',
+                              // hintText: '+963',
                               prefixText: '+963',
-                              hintStyle: TextStyle(color: Color(0xE8349CAF)),
+                              hintStyle: kHintStyle,
                               icon: Icon(
                                 Icons.phone,
-                                color: Color((0xFF349DAF)),
+                                color: kiconColor,
                               ),
                             ),
                             controller: numberController,
@@ -275,9 +273,7 @@ class _AddServiceState extends State<AddService> {
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: 'Descreption',
-                                hintStyle: TextStyle(
-                                  color: Color(0xE8349CAF),
-                                ),
+                                hintStyle: kHintStyle,
                               ),
                               controller: descriptionController,
                               validator: (String value) {

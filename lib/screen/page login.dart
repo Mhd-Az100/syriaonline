@@ -189,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                                     );
                                 },
                                 text: 'LogIn',
-                                color: kgradientColor,
+                                color: kButtongradientColor,
                               ),
                             ),
                             Padding(padding: EdgeInsets.only(top: 2.0)),

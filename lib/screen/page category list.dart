@@ -103,13 +103,8 @@ class CategoryListPage extends StatelessWidget {
                                       padding: const EdgeInsets.all(10),
                                       child: Row(
                                         children: [
-                                          Text(
-                                            categoreis.servicesCatogaryName,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 25,
-                                            ),
-                                          ),
+                                          Text(categoreis.servicesCatogaryName,
+                                              style: kTitlelstText),
                                         ],
                                       ),
                                     ),

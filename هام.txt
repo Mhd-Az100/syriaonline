@@ -4,7 +4,7 @@
 11-valedation 
 12-login full page
 13-search in category view
-14-google map get one marker to one service 
+14-////google map get one marker to one service 
 15-get rate 
 16-fix design app 
 17-screens wellcom an anemation

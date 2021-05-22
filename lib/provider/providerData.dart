@@ -2,25 +2,26 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syriaonline/model/model%20services.dart';
 
 class Providerdata extends ChangeNotifier {
-  String serviceID = '';
+  ServicesModel service;
 
-  void setServiceID({@required String val}) {
-    serviceID = val;
+  void setService({@required ServicesModel val}) {
+    service = val;
     notifyListeners();
   }
 }
 //---------write-------------
 
-setServiceID({@required context, @required String val}) {
-  Provider.of<Providerdata>(context, listen: false).setServiceID(val: val);
+setService({@required context, @required ServicesModel val}) {
+  Provider.of<Providerdata>(context, listen: false).setService(val: val);
 }
 
 //---------read-------------
 
-String serviceID(context) {
-  String serviceID =
-      Provider.of<Providerdata>(context, listen: false).serviceID;
+ServicesModel service(context) {
+  ServicesModel serviceID =
+      Provider.of<Providerdata>(context, listen: false).service;
   return serviceID;
 }
