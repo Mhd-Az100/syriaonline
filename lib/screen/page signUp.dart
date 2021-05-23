@@ -7,6 +7,7 @@ import 'package:syriaonline/utils/allUrl.dart';
 import '../constant/constent.dart';
 import '../widgets/signup/signuprawMaterialButton.dart';
 import 'package:http/http.dart' as http;
+import 'package:email_validator/email_validator.dart';
 
 class SignUP extends StatefulWidget {
   @override
@@ -60,7 +61,7 @@ class _SignUPState extends State<SignUP> {
     }
   }
 
-  //------------------shared preferences----------------------------------------
+  //--------------------------shared preferences--------------------------------
   savepref(
       String firstName, String lastName, String email, int accountId) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -101,11 +102,13 @@ class _SignUPState extends State<SignUP> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
+                      //----------------------Form------------------------------
                       child: Form(
                         key: signupformKey,
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
+                              //----------------------first name----------------
                               Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 59,
@@ -134,10 +137,14 @@ class _SignUPState extends State<SignUP> {
                                       color: klabelTextColor.withOpacity(0.5),
                                     ),
                                     hintText: 'First Name',
-                                    hintStyle: kHintStyle,
+                                    hintStyle: TextStyle(
+                                      color: klabelTextColor.withOpacity(0.5),
+                                    ),
                                   ),
                                 ),
                               ),
+
+                              //--------------------last name-------------------
                               Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 59,
@@ -166,10 +173,13 @@ class _SignUPState extends State<SignUP> {
                                       color: klabelTextColor.withOpacity(0.5),
                                     ),
                                     hintText: 'Last Name',
-                                    hintStyle: kHintStyle,
+                                    hintStyle: TextStyle(
+                                      color: klabelTextColor.withOpacity(0.5),
+                                    ),
                                   ),
                                 ),
                               ),
+                              //--------------------E_mail----------------------
                               Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 59,
@@ -187,9 +197,7 @@ class _SignUPState extends State<SignUP> {
                                 child: TextFormField(
                                   controller: emailController,
                                   keyboardType: TextInputType.emailAddress,
-                                  validator: (val) => val.length == 0
-                                      ? 'Please Enter Your Email'
-                                      : null,
+                                  validator: validateEmail,
                                   onSaved: (val) => email = val,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -198,10 +206,13 @@ class _SignUPState extends State<SignUP> {
                                       color: klabelTextColor.withOpacity(0.5),
                                     ),
                                     hintText: 'E_mail',
-                                    hintStyle: kHintStyle,
+                                    hintStyle: TextStyle(
+                                      color: klabelTextColor.withOpacity(0.5),
+                                    ),
                                   ),
                                 ),
                               ),
+                              //--------------------Phon------------------------
                               Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 59,
@@ -219,9 +230,10 @@ class _SignUPState extends State<SignUP> {
                                 child: TextFormField(
                                   controller: phoneController,
                                   keyboardType: TextInputType.number,
-                                  validator: (val) => val.length == 0
-                                      ? 'Please Enter Your Phone Number'
-                                      : null,
+                                  validator: validateMobile,
+                                  //  (val) => val.length == 0
+                                  //     ? 'Please Enter Your Phone Number'
+                                  //     : null,
                                   onSaved: (val) => phone = val,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -230,14 +242,14 @@ class _SignUPState extends State<SignUP> {
                                       color: klabelTextColor.withOpacity(0.5),
                                     ),
                                     hintText: 'Phone Number',
-                                    prefixText: '+963  ',
-                                    hintStyle: kHintStyle,
+                                    hintStyle: TextStyle(
+                                      color: klabelTextColor.withOpacity(0.5),
+                                    ),
                                   ),
                                 ),
                               ),
 
-                              //------------------------------button Sign Up----------------
-
+                              //------------------button Sign Up----------------
                               SizedBox(height: 40),
                               ReusableRaisedButton(
                                 onpressed: () {
@@ -246,8 +258,8 @@ class _SignUPState extends State<SignUP> {
                                 text: 'SignUp',
                                 color: kButtongradientColor,
                               ),
-                              //------------------------------button login----------------
 
+                              //------------------button login------------------
                               SizedBox(height: 20),
 
                               InkWell(
@@ -285,5 +297,24 @@ class _SignUPState extends State<SignUP> {
                 ),
       ),
     );
+  }
+  //------------------------Validation-----------------------------------------
+
+  String validateMobile(String value) {
+    if (value.length == 0)
+      return 'Please enter PhoneNumber';
+    else if (value.length != 10)
+      return 'Mobile Number must be of 10 digit';
+    else
+      return null;
+  }
+
+  String validateEmail(String value) {
+    if (value.length == 0)
+      return 'Please enter your Email';
+    else if (!EmailValidator.validate(value))
+      return 'Please enter a valid Email';
+    else
+      return null;
   }
 }

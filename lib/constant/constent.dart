@@ -12,17 +12,17 @@ final kCardColor = LinearGradient(
 );
 final kCardHomeColor = Color(0xA4FFFAFA);
 final kTitleCardHomeText = GoogleFonts.alegreya(
-    fontSize: 35, fontWeight: FontWeight.bold, color: Color(0xFFF3C52E));
+    fontSize: 35, fontWeight: FontWeight.bold, color: Color(0xFFFF0000f));
 final kTitlelstText = GoogleFonts.alegreya(
-    fontSize: 25, fontWeight: FontWeight.bold, color: Color(0xfffffffff));
+    fontSize: 25, fontWeight: FontWeight.bold, color: Color(0xFF070230f));
 final kTitleGridText = GoogleFonts.alegreya(
     fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xfffffffff));
 //------------------------------------Appbar------------------------------------
 
-final kAppBarColor = Color(0xFFF3C52E);
+final kAppBarColor = Color(0xFFF8F8F8);
 final kTitleAppbarStyle = GoogleFonts.pacifico(
   fontSize: 20,
-  color: Colors.white,
+  color: Colors.black,
   fontWeight: FontWeight.bold,
 );
 
@@ -46,6 +46,8 @@ final kTitleText = GoogleFonts.pacifico(
 );
 final kTextFaild = TextStyle();
 final kTextinfo = TextStyle();
+final kToastColor = Colors.white;
+final kToastTextColor = Colors.black;
 
 //---------------------------------drawer---------------------------------------
 

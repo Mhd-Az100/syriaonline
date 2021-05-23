@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -7,7 +8,6 @@ import 'package:syriaonline/model/model%20rate.dart';
 import 'package:syriaonline/model/model%20services.dart';
 import 'package:syriaonline/provider/providerData.dart';
 import 'package:syriaonline/service/RateApi.dart';
-import 'package:syriaonline/service/detailsApi.dart';
 import 'package:syriaonline/service/postApi.dart';
 import 'package:syriaonline/utils/allUrl.dart';
 
@@ -30,7 +30,7 @@ class _DetailesState extends State<Detailes> {
         .service
         .serviceId
         .toString();
-    // getpref();
+    getpref();
     ratedata();
   }
 
@@ -44,15 +44,6 @@ class _DetailesState extends State<Detailes> {
     ratees = rates;
 
     return ratees;
-  }
-
-//-------------------------------------get service info-------------------------
-  ServicesModel serviceinfo;
-  Future<ServicesModel> fdata() async {
-    GetInfo serv = GetInfo(n: id);
-    ServicesModel service = await serv.getservinfo();
-    serviceinfo = service;
-    return serviceinfo;
   }
 
 //-------------------------------------get id user------------------------------
@@ -74,16 +65,7 @@ class _DetailesState extends State<Detailes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-          //  FutureBuilder<ServicesModel>(
-          //   future: fdata(),
-          //   builder: (BuildContext ctx, AsyncSnapshot<ServicesModel> snapshot) {
-          //     ServicesModel servic = snapshot.data;
-          //     if (snapshot.connectionState == ConnectionState.waiting) {
-          //       return Container(child: Center(child: CircularProgressIndicator()));
-          //     } else {
-          //       return
-          Stack(
+      body: Stack(
         children: [
           ListView(
             children: [
@@ -99,44 +81,38 @@ class _DetailesState extends State<Detailes> {
                       title: Row(
                         children: [
                           Expanded(flex: 2, child: Text(service.serviceName)),
-                          Expanded(child: StarsRate()),
-                          // FutureBuilder<List<RateModel>>(
-                          //   future: ratedata(),
-                          //   builder: (BuildContext ctx,
-                          //       AsyncSnapshot<List<RateModel>>
-                          //           snapshot) {
-                          //     if (snapshot.connectionState ==
-                          //         ConnectionState.waiting) {
-                          //       return Container();
-                          //     } else {
-                          //       return ListView.builder(
-                          //           itemCount: ratees.length,
-                          //           itemBuilder: (BuildContext ctx,
-                          //               int index) {
-                          //             RateModel rats =
-                          //                 snapshot.data[index];
-                          //             for (int i = 0;
-                          //                 i <= ratees.length;
-                          //                 i++) {
-                          //               sumrate += rats.rateFrom5;
-                          //             }
-                          //             print(
-                          //                 'from futur builder $sumrate');
-                          //             return Expanded(
-                          //                 child: SmoothStarRating(
-                          //                     allowHalfRating: false,
-                          //                     starCount: 5,
-                          //                     rating: sumrate /
-                          //                         ratees.length,
-                          //                     size: 20,
-                          //                     isReadOnly: true,
-                          //                     color: Colors.red,
-                          //                     borderColor: Colors.red,
-                          //                     spacing: 0.0));
-                          //           });
-                          //     }
-                          //   },
-                          // ),
+                          Expanded(
+                            child: FutureBuilder<List<RateModel>>(
+                              future: ratedata(),
+                              builder: (BuildContext ctx,
+                                  AsyncSnapshot<List<RateModel>> snapshot) {
+                                double sums = 0;
+
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Container();
+                                } else {
+                                  snapshot.data.forEach((element) {
+                                    sums += double.parse(element.rateFrom5);
+                                  });
+
+                                  print("Obada thi is SUM : " +
+                                      (sums / snapshot.data.length).toString());
+                                  double result = sums / snapshot.data.length;
+
+                                  return SmoothStarRating(
+                                      allowHalfRating: false,
+                                      starCount: 5,
+                                      rating: result,
+                                      size: 20,
+                                      isReadOnly: true,
+                                      color: kColorStarsRated,
+                                      borderColor: Colors.red,
+                                      spacing: 0.0);
+                                }
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -196,15 +172,26 @@ class _DetailesState extends State<Detailes> {
                             size: 35,
                           ),
                           onPressed: () {
-                            Map rated = {
-                              'rate_from_5': '$ratingX',
-                              'service_id': id.toString(),
-                              'account_id': iduser.toString(),
-                            };
-                            print(rated);
-                            setState(() {
-                              addrate(context, rated);
-                            });
+                            if (ratingX == 0) {
+                              Fluttertoast.showToast(
+                                  backgroundColor: kToastColor,
+                                  textColor: kToastTextColor,
+                                  msg: 'Add Rate Please',
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM);
+                              print("mhmd" + ratingX.toString());
+                              return;
+                            } else {
+                              Map rated = {
+                                'rate_from_5': '$ratingX',
+                                'service_id': id.toString(),
+                                'account_id': iduser.toString(),
+                              };
+                              print(rated);
+                              setState(() {
+                                addrate(context, rated);
+                              });
+                            }
                           })
                       : Container()
                 ],

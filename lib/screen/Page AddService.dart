@@ -12,6 +12,7 @@ import 'package:syriaonline/screen/page%20googlemap%20add.dart';
 import 'package:syriaonline/service/categoryApi.dart';
 import 'package:syriaonline/service/postApi.dart';
 import 'package:syriaonline/utils/allUrl.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddService extends StatefulWidget {
   @override
@@ -19,13 +20,17 @@ class AddService extends StatefulWidget {
 }
 
 class _AddServiceState extends State<AddService> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController numberController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
+  var nameController = TextEditingController();
+  var numberController = TextEditingController();
+  var descriptionController = TextEditingController();
+
+  var servName, servDesc, servPhoneNumber;
+  var detectLocation = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   //--------------------------------dropDownButton------------------------------
   int idcate;
+  var select = false;
   CategoryModel defultSelect;
   int selectCatesID = 0;
 
@@ -56,13 +61,13 @@ class _AddServiceState extends State<AddService> {
   //--------------------------- coordinates احداثيات---------------------------
   Widget _coordinates() {
     return FloatingActionButton(
-        onPressed: () async {
-          positioned = await Navigator.push(context,
-              new MaterialPageRoute(builder: (context) => new GooglemapsAdd()));
-        },
-        backgroundColor:
-            this.positioned == null ? Colors.red : Colors.blue[300],
-        child: Icon(Icons.add_location_alt_outlined));
+      onPressed: () async {
+        positioned = await Navigator.push(context,
+            new MaterialPageRoute(builder: (context) => new GooglemapsAdd()));
+      },
+      backgroundColor: this.positioned == null ? Colors.red : Colors.blue[300],
+      child: Icon(Icons.add_location_alt_outlined),
+    );
   }
 
   //----------------------img from device---------------------------------------
@@ -171,6 +176,7 @@ class _AddServiceState extends State<AddService> {
                         this.selectCatesID = defultSelect.serviceCatogaryId;
                         idcate = this.selectCatesID;
                         print(idcate);
+                        select = true;
                       });
                     },
                   ),
@@ -188,6 +194,7 @@ class _AddServiceState extends State<AddService> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        //--------------------name service----------------------
                         Container(
                           width: MediaQuery.of(context).size.width,
                           height: 59,
@@ -202,23 +209,20 @@ class _AddServiceState extends State<AddService> {
                               ]),
                           child: TextFormField(
                             decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Name of Service',
-                              hintStyle: kHintStyle,
-                            ),
+                                border: InputBorder.none,
+                                hintText: 'Name of Service',
+                                hintStyle: kHintStyle),
                             controller: nameController,
-                            validator: (String value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter some text';
-                              }
-                              return null;
-                            },
+                            validator: validateName,
+                            onSaved: (val) => servName = val,
                             //onSaved: ,
                           ),
                         ),
                         SizedBox(
                           height: 25,
                         ),
+
+                        //--------------------phon service----------------------
                         Container(
                           width: MediaQuery.of(context).size.width,
                           height: 59,
@@ -235,7 +239,7 @@ class _AddServiceState extends State<AddService> {
                             keyboardType: TextInputType.numberWithOptions(),
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              // hintText: '+963',
+                              hintText: '+963',
                               prefixText: '+963',
                               hintStyle: kHintStyle,
                               icon: Icon(
@@ -244,17 +248,15 @@ class _AddServiceState extends State<AddService> {
                               ),
                             ),
                             controller: numberController,
-                            validator: (String value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter some text';
-                              }
-                              return null;
-                            },
+                            validator: validateMobile,
+                            onSaved: (val) => servPhoneNumber = val,
                           ),
                         ),
                         SizedBox(
                           height: 25,
                         ),
+
+                        //-------------------Descr service----------------------
                         Container(
                           width: MediaQuery.of(context).size.width,
                           height: 150,
@@ -271,17 +273,12 @@ class _AddServiceState extends State<AddService> {
                             child: TextFormField(
                               maxLines: 5,
                               decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Descreption',
-                                hintStyle: kHintStyle,
-                              ),
+                                  border: InputBorder.none,
+                                  hintText: 'Descreption',
+                                  hintStyle: kHintStyle),
                               controller: descriptionController,
-                              validator: (String value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
+                              validator: validateDescreption,
+                              onSaved: (val) => servDesc = val,
                             ),
                           ),
                         ),
@@ -292,9 +289,10 @@ class _AddServiceState extends State<AddService> {
                 Center(
                   child: Text(
                     'pressed to add your photo',
-                    style: kTextinfo,
+                    style: kTextBody,
                   ),
                 ),
+
                 //-------------------add photo------------------------------------
                 GestureDetector(
                   onTap: () => getImage(ImageSource.gallery),
@@ -308,7 +306,7 @@ class _AddServiceState extends State<AddService> {
                         ? Icon(
                             Icons.add_photo_alternate_outlined,
                             size: 100,
-                            color: Color(0xFF349DAF),
+                            color: kiconColor,
                           )
                         : Image.file(_file),
                   ),
@@ -329,32 +327,49 @@ class _AddServiceState extends State<AddService> {
                           backgroundColor:
                               MaterialStateProperty.all<Color>(kButtonColor)),
                       onPressed: () async {
-                        //-----------upload image ----
-                        if (_file != null) {
-                          String base64 = base64Encode(_file.readAsBytesSync());
-                          String imgname = _file.path.split('/').last;
-                          //--------------with photo ---------------
-                          Map addservices = {
-                            'account_id': iduser.toString(),
-                            'service_name': nameController.text,
-                            'service_phone_number': numberController.text,
-                            'service_description': descriptionController.text,
-                            'service_catogary_id': idcate.toString(),
-                            'x': positioned.latitude.toString(),
-                            'y': positioned.longitude.toString(),
-                            'manger_accept': '1',
-                            "imgname": imgname,
-                            "base64": base64,
-                          };
-                          setState(() {
-                            addseRvice(context, addservices);
-                            print("Add");
-                            print(addseRvice);
-                            // uploadimg();
-                          });
-                          // Validate will return true if the form is valid, or false if
-                          // the form is invalid.
-                          if (_formKey.currentState.validate()) {
+                        if (select == false) {
+                          Fluttertoast.showToast(
+                              msg: 'choose service category',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM);
+                        }
+                        if (positioned == null) {
+                          Fluttertoast.showToast(
+                              msg: 'Add Location',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM);
+                        }
+                        if (_formKey.currentState.validate() &&
+                            // positioned != null &&
+                            select == true) {
+                          //-----------upload image -----------
+
+                          if (_file != null) {
+                            String base64 =
+                                base64Encode(_file.readAsBytesSync());
+                            String imgname = _file.path.split('/').last;
+                            //--------------with photo ---------------
+                            Map addservices = {
+                              'account_id': iduser.toString(),
+                              'service_name': nameController.text,
+                              'service_phone_number': numberController.text,
+                              'service_description': descriptionController.text,
+                              'service_catogary_id': idcate.toString(),
+                              'x': positioned.latitude.toString(),
+                              'y': positioned.longitude.toString(),
+                              'manger_accept': '1',
+                              "imgname": imgname,
+                              "base64": base64,
+                            };
+                            setState(() {
+                              addseRvice(context, addservices);
+                              print("Add");
+                              print(addseRvice);
+                              // uploadimg();
+                            });
+                            // Validate will return true if the form is valid, or false if
+                            // the form is invalid.
+
                             // Process data.
                           }
                         } else {
@@ -375,20 +390,16 @@ class _AddServiceState extends State<AddService> {
                             print("Add");
                             print(addseRvice);
                           });
-                          // Validate will return true if the form is valid, or false if
-                          // the form is invalid.
-                          if (_formKey.currentState.validate()) {
-                            // Process data.
-                          }
                         }
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (context) => ServiceView(),
-                        //   ),
-                        // );
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => ChoosePage()),
-                        );
+
+                        if (_formKey.currentState.validate() &&
+                            positioned != null &&
+                            select == true) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (context) => ChoosePage()),
+                          );
+                        }
                       },
                       child: Text('Add Service'),
                     ),
@@ -409,5 +420,29 @@ class _AddServiceState extends State<AddService> {
             ))
       ]),
     );
+  }
+
+  //------------------------Validation-----------------------------------------
+  String validateMobile(String value) {
+    if (value.length == 0)
+      return 'Please enter PhoneNumber';
+    else if (value.length != 9)
+      return 'Mobile Number must be of 9 digit';
+    else
+      return null;
+  }
+
+  String validateName(String value) {
+    if (value.length == 0)
+      return 'Please enter name of service...';
+    else
+      return null;
+  }
+
+  String validateDescreption(String value) {
+    if (value.length == 0)
+      return 'Please enter a descreption...';
+    else
+      return null;
   }
 }

@@ -9,6 +9,14 @@ class ChoosePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 100,
+        shadowColor: Color(0xEE3264EE),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: kAppBarColor,
         title: Text(
           'Home Page',
@@ -16,14 +24,14 @@ class ChoosePage extends StatelessWidget {
         ),
       ),
       drawer: MyDrawer(),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('img/home.png'), fit: BoxFit.cover),
-        ),
-        child: SingleChildScrollView(
+      body: Stack(children: [
+        Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('img/home.png'), fit: BoxFit.cover),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -87,7 +95,7 @@ class ChoosePage extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ]),
     );
   }
 }

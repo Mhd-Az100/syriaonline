@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:syriaonline/model/model%20account.dart';
+
 List<CommentModel> rateModelFromJson(String str) => List<CommentModel>.from(
     json.decode(str).map((x) => CommentModel.fromJson(x)));
 
@@ -17,12 +19,15 @@ class CommentModel {
     this.picture,
     this.serviceId,
     this.accountId,
+    this.account,
   });
 
   final int commentId;
   final String comment;
   final dynamic picture;
   final String serviceId;
+  final Account account;
+
   final String accountId;
 
   factory CommentModel.fromJson(Map<String, dynamic> json) => CommentModel(
@@ -30,6 +35,7 @@ class CommentModel {
         comment: json["comment"],
         picture: json["picture"],
         serviceId: json["service_id"],
+        account: Account.fromJson(json['accounts']),
         accountId: json["account_id"],
       );
 

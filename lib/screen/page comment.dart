@@ -68,10 +68,6 @@ class _PageCommentState extends State<PageComment> {
   List<CommentModel> comments = [];
   Future<List<CommentModel>> fdata() async {
     GetCommentsApi com = GetCommentsApi(id: id);
-    // print('form page comment');
-
-    // print(id);
-
     List<CommentModel> coms = await com.getRate();
     comments = coms;
     return comments;
@@ -120,7 +116,9 @@ class _PageCommentState extends State<PageComment> {
                               ),
                               title: Container(
                                 margin: EdgeInsets.only(top: 17),
-                                child: Text(commentss.accountId),
+                                child: Text(commentss.account.firstName +
+                                    " " +
+                                    commentss.account.lastName),
                               ),
                               subtitle: Column(
                                 children: [

@@ -3,6 +3,7 @@ import 'package:syriaonline/screen/page%20choose.dart';
 import 'package:syriaonline/screen/page%20signUp.dart';
 import 'package:syriaonline/widgets/signup/signuprawMaterialButton.dart';
 import '../constant/constent.dart';
+import 'package:email_validator/email_validator.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var loginEmailController = TextEditingController();
   var loginCodeController = TextEditingController();
-  String loginEmail, loginPass;
+  String loginEmail, loginPass, _code = "";
   final loginformKey = new GlobalKey<FormState>();
 
   @override
@@ -93,9 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: TextFormField(
                                 controller: loginEmailController,
                                 keyboardType: TextInputType.emailAddress,
-                                validator: (val) => val.length == 0
-                                    ? 'Please Enter Your Email'
-                                    : null,
+                                validator: validateEmail,
                                 onSaved: (val) => loginEmail = val,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -146,12 +145,8 @@ class _LoginPageState extends State<LoginPage> {
                               child: TextFormField(
                                 obscureText: true,
                                 controller: loginCodeController,
-                                keyboardType: TextInputType.text,
-                                validator: (val) {
-                                  if (val.isEmpty) {
-                                    return 'please enter your code';
-                                  }
-                                },
+                                keyboardType: TextInputType.number,
+                                validator: validateCode,
                                 onSaved: (val) => loginPass = val,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -219,5 +214,25 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  //------------------------Validation-----------------------------------------
+
+  String validateEmail(String value) {
+    if (value.length == 0)
+      return 'Please enter your Email';
+    else if (!EmailValidator.validate(value))
+      return 'Please enter a valid Email';
+    else
+      return null;
+  }
+
+  String validateCode(String value) {
+    if (value.length == 0)
+      return 'Please enter your Email';
+    else if (value.length != 6)
+      return 'Code must be 6 numbers';
+    else
+      return null;
   }
 }

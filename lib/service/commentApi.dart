@@ -8,8 +8,7 @@ class GetCommentsApi {
   GetCommentsApi({this.id});
   Future<List<CommentModel>> getRate() async {
     var url = Uri.parse(commentId + id);
-    print('from comment api');
-    print(id);
+
     List<CommentModel> comlst = [];
 
     http.Response res = await http.get(url);
@@ -18,6 +17,9 @@ class GetCommentsApi {
 
       for (var item in body) {
         comlst.add(CommentModel.fromJson(item));
+      }
+      for (var item in comlst) {
+        print(item.account.firstName);
       }
 
       return comlst;
