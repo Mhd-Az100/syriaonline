@@ -1,4 +1,7 @@
 String account = "https://gp-tcc.000webhostapp.com/public/api/account";
+String login = "https://gp-tcc.000webhostapp.com/public/api/login";
+String registerCod = "https://gp-tcc.000webhostapp.com/public/api/cheackR";
+
 String rate = "https://gp-tcc.000webhostapp.com/public/api/rate";
 String rateId =
     "https://gp-tcc.000webhostapp.com/public/api/rateforthisservice/";

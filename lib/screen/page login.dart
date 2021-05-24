@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:syriaonline/screen/page%20choose.dart';
 import 'package:syriaonline/screen/page%20signUp.dart';
+import 'package:syriaonline/service/loginpost.dart';
 import 'package:syriaonline/widgets/signup/signuprawMaterialButton.dart';
+import 'package:syriaonline/utils/allUrl.dart';
 import '../constant/constent.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -17,10 +20,24 @@ class _LoginPageState extends State<LoginPage> {
   var loginCodeController = TextEditingController();
   String loginEmail, loginPass, _code = "";
   final loginformKey = new GlobalKey<FormState>();
-
+  bool state = true;
   @override
   void initState() {
     super.initState();
+  }
+
+  bool result1 = false;
+  bool result2 = false;
+  senddata(context, Map map) async {
+    result1 = await loginpost(registerCod, map);
+    print("result  $result1");
+    return result1;
+  }
+
+  sendemail(context, Map map) async {
+    result2 = await loginpost(login, map);
+    print("result  $result2");
+    return result2;
   }
 
   @override
@@ -92,6 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                                         color: Colors.black12, blurRadius: 5)
                                   ]),
                               child: TextFormField(
+                                enabled: state,
                                 controller: loginEmailController,
                                 keyboardType: TextInputType.emailAddress,
                                 validator: validateEmail,
@@ -112,7 +130,15 @@ class _LoginPageState extends State<LoginPage> {
                                         color: klabelTextColor.withOpacity(0.5),
                                       ),
                                       onPressed: () {
-                                        print('Done');
+                                        Map addEmail = {
+                                          "e_mail": loginEmailController.text,
+                                        };
+                                        setState(() {
+                                          state = false;
+                                          sendemail(context, addEmail);
+                                          print(addEmail);
+                                          // uploadimg();
+                                        });
                                       },
                                     )),
                               ),
@@ -165,7 +191,15 @@ class _LoginPageState extends State<LoginPage> {
                             Align(
                               alignment: Alignment.center,
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    state = true;
+                                    Fluttertoast.showToast(
+                                        msg: 'Send Email Again',
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.BOTTOM);
+                                  });
+                                },
                                 child: Text(
                                   'Not received any Code ?',
                                   style: TextStyle(color: klabelTextColor),
@@ -176,12 +210,24 @@ class _LoginPageState extends State<LoginPage> {
                             Center(
                               child: ReusableRaisedButton(
                                 onpressed: () {
-                                  if (loginformKey.currentState.validate())
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (context) => ChoosePage(),
-                                      ),
-                                    );
+                                  if (loginformKey.currentState.validate()) {
+                                    Map sendcode = {
+                                      "e_mail": loginEmailController.text,
+                                      "Code": loginCodeController.text,
+                                    };
+                                    setState(() {
+                                      senddata(context, sendcode);
+                                      print('sendcode $sendcode');
+                                    });
+                                    if (result2 == true) {
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context) => ChoosePage(),
+                                        ),
+                                      );
+                                      result2 = false;
+                                    }
+                                  }
                                 },
                                 text: 'LogIn',
                                 color: kButtongradientColor,

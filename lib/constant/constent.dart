@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //--------------------------------------card------------------------------------
-final kButtonLstcolor = Color(0xFFDFDFDF);
+final kContainarHome = Color(0xFF080A20);
+
+final kButtonLstcolor = Color(0xFFF8F4F4);
 
 final kCardColor = LinearGradient(
   begin: Alignment.topLeft,
@@ -10,9 +12,9 @@ final kCardColor = LinearGradient(
   colors: <Color>[Color(0xFF4286E6), Color(0xFF98BCDD)],
   tileMode: TileMode.repeated,
 );
-final kCardHomeColor = Color(0xA4FFFAFA);
+final kCardHomeColor = Color(0xFFFFFFFF);
 final kTitleCardHomeText = GoogleFonts.alegreya(
-    fontSize: 35, fontWeight: FontWeight.bold, color: Color(0xFFFF0000f));
+    fontSize: 35, fontWeight: FontWeight.bold, color: Color(0xFF050013f));
 final kTitlelstText = GoogleFonts.alegreya(
     fontSize: 25, fontWeight: FontWeight.bold, color: Color(0xFF070230f));
 final kTitleGridText = GoogleFonts.alegreya(
@@ -21,7 +23,7 @@ final kTitleGridText = GoogleFonts.alegreya(
 
 final kAppBarColor = Color(0xFFF8F8F8);
 final kTitleAppbarStyle = GoogleFonts.pacifico(
-  fontSize: 20,
+  fontSize: 30,
   color: Colors.black,
   fontWeight: FontWeight.bold,
 );

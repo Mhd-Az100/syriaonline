@@ -9,7 +9,6 @@ class ChoosePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100,
         shadowColor: Color(0xEE3264EE),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -49,48 +48,40 @@ class ChoosePage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Column(
-                children: [
-                  //-------------------------------------view card--------------
-
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => CategoryListPage(),
-                      ),
-                    ),
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: kCardHomeColor),
-                      margin: EdgeInsets.all(50),
-                      child: Center(
-                          child:
-                              Text('Veiw Service', style: kTitleCardHomeText)),
-                    ),
+              GestureDetector(
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CategoryListPage(),
                   ),
+                ),
+                child: Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: kCardHomeColor),
+                  margin: EdgeInsets.all(50),
+                  child: Center(
+                      child: Text('Veiw Service', style: kTitleCardHomeText)),
+                ),
+              ),
 
-                  //-------------------------------------add service card-------
+              //-------------------------------------add service card-------
 
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => AddService(),
-                      ),
-                    ),
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                          color: kCardHomeColor,
-                          borderRadius: BorderRadius.circular(30)),
-                      margin: EdgeInsets.all(50),
-                      child: Center(
-                          child:
-                              Text('Add Service', style: kTitleCardHomeText)),
-                    ),
+              GestureDetector(
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AddService(),
                   ),
-                ],
+                ),
+                child: Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                      color: kCardHomeColor,
+                      borderRadius: BorderRadius.circular(30)),
+                  margin: EdgeInsets.all(50),
+                  child: Center(
+                      child: Text('Add Service', style: kTitleCardHomeText)),
+                ),
               ),
             ],
           ),
