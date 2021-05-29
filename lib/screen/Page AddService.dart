@@ -88,8 +88,9 @@ class _AddServiceState extends State<AddService> {
   }
 
 //----------------------------send data-----------------------------------------
+  bool result = false;
   addseRvice(context, Map map) async {
-    bool result = await postdata(services, map);
+    result = await postdata(services, map);
     print(result);
     print(map);
   }
@@ -240,7 +241,6 @@ class _AddServiceState extends State<AddService> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: '+963',
-                              prefixText: '+963',
                               hintStyle: kHintStyle,
                               icon: Icon(
                                 Icons.phone,
@@ -329,12 +329,21 @@ class _AddServiceState extends State<AddService> {
                       onPressed: () async {
                         if (select == false) {
                           Fluttertoast.showToast(
+                              backgroundColor: Color(0xB7FF0000),
+                              msg: 'choose service category',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM);
+                        }
+                        if (select == false) {
+                          Fluttertoast.showToast(
+                              backgroundColor: Color(0xB7FF0000),
                               msg: 'choose service category',
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM);
                         }
                         if (positioned == null) {
                           Fluttertoast.showToast(
+                              backgroundColor: Color(0xB7FF0000),
                               msg: 'Add Location',
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM);
@@ -365,40 +374,37 @@ class _AddServiceState extends State<AddService> {
                               addseRvice(context, addservices);
                               print("Add");
                               print(addseRvice);
-                              // uploadimg();
                             });
-                            // Validate will return true if the form is valid, or false if
-                            // the form is invalid.
+                          } else {
+                            //--------------withOut photo ---------------
 
-                            // Process data.
+                            Map addservices = {
+                              'account_id': iduser.toString(),
+                              'service_name': nameController.text,
+                              'service_phone_number': numberController.text,
+                              'service_description': descriptionController.text,
+                              'service_catogary_id': idcate.toString(),
+                              'x': positioned.latitude.toString(),
+                              'y': positioned.longitude.toString(),
+                              'manger_accept': '1',
+                            };
+                            setState(() {
+                              addseRvice(context, addservices);
+                              print("Add");
+                              print(addseRvice);
+                            });
                           }
-                        } else {
-                          //--------------withOut photo ---------------
 
-                          Map addservices = {
-                            'account_id': iduser.toString(),
-                            'service_name': nameController.text,
-                            'service_phone_number': numberController.text,
-                            'service_description': descriptionController.text,
-                            'service_catogary_id': idcate.toString(),
-                            'x': positioned.latitude.toString(),
-                            'y': positioned.longitude.toString(),
-                            'manger_accept': '1',
-                          };
-                          setState(() {
-                            addseRvice(context, addservices);
-                            print("Add");
-                            print(addseRvice);
-                          });
-                        }
-
-                        if (_formKey.currentState.validate() &&
-                            positioned != null &&
-                            select == true) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                                 builder: (context) => ChoosePage()),
                           );
+                        } else {
+                          Fluttertoast.showToast(
+                              backgroundColor: Color(0xB7FF0000),
+                              msg: 'error Add',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM);
                         }
                       },
                       child: Text('Add Service'),
@@ -426,8 +432,8 @@ class _AddServiceState extends State<AddService> {
   String validateMobile(String value) {
     if (value.length == 0)
       return 'Please enter PhoneNumber';
-    else if (value.length != 9)
-      return 'Mobile Number must be of 9 digit';
+    else if (value.length != 10)
+      return 'Mobile Number must be of 10 digit';
     else
       return null;
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:syriaonline/constant/constent.dart';
 import 'package:syriaonline/constant/drawer.dart';
 import 'package:syriaonline/model/model%20services.dart';
@@ -17,12 +19,32 @@ class ServiceView extends StatefulWidget {
 }
 
 class _ServiceViewState extends State<ServiceView> {
+  //---------------------for current location-----------------------------------
+  Map map;
+  Position currentPosition;
+  var geoLocator = Geolocator();
+  double bottomPaddingOfMap = 0;
+  void currentlocatorPosition() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    currentPosition = position;
+    LatLng latLngposition = LatLng(position.latitude, position.longitude);
+    print("x= ${position.latitude}");
+    print("y= ${position.longitude}");
+    print(latLngposition);
+    map = {
+      "user_location_x": position.latitude.toString(),
+      "user_location_y": position.longitude.toString(),
+    };
+  }
+  //---------------------------- service api -----------------------------------
+
   List<ServicesModel> services = [];
   Future<List<ServicesModel>> fdata() async {
     GetServiceApi type = GetServiceApi(n: widget.id.toString());
     // await type.getserv();
 
-    List<ServicesModel> types = await type.getserv();
+    List<ServicesModel> types = await type.getserv(map);
     services = types;
     return services;
   }
@@ -31,6 +53,7 @@ class _ServiceViewState extends State<ServiceView> {
   void initState() {
     super.initState();
     fdata();
+    currentlocatorPosition();
   }
 
   @override

@@ -9,7 +9,6 @@ import 'package:syriaonline/model/model%20services.dart';
 import 'package:syriaonline/provider/providerData.dart';
 import 'package:syriaonline/screen/page%20details.dart';
 import 'package:syriaonline/service/getAllService.dart';
-import 'package:syriaonline/utils/allUrl.dart';
 
 const kGoogleApiKey = "AIzaSyDELVyIyOWK-s4frDfUmU81fBESRMsEkRE";
 

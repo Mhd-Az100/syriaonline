@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var loginEmailController = TextEditingController();
   var loginCodeController = TextEditingController();
-  String loginEmail, loginPass, _code = "";
+  String loginEmail, _code = "";
   final loginformKey = new GlobalKey<FormState>();
   bool state = true;
   @override
@@ -173,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                                 controller: loginCodeController,
                                 keyboardType: TextInputType.number,
                                 validator: validateCode,
-                                onSaved: (val) => loginPass = val,
+                                onSaved: (val) => _code = val,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   icon: Icon(

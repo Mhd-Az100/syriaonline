@@ -61,7 +61,7 @@ class _SignUPState extends State<SignUP> {
     }
   }
 
-  //--------------------------shared preferences--------------------------------
+  //------------------shared preferences----------------------------------------
   savepref(
       String firstName, String lastName, String email, int accountId) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -102,13 +102,11 @@ class _SignUPState extends State<SignUP> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
-                      //----------------------Form------------------------------
                       child: Form(
                         key: signupformKey,
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              //----------------------first name----------------
                               Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 59,
@@ -143,8 +141,6 @@ class _SignUPState extends State<SignUP> {
                                   ),
                                 ),
                               ),
-
-                              //--------------------last name-------------------
                               Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 59,
@@ -179,7 +175,6 @@ class _SignUPState extends State<SignUP> {
                                   ),
                                 ),
                               ),
-                              //--------------------E_mail----------------------
                               Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 59,
@@ -212,7 +207,6 @@ class _SignUPState extends State<SignUP> {
                                   ),
                                 ),
                               ),
-                              //--------------------Phon------------------------
                               Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 59,
@@ -249,7 +243,8 @@ class _SignUPState extends State<SignUP> {
                                 ),
                               ),
 
-                              //------------------button Sign Up----------------
+                              //------------------------------button Sign Up----------------
+
                               SizedBox(height: 40),
                               ReusableRaisedButton(
                                 onpressed: () {
@@ -258,8 +253,8 @@ class _SignUPState extends State<SignUP> {
                                 text: 'SignUp',
                                 color: kButtongradientColor,
                               ),
+                              //------------------------------button login----------------
 
-                              //------------------button login------------------
                               SizedBox(height: 20),
 
                               InkWell(

@@ -22,21 +22,42 @@ class CategoryListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kchooseColor,
       drawer: MyDrawer(),
       appBar: AppBar(
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: kAppBarColor,
           title: Text(
             'Category',
             style: kTitleAppbarStyle,
           )),
-      body: Container(
-          child: Stack(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: FutureBuilder<List<CategoryModel>>(
+          SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: Stack(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 40),
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 20,
+                          offset: Offset(0, -2),
+                          color: Colors.black.withOpacity(.5),
+                        )
+                      ],
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20),
+                        topLeft: Radius.circular(20),
+                      ),
+                      color: kCardHomeColor),
+                ),
+                FutureBuilder<List<CategoryModel>>(
                   future: fdata(),
                   builder: (BuildContext ctx,
                       AsyncSnapshot<List<CategoryModel>> snapshot) {
@@ -62,8 +83,21 @@ class CategoryListPage extends StatelessWidget {
                               );
                             },
                             child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 20,
+                                    offset: Offset(0, 5),
+                                    color: Colors.black.withOpacity(.5),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(20),
+                                  topLeft: Radius.circular(20),
+                                ),
+                              ),
                               margin: EdgeInsets.all(20),
-                              height: 150,
+                              height: 175,
                               child: Stack(
                                 children: [
                                   Positioned.fill(
@@ -99,14 +133,26 @@ class CategoryListPage extends StatelessWidget {
                                   ),
                                   Positioned(
                                     bottom: 0,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: Row(
-                                        children: [
-                                          Text(categoreis.servicesCatogaryName,
-                                              style: kTitlelstText),
-                                        ],
-                                      ),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 150,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(20),
+                                                bottomLeft: Radius.circular(20),
+                                              ),
+                                              gradient: kBackTitleColor),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Text(
+                                                categoreis.servicesCatogaryName,
+                                                style: kTitlelstText),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   )
                                 ],
@@ -119,11 +165,11 @@ class CategoryListPage extends StatelessWidget {
                     }
                   },
                 ),
-              )
-            ],
-          ),
+              ],
+            ),
+          )
         ],
-      )),
+      ),
     );
   }
 }

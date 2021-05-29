@@ -7,10 +7,11 @@ import 'package:syriaonline/utils/allUrl.dart';
 class GetServiceApi {
   String n;
   GetServiceApi({this.n});
-  Future<List<ServicesModel>> getserv() async {
+  Future<List<ServicesModel>> getserv(Map data) async {
     List<ServicesModel> servlist = [];
-    var url = Uri.parse(catogarytype + n);
-    http.Response res = await http.get(url);
+    print('n= ' + n);
+    var url = Uri.parse(sortservices + n);
+    http.Response res = await http.post(url, body: data);
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
 

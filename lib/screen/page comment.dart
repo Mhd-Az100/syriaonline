@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/model/model%20comment.dart';
@@ -18,6 +19,8 @@ class PageComment extends StatefulWidget {
 class _PageCommentState extends State<PageComment> {
   TextEditingController commentController = TextEditingController();
   final commentformKey = new GlobalKey<FormState>();
+  final GlobalKey<LiquidPullToRefreshState> _refreshIndicatorKey =
+      GlobalKey<LiquidPullToRefreshState>();
   String commented;
   String id;
   void initState() {

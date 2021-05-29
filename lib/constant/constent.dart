@@ -13,18 +13,20 @@ final kCardColor = LinearGradient(
   tileMode: TileMode.repeated,
 );
 final kCardHomeColor = Color(0xFFFFFFFF);
-final kTitleCardHomeText = GoogleFonts.alegreya(
-    fontSize: 35, fontWeight: FontWeight.bold, color: Color(0xFF050013f));
+final kTitleCardAddText = GoogleFonts.pacifico(
+    fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white);
+final kTitleCardViewText = GoogleFonts.pacifico(
+    fontSize: 35, fontWeight: FontWeight.bold, color: kchooseColor);
 final kTitlelstText = GoogleFonts.alegreya(
-    fontSize: 25, fontWeight: FontWeight.bold, color: Color(0xFF070230f));
+    fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white);
 final kTitleGridText = GoogleFonts.alegreya(
     fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xfffffffff));
 //------------------------------------Appbar------------------------------------
 
-final kAppBarColor = Color(0xFFF8F8F8);
+final kAppBarColor = Color(0xff5eaaa8);
 final kTitleAppbarStyle = GoogleFonts.pacifico(
   fontSize: 30,
-  color: Colors.black,
+  color: Colors.white,
   fontWeight: FontWeight.bold,
 );
 
@@ -35,7 +37,13 @@ final kTitleTextBody = GoogleFonts.pacifico(
 
 //--------------------------------------body------------------------------------
 
+final kchooseColor = Color(0xff5eaaa8);
+
 final kBackTextColor = Color(0xFFF3C52E);
+final kBackTitleColor = LinearGradient(colors: <Color>[
+  Color(0xFF579997),
+  Color(0xFF73B3B0),
+]);
 final kColorStarsRate = Colors.yellow;
 final kColorStarsRated = Colors.red;
 final kTextBody = GoogleFonts.petrona(fontSize: 17, color: Colors.black);

@@ -33,6 +33,7 @@ dependencies:
   http: ^0.13.1
   image_picker: ^0.7.4
   jumping_bottom_nav_bar: ^0.1.0
+  liquid_pull_to_refresh: ^3.0.0
   provider: ^5.0.0
   shared_preferences: ^2.0.5
   smooth_star_rating: ^1.1.1
