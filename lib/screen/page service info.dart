@@ -21,10 +21,6 @@ class ServiceInfo extends StatefulWidget {
 class _ServiceInfoState extends State<ServiceInfo> {
   @override
   void initState() {
-    // print('form page info');
-    // // print(widget.id);
-    // print(widget.service.serviceCatogaryId);
-
     super.initState();
   }
 

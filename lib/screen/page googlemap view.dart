@@ -118,7 +118,7 @@ class _GooglemapsState extends State<Googlemaps> {
           initialCameraPosition: CameraPosition(
               target: LatLng(double.parse(service.x), double.parse(service.y)),
               zoom: 16),
-          // mapType: maptype,
+          mapType: maptype,
 
           // onMapCreated: (controller) {
           //   setState(() {
