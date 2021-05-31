@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:syriaonline/model/model%20sortService.dart';
+
 import '../model/model services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -9,8 +11,8 @@ import 'package:syriaonline/utils/allUrl.dart';
 class GetServiceApi {
   String n;
   GetServiceApi({this.n});
-  Future<List<ServicesModel>> getserv(Map data) async {
-    List<ServicesModel> servlist = [];
+  Future<List<SortService>> getserv(Map data) async {
+    List<SortService> servlist = [];
     print('n= ' + n);
     print('befor post data $data');
 
@@ -23,10 +25,10 @@ class GetServiceApi {
       var body = jsonDecode(res.body);
 
       for (var item in body) {
-        servlist.add(ServicesModel.fromJson(item));
+        servlist.add(SortService.fromJson(item));
       }
       for (var item in servlist) {
-        print(item.serviceName);
+        print(item.service.serviceName);
       }
 
       return servlist;

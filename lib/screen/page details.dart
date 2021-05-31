@@ -55,11 +55,19 @@ class _DetailesState extends State<Detailes> {
       iduser = preferences.getString('account_id');
     });
   }
-//-------------------------------------add rate----------------------------
 
+//-------------------------------------add rate----------------------------
+  bool result = false;
   addrate(context, Map map) async {
-    bool result = await postdata(rate, map);
+    result = await postdata(rate, map);
     print(map);
+    result == false
+        ? Fluttertoast.showToast(
+            backgroundColor: Color(0xB7FF0000),
+            msg: 'You cannot add a rating again because you did it before ',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM)
+        : print("your rated now");
   }
 
   @override
@@ -96,8 +104,8 @@ class _DetailesState extends State<Detailes> {
                                     sums += double.parse(element.rateFrom5);
                                   });
 
-                                  print("Obada thi is SUM : " +
-                                      (sums / snapshot.data.length).toString());
+                                  // print("Obada thi is SUM : " +
+                                  //     (sums / snapshot.data.length).toString());
                                   double result = sums / snapshot.data.length;
 
                                   return SmoothStarRating(
@@ -179,7 +187,7 @@ class _DetailesState extends State<Detailes> {
                                   msg: 'Add Rate Please',
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.BOTTOM);
-                              print("mhmd" + ratingX.toString());
+                              // print("mhmd" + ratingX.toString());
                               return;
                             } else {
                               Map rated = {

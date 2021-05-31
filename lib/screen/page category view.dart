@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:syriaonline/model/model%20sortService.dart';
 import 'package:syriaonline/provider/providerData.dart';
 import 'package:syriaonline/constant/constent.dart';
 import 'package:syriaonline/constant/drawer.dart';
@@ -29,11 +30,11 @@ class _ServiceViewState extends State<ServiceView> {
   }
   //---------------------------- service api -----------------------------------
 
-  List<ServicesModel> services = [];
+  List<SortService> services = [];
 
-  Future<List<ServicesModel>> fdata() async {
+  Future<List<SortService>> fdata() async {
     GetServiceApi type = GetServiceApi(n: widget.id.toString());
-    List<ServicesModel> types = await type.getserv(map);
+    List<SortService> types = await type.getserv(map);
     services = types;
     return services;
   }
@@ -56,10 +57,10 @@ class _ServiceViewState extends State<ServiceView> {
         body: Stack(children: [
           Container(
             margin: EdgeInsets.only(top: 70),
-            child: FutureBuilder<List<ServicesModel>>(
+            child: FutureBuilder<List<SortService>>(
               future: fdata(),
               builder: (BuildContext ctx,
-                  AsyncSnapshot<List<ServicesModel>> snapshot) {
+                  AsyncSnapshot<List<SortService>> snapshot) {
                 if (snapshot.data == null) {
                   return Container(
                       child: Center(child: CircularProgressIndicator()));
@@ -76,10 +77,10 @@ class _ServiceViewState extends State<ServiceView> {
                           mainAxisSpacing: 20,
                         ),
                         itemBuilder: (context, index) {
-                          ServicesModel c = snapshot.data[index];
+                          SortService c = snapshot.data[index];
                           return InkWell(
                             onTap: () {
-                              setService(context: context, val: c);
+                              setService(context: context, val: c.service);
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (context) => ServiceInfo(
@@ -93,7 +94,7 @@ class _ServiceViewState extends State<ServiceView> {
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                                 child: Image.network(
-                                  c.picture,
+                                  c.service.picture,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -104,7 +105,7 @@ class _ServiceViewState extends State<ServiceView> {
                                 height: 50,
                                 child: ListTile(
                                   leading: Text(
-                                    c.serviceName,
+                                    c.service.serviceName,
                                     style: kTitleGridText,
                                   ),
                                 ),

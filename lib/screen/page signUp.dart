@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'page%20choose.dart';
 import 'page%20login.dart';
@@ -44,20 +45,37 @@ class _SignUPState extends State<SignUP> {
       };
 
       http.Response res = await http.post(url, body: data);
-      var resbody = jsonDecode(res.body);
 
-      savepref(resbody['first_name'], resbody['last_name'], resbody['e_mail'],
-          resbody['account_id']);
+      if (res.statusCode == 200) {
+        var resbody = jsonDecode(res.body);
+        print('message ${res.body}');
 
-      setState(() {
-        loading = false;
-      });
+        savepref(resbody['first_name'], resbody['last_name'], resbody['e_mail'],
+            resbody['account_id']);
 
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => ChoosePage(),
-        ),
-      );
+        setState(() {
+          loading = false;
+        });
+
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => ChoosePage(),
+          ),
+        );
+      } else {
+        print('statuscode=${res.statusCode}');
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => SignUP(),
+          ),
+        );
+        Fluttertoast.showToast(
+            timeInSecForIosWeb: 2,
+            backgroundColor: Color(0xB7FF0000),
+            msg: 'This account already exists',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM);
+      }
     }
   }
 

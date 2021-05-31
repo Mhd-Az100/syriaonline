@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:syriaonline/screen/page%20choose.dart';
 import 'package:syriaonline/screen/page%20signUp.dart';
 import 'package:syriaonline/service/loginpost.dart';
+import 'package:syriaonline/service/postApi.dart';
 import 'package:syriaonline/widgets/signup/signuprawMaterialButton.dart';
 import 'package:syriaonline/utils/allUrl.dart';
 import '../constant/constent.dart';
@@ -30,13 +31,26 @@ class _LoginPageState extends State<LoginPage> {
   bool result2 = false;
   senddata(context, Map map) async {
     result1 = await loginpost(registerCod, map);
-    print("result  $result1");
+    result1
+        ? Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => ChoosePage(),
+            ),
+          )
+        : Fluttertoast.showToast(
+            timeInSecForIosWeb: 2,
+            backgroundColor: Color(0xE1D32323),
+            msg: 'error in your\n Email OR Code',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM);
+
+    print("result 1 $result1");
     return result1;
   }
 
   sendemail(context, Map map) async {
-    result2 = await loginpost(login, map);
-    print("result  $result2");
+    result2 = await postdata(login, map);
+    print("result 2  $result2");
     return result2;
   }
 
@@ -137,7 +151,13 @@ class _LoginPageState extends State<LoginPage> {
                                           state = false;
                                           sendemail(context, addEmail);
                                           print(addEmail);
-                                          // uploadimg();
+                                          Fluttertoast.showToast(
+                                              timeInSecForIosWeb: 2,
+                                              backgroundColor:
+                                                  Color(0xE139B84E),
+                                              msg: 'Send Code for your Gmail',
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.BOTTOM);
                                         });
                                       },
                                     )),
@@ -211,22 +231,14 @@ class _LoginPageState extends State<LoginPage> {
                               child: ReusableRaisedButton(
                                 onpressed: () {
                                   if (loginformKey.currentState.validate()) {
-                                    Map sendcode = {
-                                      "e_mail": loginEmailController.text,
-                                      "Code": loginCodeController.text,
-                                    };
                                     setState(() {
+                                      Map sendcode = {
+                                        "e_mail": loginEmailController.text,
+                                        "Code": loginCodeController.text,
+                                      };
                                       senddata(context, sendcode);
                                       print('sendcode $sendcode');
                                     });
-                                    if (result2 == true) {
-                                      Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                          builder: (context) => ChoosePage(),
-                                        ),
-                                      );
-                                      result2 = false;
-                                    }
                                   }
                                 },
                                 text: 'LogIn',

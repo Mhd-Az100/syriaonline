@@ -91,6 +91,16 @@ class _AddServiceState extends State<AddService> {
   bool result = false;
   addseRvice(context, Map map) async {
     result = await postdata(services, map);
+
+    result
+        ? Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => ChoosePage()))
+        : Fluttertoast.showToast(
+            backgroundColor: Color(0xB7FF0000),
+            msg: 'error Add',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM);
+
     print(result);
     print(map);
   }
@@ -358,19 +368,21 @@ class _AddServiceState extends State<AddService> {
                                 base64Encode(_file.readAsBytesSync());
                             String imgname = _file.path.split('/').last;
                             //--------------with photo ---------------
-                            Map addservices = {
-                              'account_id': iduser.toString(),
-                              'service_name': nameController.text,
-                              'service_phone_number': numberController.text,
-                              'service_description': descriptionController.text,
-                              'service_catogary_id': idcate.toString(),
-                              'x': positioned.latitude.toString(),
-                              'y': positioned.longitude.toString(),
-                              'manger_accept': '1',
-                              "imgname": imgname,
-                              "base64": base64,
-                            };
+
                             setState(() {
+                              Map addservices = {
+                                'account_id': iduser.toString(),
+                                'service_name': nameController.text,
+                                'service_phone_number': numberController.text,
+                                'service_description':
+                                    descriptionController.text,
+                                'service_catogary_id': idcate.toString(),
+                                'x': positioned.latitude.toString(),
+                                'y': positioned.longitude.toString(),
+                                'manger_accept': '1',
+                                "imgname": imgname,
+                                "base64": base64,
+                              };
                               addseRvice(context, addservices);
                               print("Add");
                               print(addseRvice);
@@ -378,27 +390,23 @@ class _AddServiceState extends State<AddService> {
                           } else {
                             //--------------withOut photo ---------------
 
-                            Map addservices = {
-                              'account_id': iduser.toString(),
-                              'service_name': nameController.text,
-                              'service_phone_number': numberController.text,
-                              'service_description': descriptionController.text,
-                              'service_catogary_id': idcate.toString(),
-                              'x': positioned.latitude.toString(),
-                              'y': positioned.longitude.toString(),
-                              'manger_accept': '1',
-                            };
                             setState(() {
+                              Map addservices = {
+                                'account_id': iduser.toString(),
+                                'service_name': nameController.text,
+                                'service_phone_number': numberController.text,
+                                'service_description':
+                                    descriptionController.text,
+                                'service_catogary_id': idcate.toString(),
+                                'x': positioned.latitude.toString(),
+                                'y': positioned.longitude.toString(),
+                                'manger_accept': '1',
+                              };
                               addseRvice(context, addservices);
                               print("Add");
                               print(addseRvice);
                             });
                           }
-
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                                builder: (context) => ChoosePage()),
-                          );
                         } else {
                           Fluttertoast.showToast(
                               backgroundColor: Color(0xB7FF0000),
