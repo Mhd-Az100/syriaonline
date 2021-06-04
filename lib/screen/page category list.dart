@@ -108,10 +108,12 @@ class _CategoryListPageState extends State<CategoryListPage> {
                           return GestureDetector(
                             onTap: () {
                               //---------------------for view page -------------
+                              setcategory(context: context, val1: categoreis);
                               setcurrentlocation(context: context, val2: map);
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ServiceView(
+                                    index: index,
                                     id: categoreis.serviceCatogaryId,
                                     categoryName:
                                         categoreis.servicesCatogaryName,

@@ -1,3 +1,5 @@
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'Page AddService.dart';
 import 'page category list.dart';
 import '../constant/constent.dart';
@@ -11,6 +13,7 @@ class ChoosePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        // leading: Icon(Icons.ac_unit_outlined),
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: kchooseColor,
@@ -64,6 +67,9 @@ class ChoosePage extends StatelessWidget {
                         child: Text('Veiw Service', style: kTitleCardViewText)),
                   ),
                 ),
+                // Expanded(
+                //     child: SvgPicture.asset("img/undraw_Add_files_re_v09g.svg",
+                //         width: 200, height: 200))
               ],
             ),
           ),

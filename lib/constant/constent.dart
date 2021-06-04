@@ -20,7 +20,7 @@ final kTitleCardViewText = GoogleFonts.pacifico(
 final kTitlelstText = GoogleFonts.alegreya(
     fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white);
 final kTitleGridText = GoogleFonts.alegreya(
-    fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xfffffffff));
+    fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF06040F));
 //------------------------------------Appbar------------------------------------
 
 final kAppBarColor = Color(0xff5eaaa8);
@@ -70,6 +70,12 @@ final kButtonColor = Color(0xFF3159DA);
 final kButtonSaveLocationColor = Color(0xFF3159DA);
 final kTextButton = GoogleFonts.petrona(
     fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold);
+final kTextButtonenable = GoogleFonts.petrona(
+    fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold);
+final kTextButtondisable = GoogleFonts.petrona(
+  fontSize: 18,
+  color: Color(0xDCF3F3F3f),
+);
 
 //-------------------------------------login------------------------------------
 
