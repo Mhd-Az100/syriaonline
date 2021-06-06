@@ -67,9 +67,6 @@ class ChoosePage extends StatelessWidget {
                         child: Text('Veiw Service', style: kTitleCardViewText)),
                   ),
                 ),
-                // Expanded(
-                //     child: SvgPicture.asset("img/undraw_Add_files_re_v09g.svg",
-                //         width: 200, height: 200))
               ],
             ),
           ),
@@ -84,7 +81,7 @@ class ChoosePage extends StatelessWidget {
               //-------------------------------------add service card---------
               Container(
                 width: double.infinity,
-                height: size.height * 0.4,
+                height: size.height * 0.45,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -120,8 +117,8 @@ class ChoosePage extends StatelessWidget {
                             color: kchooseColor),
                         margin: EdgeInsets.all(50),
                         child: Center(
-                            child: Text('Add Your Service',
-                                style: kTitleCardAddText)),
+                            child:
+                                Text('Add Service', style: kTitleCardAddText)),
                       ),
                     ),
                   ],

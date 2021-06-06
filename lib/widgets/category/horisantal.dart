@@ -28,7 +28,7 @@ class _HorisantalListViewState extends State<HorisantalListView> {
     return FutureBuilder<List<CategoryModel>>(
       future: fdata(),
       builder: (BuildContext ctx, AsyncSnapshot<List<CategoryModel>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == null) {
           return Container();
         } else {
           return ListView.builder(
@@ -43,10 +43,9 @@ class _HorisantalListViewState extends State<HorisantalListView> {
                 categ: () {
                   setState(() {
                     selectindex = index;
-                    Navigator.of(context).push(
+                    Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                         builder: (context) => ServiceView(
-                            // id: categoreis.serviceCatogaryId,
                             categoryName: categoreis.servicesCatogaryName),
                       ),
                     );

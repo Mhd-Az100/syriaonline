@@ -18,9 +18,7 @@ class GetServiceApi {
 
     var url = Uri.parse(sortservices + n);
     http.Response res = await http.post(url, body: data);
-    print('after post data ${res.body}');
 
-    // while (res.body == null) {
     if (res.statusCode == 200) {
       var body = jsonDecode(res.body);
 
@@ -35,7 +33,29 @@ class GetServiceApi {
     } else {
       print('statuscode=${res.statusCode}');
     }
-    //if (res.statusCode != 444) break;
-    // }
+  }
+
+  Future<List<SortService>> getSearchServ(Map data) async {
+    List<SortService> servlist = [];
+    print('n= ' + n);
+    print('befor post data $data');
+
+    var url = Uri.parse(searchonservice + n);
+    http.Response res = await http.post(url, body: data);
+
+    if (res.statusCode == 200) {
+      var body = jsonDecode(res.body);
+
+      for (var item in body) {
+        servlist.add(SortService.fromJson(item));
+      }
+      for (var item in servlist) {
+        print(item.service.serviceName);
+      }
+
+      return servlist;
+    } else {
+      print('statuscode=${res.statusCode}');
+    }
   }
 }

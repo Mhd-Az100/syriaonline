@@ -13,20 +13,25 @@ final kCardColor = LinearGradient(
   tileMode: TileMode.repeated,
 );
 final kCardHomeColor = Color(0xFFFFFFFF);
-final kTitleCardAddText = GoogleFonts.pacifico(
-    fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white);
-final kTitleCardViewText = GoogleFonts.pacifico(
-    fontSize: 35, fontWeight: FontWeight.bold, color: kchooseColor);
-final kTitlelstText = GoogleFonts.alegreya(
+final kTitleCardAddText = GoogleFonts.caveat(
+    fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white);
+final kTitleCardViewText = GoogleFonts.caveat(
+    fontSize: 40, fontWeight: FontWeight.bold, color: kchooseColor);
+final kTitlelstText = GoogleFonts.caveat(
     fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white);
-final kTitleGridText = GoogleFonts.alegreya(
+final kTitleGridText = GoogleFonts.elMessiri(
     fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF06040F));
 //------------------------------------Appbar------------------------------------
-
+final kAppbarDetails = Colors.white;
 final kAppBarColor = Color(0xff5eaaa8);
 final kTitleAppbarStyle = GoogleFonts.pacifico(
   fontSize: 30,
   color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+final kTitleAppbarStyleDetails = GoogleFonts.pacifico(
+  fontSize: 30,
+  color: Colors.black,
   fontWeight: FontWeight.bold,
 );
 
@@ -38,15 +43,21 @@ final kTitleTextBody = GoogleFonts.pacifico(
 //--------------------------------------body------------------------------------
 
 final kchooseColor = Color(0xff5eaaa8);
-
+final kdetailsbodyColor = Color(0xFFF8F8F8);
 final kBackTextColor = Color(0xFFF3C52E);
 final kBackTitleColor = LinearGradient(colors: <Color>[
   Color(0xFF579997),
   Color(0xFF73B3B0),
 ]);
 final kColorStarsRate = Colors.yellow;
-final kColorStarsRated = Colors.red;
-final kTextBody = GoogleFonts.petrona(fontSize: 17, color: Colors.black);
+final kColorStarsRated = Colors.yellow;
+final kTextBody = GoogleFonts.alegreya(fontSize: 20, color: Colors.black);
+final kTextdescrubt =
+    GoogleFonts.scheherazade(fontSize: 25, color: Colors.black);
+
+final kTexttitleDetails =
+    GoogleFonts.elMessiri(fontSize: 17, color: Colors.black);
+
 final kTextBodyApp = GoogleFonts.petrona(
     fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold);
 
@@ -55,7 +66,7 @@ final kTitleText = GoogleFonts.pacifico(
   color: Colors.white,
 );
 final kTextFaild = TextStyle();
-final kTextinfo = TextStyle();
+final kTextinfo = GoogleFonts.alegreya(fontSize: 15, color: Colors.black);
 final kToastColor = Colors.white;
 final kToastTextColor = Colors.black;
 
@@ -103,7 +114,7 @@ const kiconColor = Color(0xFF0675B1);
 const kHintStyle = TextStyle(color: Color(0xE8349CAF));
 //---------------------------------Navigation Bar-------------------------------
 
-final kBackgroundNAVcolor = Color(0xFF005B72);
-final kCurveColorNAV = Colors.blue;
-final kStartColorNAV = Colors.yellow;
-final kEndColorNAV = Colors.blue;
+final kBackgroundNAVcolor = Color(0xff233e8b);
+final kCurveColorNAV = Colors.white;
+final kStartColorNAV = Colors.black;
+final kEndColorNAV = Colors.white;

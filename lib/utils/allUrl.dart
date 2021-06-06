@@ -20,3 +20,5 @@ String servicescatogary =
 String accountregistrations =
     "https://gp-tcc.000webhostapp.com/public/api/accountregistrations";
 String accounttype = "https://gp-tcc.000webhostapp.com/public/api/accounttype";
+String searchonservice =
+    "https://gp-tcc.000webhostapp.com/public/api/SerchOnServices/";

@@ -104,8 +104,6 @@ class _DetailesState extends State<Detailes> {
                                     sums += double.parse(element.rateFrom5);
                                   });
 
-                                  // print("Obada thi is SUM : " +
-                                  //     (sums / snapshot.data.length).toString());
                                   double result = sums / snapshot.data.length;
 
                                   return SmoothStarRating(
@@ -130,6 +128,8 @@ class _DetailesState extends State<Detailes> {
               SizedBox(
                 height: 25,
               ),
+              //--------------------------------phone---------------------------
+
               Container(
                 child: Text(
                   'Phone Number : ${service.servicePhoneNumber}',

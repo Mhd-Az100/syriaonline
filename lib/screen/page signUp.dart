@@ -46,7 +46,7 @@ class _SignUPState extends State<SignUP> {
 
       http.Response res = await http.post(url, body: data);
 
-      if (res.statusCode == 200) {
+      if (res.statusCode == 201) {
         var resbody = jsonDecode(res.body);
         print('message ${res.body}');
 

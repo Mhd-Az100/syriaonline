@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:syriaonline/constant/constent.dart';
 import 'package:syriaonline/model/model%20services.dart';
 import 'package:syriaonline/provider/providerData.dart';
-import 'package:syriaonline/screen/page%20details.dart';
+import 'package:syriaonline/screen/page%20details3.dart';
 import 'package:syriaonline/service/getAllService.dart';
 
 const kGoogleApiKey = "AIzaSyDELVyIyOWK-s4frDfUmU81fBESRMsEkRE";

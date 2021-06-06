@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:syriaonline/model/model%20services.dart';
-import 'package:syriaonline/screen/page%20details.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:syriaonline/screen/page%20details3.dart';
 import '../constant/constent.dart';
 import '../constant/drawer.dart';
 import 'package:jumping_bottom_nav_bar/jumping_bottom_nav_bar.dart';
@@ -8,12 +9,6 @@ import 'page comment.dart';
 import 'page googlemap view.dart';
 
 class ServiceInfo extends StatefulWidget {
-  // ServicesModel service;
-  // ServiceInfo({this.service});
-
-  // int id;
-  // ServiceInfo({this.id});
-
   @override
   _ServiceInfoState createState() => _ServiceInfoState();
 }
@@ -29,27 +24,15 @@ class _ServiceInfoState extends State<ServiceInfo> {
     //--------------------------------pagecomment-------------------------------
     {
       'page': PageComment(),
-      'title': Text(
-        'Comment',
-        style: kTitleAppbarStyle,
-      )
     },
     //----------------------------------details---------------------------------
 
     {
       'page': Detailes(),
-      'title': Text(
-        'Info Service',
-        style: kTitleAppbarStyle,
-      )
     },
     //-----------------------------google map-----------------------------------
     {
       'page': Googlemaps(),
-      'title': Text(
-        'Location Map',
-        style: kTitleAppbarStyle,
-      )
     },
   ];
 
@@ -63,39 +46,42 @@ class _ServiceInfoState extends State<ServiceInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kAppBarColor,
-        title: _pages[indexpage]['title'],
-      ),
       drawer: MyDrawer(),
       body: _pages[indexpage]['page'],
       //----------------------------navigationbar-------------------------------
 
       bottomNavigationBar: JumpingTabBar(
         onChangeTab: onchangetab,
-        backgroundColor: kBackgroundNAVcolor,
+        backgroundColor: kchooseColor,
         circleGradient: LinearGradient(
           colors: [
-            Colors.purpleAccent,
-            Colors.deepPurple,
+            Color(0xff233e8b),
+            Color(0xFF3F5DAF),
+            Color(0xFF72A5A7),
           ],
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
         ),
         items: [
           TabItemIcon(
-            iconData: Icons.comment_rounded,
+            iconData: LineIcons.commentDots,
             curveColor: kCurveColorNAV,
             startColor: kStartColorNAV,
             endColor: kEndColorNAV,
           ),
           TabItemIcon(
-              iconData: Icons.store_mall_directory_rounded,
+              iconData: LineIcons.store,
               curveColor: kCurveColorNAV,
               startColor: kStartColorNAV,
               endColor: kEndColorNAV),
           TabItemIcon(
-              iconData: Icons.location_on,
+              buildWidget: (_, color) => Container(
+                  width: 40,
+                  height: 40,
+                  child: SvgPicture.asset(
+                    "img/icons/iconsearch.svg",
+                    width: 40,
+                  )),
               curveColor: kCurveColorNAV,
               startColor: kStartColorNAV,
               endColor: kEndColorNAV),

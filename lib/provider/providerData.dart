@@ -3,13 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syriaonline/model/model%20category%20.dart';
+import 'package:syriaonline/model/model%20rate.dart';
 import 'package:syriaonline/model/model%20services.dart';
 
 class Providerdata extends ChangeNotifier {
   ServicesModel service;
   CategoryModel category;
   Map mapcurrentlocation;
-
+  RateModel rate;
   void setService({@required ServicesModel val}) {
     service = val;
     notifyListeners();
@@ -22,6 +23,11 @@ class Providerdata extends ChangeNotifier {
 
   void setcurrentlocation({@required Map val2}) {
     mapcurrentlocation = val2;
+    notifyListeners();
+  }
+
+  void setrate({@required RateModel val3}) {
+    rate = val3;
     notifyListeners();
   }
 }
@@ -38,6 +44,10 @@ setcategory({@required context, @required CategoryModel val1}) {
 setcurrentlocation({@required context, @required Map val2}) {
   Provider.of<Providerdata>(context, listen: false)
       .setcurrentlocation(val2: val2);
+}
+
+setrate({@required context, @required RateModel val3}) {
+  Provider.of<Providerdata>(context, listen: false).setrate(val3: val3);
 }
 
 //---------read-------------

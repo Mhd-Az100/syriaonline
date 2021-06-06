@@ -96,7 +96,8 @@ class _PageCommentState extends State<PageComment> {
             //-------------------------------------view comments----------------
 
             Container(
-              height: MediaQuery.of(context).size.height - 80,
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height - 75,
               child: FutureBuilder(
                 future: fdata(),
                 builder: (BuildContext ctxx,
@@ -150,7 +151,7 @@ class _PageCommentState extends State<PageComment> {
             Positioned(
               bottom: 0,
               child: Container(
-                color: Colors.white,
+                color: Colors.transparent,
                 height: 85,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
@@ -162,8 +163,8 @@ class _PageCommentState extends State<PageComment> {
                           child: Container(
                             padding: EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                                border: Border(
-                                    top: BorderSide(color: Colors.grey))),
+                              color: Colors.transparent,
+                            ),
                             width: MediaQuery.of(context).size.width,
                             child: Form(
                               key: commentformKey,
