@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'page%20choose.dart';
 import 'page%20login.dart';
@@ -26,7 +29,22 @@ class _SignUPState extends State<SignUP> {
   var firstname, lastname, email, phone, pass;
 
   final signupformKey = new GlobalKey<FormState>();
+  //----------------------img from device---------------------------------------
 
+  File _file;
+  final picker = ImagePicker();
+
+  Future getImage(x) async {
+    final pickedFile = await picker.getImage(source: x);
+
+    setState(() {
+      if (pickedFile != null) {
+        _file = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
   //-------------------------register sign up ----------------------------------
 
   void register() async {
@@ -35,89 +53,140 @@ class _SignUPState extends State<SignUP> {
       setState(() {
         loading = true;
       });
-      var data = {
-        "first_name": firstNameController.text,
-        "last_name": lastNameController.text,
-        "e_mail": emailController.text,
-        "user_phone_number": phoneController.text,
-        "passowrd": passwordController.text,
-        'account_type_id': '2',
-      };
+      if (_file != null) {
+        String base64 = base64Encode(_file.readAsBytesSync());
+        String imgname = _file.path.split('/').last;
+        //--------------with photo ---------------
+        var data = {
+          "first_name": firstNameController.text,
+          "last_name": lastNameController.text,
+          "e_mail": emailController.text,
+          "user_phone_number": phoneController.text,
+          "passowrd": passwordController.text,
+          'account_type_id': '2',
+          "imgname": imgname,
+          "base64": base64,
+        };
+        print(data);
+        http.Response res = await http.post(url, body: data);
 
-      http.Response res = await http.post(url, body: data);
+        if (res.statusCode == 201) {
+          var resbody = jsonDecode(res.body);
+          print('message ${res.body}');
 
-      if (res.statusCode == 201) {
-        var resbody = jsonDecode(res.body);
-        print('message ${res.body}');
+          // savepref(resbody['first_name'], resbody['last_name'],
+          //     resbody['e_mail'], resbody['account_id']);
 
-        savepref(resbody['first_name'], resbody['last_name'], resbody['e_mail'],
-            resbody['account_id']);
+          setState(() {
+            loading = false;
+          });
 
-        setState(() {
-          loading = false;
-        });
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => LoginPage(),
+            ),
+          );
+        } else {
+          print('statuscode=${res.statusCode}');
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => SignUP(),
+            ),
+          );
+          Fluttertoast.showToast(
+              timeInSecForIosWeb: 2,
+              backgroundColor: Color(0xB7FF0000),
+              msg: 'This account already exists',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM);
+        }
+      }
+      //--------------without photo ---------------
+      else {
+        var data = {
+          "first_name": firstNameController.text,
+          "last_name": lastNameController.text,
+          "e_mail": emailController.text,
+          "user_phone_number": phoneController.text,
+          "passowrd": passwordController.text,
+          'account_type_id': '2',
+        };
+        print(data);
 
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => ChoosePage(),
-          ),
-        );
-      } else {
-        print('statuscode=${res.statusCode}');
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => SignUP(),
-          ),
-        );
-        Fluttertoast.showToast(
-            timeInSecForIosWeb: 2,
-            backgroundColor: Color(0xB7FF0000),
-            msg: 'This account already exists',
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM);
+        http.Response res = await http.post(url, body: data);
+
+        if (res.statusCode == 201) {
+          var resbody = jsonDecode(res.body);
+          print('message ${res.body}');
+
+          // savepref(resbody['first_name'], resbody['last_name'],
+          //     resbody['e_mail'], resbody['account_id']);
+
+          setState(() {
+            loading = false;
+          });
+
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => LoginPage(),
+            ),
+          );
+        } else {
+          print('statuscode=${res.statusCode}');
+
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => SignUP(),
+            ),
+          );
+          Fluttertoast.showToast(
+              timeInSecForIosWeb: 2,
+              backgroundColor: Color(0xB7FF0000),
+              msg: 'This account already exists',
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM);
+        }
       }
     }
   }
 
   //------------------shared preferences----------------------------------------
-  savepref(
-      String firstName, String lastName, String email, int accountId) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString('first_name', firstName);
-    preferences.setString('last_name', lastName);
-    preferences.setString('e_mail', email);
-    preferences.setString('account_id', accountId.toString());
 
-    // مشان اتاكد
-    print(preferences.getString('first_name'));
-    print(preferences.getString('last_name'));
-    print(preferences.getString('e_mail'));
-    print(preferences.getString('account_id'));
-  }
+  // savepref(
+  //     String firstName, String lastName, String email, int accountId) async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   preferences.setString('first_name', firstName);
+  //   preferences.setString('last_name', lastName);
+  //   preferences.setString('e_mail', email);
+  //   preferences.setString('account_id', accountId.toString());
+
+  //   // مشان اتاكد
+  //   print(preferences.getString('first_name'));
+  //   print(preferences.getString('last_name'));
+  //   print(preferences.getString('e_mail'));
+  //   print(preferences.getString('account_id'));
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: (loading == false)
-            ? SingleChildScrollView(
+    Size size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      backgroundColor: kchooseColor,
+      body: (loading == false)
+          ? Container(
+              width: size.width,
+              height: size.height,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(200),
+                    bottomRight: Radius.circular(200)),
+              ),
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: kBackTextColor,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(100),
-                            bottomRight: Radius.circular(100)),
-                      ),
-                      child: Text(
-                        'Sign Up',
-                        style: kTitleText,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: Form(
@@ -125,80 +194,117 @@ class _SignUPState extends State<SignUP> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 59,
-                                padding: EdgeInsets.only(
-                                    top: 8, left: 16, right: 16, bottom: 4),
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black12, blurRadius: 5)
-                                    ]),
-                                child: TextFormField(
-                                  controller: firstNameController,
-                                  keyboardType: TextInputType.text,
-                                  validator: (val) => val.length == 0
-                                      ? 'Please Enter Your First Name'
-                                      : null,
-                                  onSaved: (val) => firstname = val,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    icon: Icon(
-                                      Icons.person_pin,
-                                      color: klabelTextColor.withOpacity(0.5),
-                                    ),
-                                    hintText: 'First Name',
-                                    hintStyle: TextStyle(
-                                      color: klabelTextColor.withOpacity(0.5),
-                                    ),
+                              GestureDetector(
+                                onTap: () => getImage(ImageSource.gallery),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
                                   ),
+                                  width: 120,
+                                  height: 120,
+                                  margin:
+                                      EdgeInsets.only(top: 10.0, bottom: 35),
+                                  padding: EdgeInsets.all(5.0),
+                                  child: _file == null
+                                      ? SvgPicture.asset(
+                                          "img/icons/avatar.svg",
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                                image: FileImage(
+                                                  _file,
+                                                ),
+                                                fit: BoxFit.cover),
+                                          ),
+                                        ),
                                 ),
                               ),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 59,
-                                padding: EdgeInsets.only(
-                                    top: 8, left: 16, right: 16, bottom: 4),
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black12, blurRadius: 5)
-                                    ]),
-                                child: TextFormField(
-                                  controller: lastNameController,
-                                  keyboardType: TextInputType.text,
-                                  validator: (val) => val.length == 0
-                                      ? 'Please Enter Your Last Name'
-                                      : null,
-                                  onSaved: (val) => lastname = val,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    icon: Icon(
-                                      Icons.person_pin,
-                                      color: klabelTextColor.withOpacity(0.5),
-                                    ),
-                                    hintText: 'Last Name',
-                                    hintStyle: TextStyle(
-                                      color: klabelTextColor.withOpacity(0.5),
+
+                              Row(
+                                children: [
+                                  Container(
+                                    width: (size.width / 2) - 10,
+                                    height: 50,
+                                    padding: EdgeInsets.all(8),
+                                    margin: EdgeInsets.only(),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50)),
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.black12,
+                                              blurRadius: 5)
+                                        ]),
+                                    child: TextFormField(
+                                      controller: firstNameController,
+                                      keyboardType: TextInputType.text,
+                                      validator: (val) => val.length == 0
+                                          ? 'Please Enter Your First Name'
+                                          : null,
+                                      onSaved: (val) => firstname = val,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        icon: Icon(
+                                          Icons.person_pin,
+                                          color:
+                                              klabelTextColor.withOpacity(0.5),
+                                        ),
+                                        hintText: 'First Name',
+                                        hintStyle: TextStyle(
+                                          color:
+                                              klabelTextColor.withOpacity(0.5),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  Container(
+                                    width: (size.width / 2) - 10,
+                                    height: 50,
+                                    padding: EdgeInsets.all(8),
+                                    margin: EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50)),
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.black12,
+                                              blurRadius: 5)
+                                        ]),
+                                    child: TextFormField(
+                                      controller: lastNameController,
+                                      keyboardType: TextInputType.text,
+                                      validator: (val) => val.length == 0
+                                          ? 'Please Enter Your Last Name'
+                                          : null,
+                                      onSaved: (val) => lastname = val,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        icon: Icon(
+                                          Icons.person_pin,
+                                          color:
+                                              klabelTextColor.withOpacity(0.5),
+                                        ),
+                                        hintText: 'Last Name',
+                                        hintStyle: TextStyle(
+                                          color:
+                                              klabelTextColor.withOpacity(0.5),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
+
                               Container(
                                 width: MediaQuery.of(context).size.width,
-                                height: 59,
-                                padding: EdgeInsets.only(
-                                    top: 8, left: 16, right: 16, bottom: 4),
-                                margin: EdgeInsets.all(10),
+                                height: 50,
+                                padding: EdgeInsets.all(8),
+                                margin: EdgeInsets.all(5),
                                 decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(50)),
@@ -227,10 +333,9 @@ class _SignUPState extends State<SignUP> {
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width,
-                                height: 59,
-                                padding: EdgeInsets.only(
-                                    top: 8, left: 16, right: 16, bottom: 4),
-                                margin: EdgeInsets.all(10),
+                                height: 50,
+                                padding: EdgeInsets.all(8),
+                                margin: EdgeInsets.all(5),
                                 decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(50)),
@@ -243,9 +348,6 @@ class _SignUPState extends State<SignUP> {
                                   controller: phoneController,
                                   keyboardType: TextInputType.number,
                                   validator: validateMobile,
-                                  //  (val) => val.length == 0
-                                  //     ? 'Please Enter Your Phone Number'
-                                  //     : null,
                                   onSaved: (val) => phone = val,
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -253,6 +355,7 @@ class _SignUPState extends State<SignUP> {
                                       Icons.phone,
                                       color: klabelTextColor.withOpacity(0.5),
                                     ),
+                                    prefix: Text('+963'),
                                     hintText: 'Phone Number',
                                     hintStyle: TextStyle(
                                       color: klabelTextColor.withOpacity(0.5),
@@ -283,7 +386,7 @@ class _SignUPState extends State<SignUP> {
                                   ));
                                 },
                                 child: Text(
-                                  'You Dont Have an Account ? Sing_IN',
+                                  'You Don`t Have an Account ? Sign_IN',
                                   style: TextStyle(color: klabelTextColor),
                                 ),
                               ),
@@ -292,23 +395,23 @@ class _SignUPState extends State<SignUP> {
                     ),
                   ],
                 ),
+              ),
+            )
+          : Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text("Loading..."),
+                ],
               )
-            : Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text("Loading..."),
-                  ],
-                )
-                // )
-                ),
-      ),
+              // )
+              ),
     );
   }
   //------------------------Validation-----------------------------------------

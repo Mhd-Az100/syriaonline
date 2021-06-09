@@ -17,6 +17,7 @@ class Account {
     this.firstName,
     this.lastName,
     this.userPhoneNumber,
+    this.picture,
     this.password,
     this.accountTypeId,
     this.createdAt,
@@ -28,6 +29,7 @@ class Account {
   final String firstName;
   final String lastName;
   final String userPhoneNumber;
+  final String picture;
   final dynamic password;
   final String accountTypeId;
   final DateTime createdAt;
@@ -39,6 +41,7 @@ class Account {
         firstName: json["first_name"],
         lastName: json["last_name"],
         userPhoneNumber: json["user_phone_number"],
+        picture: json["picture"],
         password: json["password"],
         accountTypeId: json["account_type_id"],
         createdAt: DateTime.parse(json["created_at"]),

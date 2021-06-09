@@ -10,6 +10,7 @@ class Providerdata extends ChangeNotifier {
   ServicesModel service;
   CategoryModel category;
   Map mapcurrentlocation;
+
   RateModel rate;
   void setService({@required ServicesModel val}) {
     service = val;

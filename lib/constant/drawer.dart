@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/screen/Page%20AddService.dart';
 import '../screen/page category list.dart';
@@ -13,22 +14,24 @@ class MyDrawer extends StatefulWidget {
 
 class _MyDrawerState extends State<MyDrawer> {
   var firstname;
-
   var lastname;
-
+  var pictureprofile;
   var email;
-
+  var picture;
   bool isSign = false;
   getpref() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     firstname = preferences.getString('first_name');
     lastname = preferences.getString('last_name');
     email = preferences.getString('e_mail');
+    picture = preferences.getString('picture');
+
     if (firstname != null) {
       setState(() {
         firstname = preferences.getString('first_name');
         lastname = preferences.getString('last_name');
         email = preferences.getString('e_mail');
+        picture = preferences.getString('picture');
         isSign = true;
       });
     }
@@ -47,18 +50,38 @@ class _MyDrawerState extends State<MyDrawer> {
         body: ListView(
           children: [
             UserAccountsDrawerHeader(
-              accountName: isSign ? Text(firstname + " " + lastname) : Text(''),
-              accountEmail: isSign ? Text(email) : Text(''),
+              accountName: isSign
+                  ? Text(
+                      firstname + " " + lastname,
+                      style: kTextBody,
+                    )
+                  : Text(''),
+              accountEmail: isSign
+                  ? Text(
+                      email,
+                      style: kTextinfo,
+                    )
+                  : Text(''),
               currentAccountPicture: GestureDetector(
                 child: CircleAvatar(
-                  backgroundColor: kColorbackCircleAvatar,
+                  foregroundImage: NetworkImage(
+                    picture,
+                  ),
                   child: Icon(
                     Icons.person,
                   ),
                 ),
               ),
               decoration: BoxDecoration(
-                color: kBackCardColordrawer,
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF9BB1B6),
+                    Color(0xFFC4C4C4),
+                    Color(0xFFFFFFFF),
+                  ],
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                ),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(30),
                   bottomRight: Radius.circular(30),
@@ -73,27 +96,42 @@ class _MyDrawerState extends State<MyDrawer> {
                       builder: (context) => ChoosePage(),
                     )),
                     child: ListTile(
-                      title: Text('Home Page'),
-                      leading: Icon(Icons.home_rounded),
-                    ),
+                        title: Text(
+                          'Home Page',
+                          style: kTitledrawer,
+                        ),
+                        leading: SvgPicture.asset(
+                          "img/icons/home.svg",
+                          width: 30,
+                        )),
                   ),
                   InkWell(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => AddService(),
                     )),
                     child: ListTile(
-                      title: Text('Add Service'),
-                      leading: Icon(Icons.post_add_rounded),
-                    ),
+                        title: Text(
+                          'Add Service',
+                          style: kTitledrawer,
+                        ),
+                        leading: SvgPicture.asset(
+                          "img/icons/add.svg",
+                          width: 30,
+                        )),
                   ),
                   InkWell(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CategoryListPage(),
                     )),
                     child: ListTile(
-                      title: Text('View Services'),
-                      leading: Icon(Icons.view_carousel_rounded),
-                    ),
+                        title: Text(
+                          'View Services',
+                          style: kTitledrawer,
+                        ),
+                        leading: SvgPicture.asset(
+                          "img/icons/view.svg",
+                          width: 30,
+                        )),
                   ),
                   InkWell(
                     onTap: () async {
@@ -107,9 +145,13 @@ class _MyDrawerState extends State<MyDrawer> {
                       ));
                     },
                     child: ListTile(
-                      title: Text('Sign Out'),
-                      leading: Icon(
-                        Icons.logout,
+                      title: Text(
+                        'Sign Out',
+                        style: kTitledrawer,
+                      ),
+                      leading: SvgPicture.asset(
+                        "img/icons/signout.svg",
+                        width: 30,
                       ),
                     ),
                   )

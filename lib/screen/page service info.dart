@@ -55,34 +55,46 @@ class _ServiceInfoState extends State<ServiceInfo> {
         backgroundColor: kchooseColor,
         circleGradient: LinearGradient(
           colors: [
-            Color(0xff233e8b),
-            Color(0xFF3F5DAF),
-            Color(0xFF72A5A7),
+            Color(0xFFBCF0FD),
+            Color(0xFFC4C4C4),
+            Color(0xFFFFFFFF),
           ],
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
         ),
         items: [
           TabItemIcon(
-            iconData: LineIcons.commentDots,
+            buildWidget: (_, color) => Container(
+                width: 36,
+                height: 36,
+                child: Image.asset(
+                  "img/icons/comment.png",
+                  width: 36,
+                )),
             curveColor: kCurveColorNAV,
             startColor: kStartColorNAV,
             endColor: kEndColorNAV,
           ),
           TabItemIcon(
-              iconData: LineIcons.store,
+              buildWidget: (_, color) => Container(
+                  width: 36,
+                  height: 36,
+                  child: Image.asset(
+                    "img/icons/store.png",
+                    width: 36,
+                  )),
               curveColor: kCurveColorNAV,
               startColor: kStartColorNAV,
               endColor: kEndColorNAV),
           TabItemIcon(
               buildWidget: (_, color) => Container(
-                  width: 40,
-                  height: 40,
-                  child: SvgPicture.asset(
-                    "img/icons/iconsearch.svg",
-                    width: 40,
+                  width: 36,
+                  height: 36,
+                  child: Image.asset(
+                    "img/icons/location.png",
+                    width: 36,
                   )),
-              curveColor: kCurveColorNAV,
+              curveColor: Colors.lightGreen[400],
               startColor: kStartColorNAV,
               endColor: kEndColorNAV),
         ],

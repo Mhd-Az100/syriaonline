@@ -93,13 +93,12 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
               height: 70,
               width: 150,
               decoration: BoxDecoration(
-                  gradient: kButtongradientColor,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(80.0),
-                  )),
+                shape: BoxShape.circle,
+                gradient: kButtongradientColor,
+              ),
               padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: Text(
-                'Change Map Type',
+                'Map \nType',
                 textAlign: TextAlign.center,
                 style: kTextButton,
               ),
@@ -111,7 +110,7 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
           bottom: 20,
           left: 10,
           child: Container(
-            width: 150,
+            width: 100,
             height: 40,
             child: ElevatedButton(
               child: Text("Save"),

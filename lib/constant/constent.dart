@@ -52,6 +52,8 @@ final kBackTitleColor = LinearGradient(colors: <Color>[
 final kColorStarsRate = Colors.yellow;
 final kColorStarsRated = Colors.yellow;
 final kTextBody = GoogleFonts.alegreya(fontSize: 20, color: Colors.black);
+final kTextdropdown = GoogleFonts.alegreya(fontSize: 15, color: Colors.black);
+
 final kTextdescrubt =
     GoogleFonts.scheherazade(fontSize: 25, color: Colors.black);
 
@@ -63,9 +65,10 @@ final kTextBodyApp = GoogleFonts.petrona(
 
 final kTitleText = GoogleFonts.pacifico(
   fontSize: 30,
-  color: Colors.white,
+  color: kchooseColor,
 );
-final kTextFaild = TextStyle();
+final kTextNote = GoogleFonts.caveat(
+    fontSize: 40, fontWeight: FontWeight.bold, color: Colors.black);
 final kTextinfo = GoogleFonts.alegreya(fontSize: 15, color: Colors.black);
 final kToastColor = Colors.white;
 final kToastTextColor = Colors.black;
@@ -74,10 +77,11 @@ final kToastTextColor = Colors.black;
 
 final kColorbackCircleAvatar = Color(0xFF58637A);
 final kBackCardColordrawer = Color(0xFF0880D1);
+final kTitledrawer = GoogleFonts.caveat(
+    fontSize: 20, fontWeight: FontWeight.normal, color: Colors.black87);
 
 //------------------------------------button------------------------------------
 
-final kButtonColor = Color(0xFF3159DA);
 final kButtonSaveLocationColor = Color(0xFF3159DA);
 final kTextButton = GoogleFonts.petrona(
     fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold);
@@ -107,8 +111,10 @@ const kTitleTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontStyle: FontStyle.italic,
 );
-const kButtongradientColor = LinearGradient(
-    colors: <Color>[Color(0xFFFAC310), Color(0xFFFCD31D), Color(0xFFFAEB64)]);
+const kButtongradientColor = LinearGradient(colors: <Color>[
+  Color(0xFF579997),
+  Color(0xFF73B3B0),
+]);
 //------------------------------------icon--------------------------------------
 const kiconColor = Color(0xFF0675B1);
 const kHintStyle = TextStyle(color: Color(0xE8349CAF));

@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/constant/constent.dart';
-import 'package:syriaonline/constant/drawer.dart';
 import 'package:syriaonline/model/model%20category%20.dart';
 import 'package:syriaonline/screen/page%20choose.dart';
 import 'package:syriaonline/screen/page%20googlemap%20add.dart';
@@ -65,7 +64,8 @@ class _AddServiceState extends State<AddService> {
         positioned = await Navigator.push(context,
             new MaterialPageRoute(builder: (context) => new GooglemapsAdd()));
       },
-      backgroundColor: this.positioned == null ? Colors.red : Colors.blue[300],
+      backgroundColor:
+          this.positioned == null ? Colors.red : Colors.lightGreen[700],
       child: Icon(Icons.add_location_alt_outlined),
     );
   }
@@ -114,14 +114,6 @@ class _AddServiceState extends State<AddService> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kAppBarColor,
-        title: Text(
-          'Add Service',
-          style: kTitleAppbarStyle,
-        ),
-      ),
-      drawer: MyDrawer(),
       body: Stack(children: [
         Container(
           child: SingleChildScrollView(
@@ -135,9 +127,9 @@ class _AddServiceState extends State<AddService> {
                   children: [
                     Expanded(
                       child: Container(
-                        height: 50,
+                        height: 100,
                         decoration: BoxDecoration(
-                          color: kBackTextColor,
+                          color: kchooseColor,
                           borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(65),
                             bottomRight: Radius.circular(65),
@@ -154,44 +146,7 @@ class _AddServiceState extends State<AddService> {
                     )
                   ],
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 52.0, right: 52.0, top: 20),
-                  child: DropdownButton(
-                    isExpanded: true,
-                    value: defultSelect,
-                    icon: Padding(
-                      padding: const EdgeInsets.only(left: 100.0),
-                      child: const Icon(
-                        Icons.arrow_drop_down_rounded,
-                        color: kiconColor,
-                      ),
-                    ),
-                    iconSize: 40,
-                    elevation: 10,
-                    style: kTextBody,
-                    underline: Container(height: 3, color: kBackTextColor),
-                    items: categories?.map((CategoryModel cates) {
-                          return DropdownMenuItem<CategoryModel>(
-                            value: cates,
-                            child: Text(
-                              cates.servicesCatogaryName.toString(),
-                            ),
-                          );
-                        })?.toList() ??
-                        [],
-                    hint: Text("SelectType", style: kTextFaild),
-                    onChanged: (newValue) {
-                      setState(() {
-                        this.defultSelect = newValue;
-                        this.selectCatesID = defultSelect.serviceCatogaryId;
-                        idcate = this.selectCatesID;
-                        print(idcate);
-                        select = true;
-                      });
-                    },
-                  ),
-                ),
+
                 SizedBox(
                   height: 25,
                 ),
@@ -206,28 +161,76 @@ class _AddServiceState extends State<AddService> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         //--------------------name service----------------------
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 59,
-                          padding: EdgeInsets.only(
-                              top: 8, left: 16, right: 16, bottom: 4),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(50)),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(color: Colors.black12, blurRadius: 5)
-                              ]),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Name of Service',
-                                hintStyle: kHintStyle),
-                            controller: nameController,
-                            validator: validateName,
-                            onSaved: (val) => servName = val,
-                            //onSaved: ,
-                          ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 59,
+                                padding: EdgeInsets.only(
+                                    top: 8, left: 16, right: 16, bottom: 4),
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50)),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black12, blurRadius: 5)
+                                    ]),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Name of Service',
+                                      hintStyle: kHintStyle),
+                                  controller: nameController,
+                                  validator: validateName,
+                                  onSaved: (val) => servName = val,
+                                  //onSaved: ,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: DropdownButton(
+                                  isExpanded: true,
+                                  value: defultSelect,
+                                  icon: const Icon(
+                                    Icons.arrow_drop_down_rounded,
+                                    color: kiconColor,
+                                  ),
+                                  iconSize: 30,
+                                  elevation: 10,
+                                  style: kTextdropdown,
+                                  underline:
+                                      Container(height: 3, color: kchooseColor),
+                                  items: categories?.map((CategoryModel cates) {
+                                        return DropdownMenuItem<CategoryModel>(
+                                          value: cates,
+                                          child: Text(
+                                            cates.servicesCatogaryName
+                                                .toString(),
+                                          ),
+                                        );
+                                      })?.toList() ??
+                                      [],
+                                  hint: Text("SelectType", style: kTextinfo),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      this.defultSelect = newValue;
+                                      this.selectCatesID =
+                                          defultSelect.serviceCatogaryId;
+                                      idcate = this.selectCatesID;
+                                      print(idcate);
+                                      select = true;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: 25,
@@ -250,7 +253,7 @@ class _AddServiceState extends State<AddService> {
                             keyboardType: TextInputType.numberWithOptions(),
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: '+963',
+                              prefix: Text('+963'),
                               hintStyle: kHintStyle,
                               icon: Icon(
                                 Icons.phone,
@@ -269,7 +272,7 @@ class _AddServiceState extends State<AddService> {
                         //-------------------Descr service----------------------
                         Container(
                           width: MediaQuery.of(context).size.width,
-                          height: 150,
+                          height: 100,
                           padding: EdgeInsets.only(
                               top: 4, left: 16, right: 16, bottom: 4),
                           decoration: BoxDecoration(
@@ -281,7 +284,7 @@ class _AddServiceState extends State<AddService> {
                               ]),
                           child: Center(
                             child: TextFormField(
-                              maxLines: 5,
+                              maxLines: 3,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Descreption',
@@ -308,14 +311,14 @@ class _AddServiceState extends State<AddService> {
                   onTap: () => getImage(ImageSource.gallery),
                   child: Container(
                     margin: EdgeInsets.all(0),
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width,
+                    width: MediaQuery.of(context).size.width - 250,
+                    height: MediaQuery.of(context).size.width - 250,
                     decoration: BoxDecoration(),
                     padding: EdgeInsets.all(5.0),
                     child: _file == null
                         ? Icon(
                             Icons.add_photo_alternate_outlined,
-                            size: 100,
+                            size: 75,
                             color: kiconColor,
                           )
                         : Image.file(_file),
@@ -325,17 +328,17 @@ class _AddServiceState extends State<AddService> {
                   height: 15,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: Center(
                     child: ElevatedButton(
                       style: ButtonStyle(
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
+                            borderRadius: BorderRadius.circular(10.0),
                           )),
                           backgroundColor:
-                              MaterialStateProperty.all<Color>(kButtonColor)),
+                              MaterialStateProperty.all<Color>(kchooseColor)),
                       onPressed: () async {
                         if (select == false) {
                           Fluttertoast.showToast(

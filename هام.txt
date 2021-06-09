@@ -3,4 +3,5 @@
 13-search in category view
 16-fix design app 
 17-screens wellcom an anemation
- 
+18-fevorate
+19-photo profile 

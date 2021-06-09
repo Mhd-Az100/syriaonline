@@ -152,13 +152,12 @@ class _GooglemapsState extends State<Googlemaps> {
               height: 70,
               width: 150,
               decoration: BoxDecoration(
-                  gradient: kButtongradientColor,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(80.0),
-                  )),
+                shape: BoxShape.circle,
+                gradient: kButtongradientColor,
+              ),
               padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: Text(
-                'Change Map Type',
+                'Map \nType',
                 textAlign: TextAlign.center,
                 style: kTextButton,
               ),

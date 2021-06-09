@@ -13,6 +13,7 @@ import 'package:syriaonline/helpers/dialog_helper.dart';
 import 'package:syriaonline/model/model%20rate.dart';
 import 'package:syriaonline/model/model%20services.dart';
 import 'package:syriaonline/provider/providerData.dart';
+import 'package:syriaonline/screen/page%20service%20info.dart';
 import 'package:syriaonline/service/RateApi.dart';
 import 'package:syriaonline/service/postApi.dart';
 import 'package:syriaonline/utils/allUrl.dart';
@@ -56,7 +57,10 @@ class _DetailesState extends State<Detailes> {
 
     return completer.future.then<void>((_) {
       _scaffoldKey.currentState;
-      ratedata();
+      setState(() {
+        initState();
+        ratedata();
+      });
     });
   }
 
@@ -118,7 +122,7 @@ class _DetailesState extends State<Detailes> {
             onPressed: () => Navigator.pop(context),
           )),
       body: LiquidPullToRefresh(
-        springAnimationDurationInMilliseconds: 300,
+        springAnimationDurationInMilliseconds: 200,
         color: kchooseColor,
         key: _refreshIndicatorKey,
         onRefresh: _handleRefresh,
@@ -185,6 +189,8 @@ class _DetailesState extends State<Detailes> {
                           ),
                         ),
                         Expanded(
+                          //---------------------stars rate-----------------------
+
                           child: Container(
                             margin: EdgeInsets.only(left: 26),
                             child: FutureBuilder<List<RateModel>>(
@@ -193,8 +199,7 @@ class _DetailesState extends State<Detailes> {
                                   AsyncSnapshot<List<RateModel>> snapshot) {
                                 double sums = 0;
 
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
+                                if (snapshot.data == null) {
                                   return Container();
                                 } else {
                                   snapshot.data.forEach((element) {
@@ -224,12 +229,10 @@ class _DetailesState extends State<Detailes> {
                     ),
                     Row(
                       children: [
-                        //---------------------stars rate-----------------------
-
                         Expanded(
                           flex: 2,
                           child: Text(
-                            'Phone  : ${service.servicePhoneNumber}',
+                            'Phone  : +963${service.servicePhoneNumber}',
                             style: kTextBody,
                           ),
                         ),
