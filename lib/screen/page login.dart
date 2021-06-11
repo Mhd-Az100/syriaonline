@@ -3,7 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:syriaonline/screen/page%20choose.dart';
 import 'package:syriaonline/screen/page%20signUp.dart';
 import 'package:syriaonline/service/loginpost.dart';
-import 'package:syriaonline/service/postApi.dart';
 import 'package:syriaonline/service/postemail.dart';
 import 'package:syriaonline/widgets/signup/signuprawMaterialButton.dart';
 import 'package:syriaonline/utils/allUrl.dart';
@@ -60,10 +59,10 @@ class _LoginPageState extends State<LoginPage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: kchooseColor,
       body: Container(
         width: double.infinity,
         height: double.infinity,
+        color: kchooseColor,
         child: SingleChildScrollView(
           child: Container(
             width: size.width,
@@ -134,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                                           color:
                                               klabelTextColor.withOpacity(0.5),
                                         ),
-                                        hintText: 'Please Enter Your E_mail',
+                                        hintText: ' Enter Your E_mail',
                                         hintStyle: TextStyle(
                                           color:
                                               klabelTextColor.withOpacity(0.5),
@@ -195,6 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                                             blurRadius: 5)
                                       ]),
                                   child: TextFormField(
+                                    enabled: !state,
                                     obscureText: true,
                                     controller: loginCodeController,
                                     keyboardType: TextInputType.number,
@@ -206,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                                         Icons.security,
                                         color: klabelTextColor.withOpacity(0.5),
                                       ),
-                                      hintText: 'Please Enter Your Code',
+                                      hintText: ' Enter Your Code',
                                       hintStyle: TextStyle(
                                         color: klabelTextColor.withOpacity(0.5),
                                       ),
@@ -226,9 +226,23 @@ class _LoginPageState extends State<LoginPage> {
                                             gravity: ToastGravity.BOTTOM);
                                       });
                                     },
-                                    child: Text(
-                                      'Not received any Code ?',
-                                      style: TextStyle(color: klabelTextColor),
+                                    child: Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 5,
+                                            color: Colors.grey.withOpacity(0.3),
+                                          )
+                                        ],
+                                        color: Colors.white,
+                                      ),
+                                      child: Text(
+                                        'Not received any Code ?',
+                                        style:
+                                            TextStyle(color: Colors.grey[850]),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -257,15 +271,29 @@ class _LoginPageState extends State<LoginPage> {
                                   alignment: Alignment.center,
                                   child: TextButton(
                                     onPressed: () {
-                                      Navigator.of(context).push(
+                                      Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                           builder: (context) => SignUP(),
                                         ),
                                       );
                                     },
-                                    child: Text(
-                                      'You Don`t Have an Account ? Sign_Up',
-                                      style: TextStyle(color: klabelTextColor),
+                                    child: Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 5,
+                                            color: Colors.grey.withOpacity(0.3),
+                                          )
+                                        ],
+                                        color: Colors.white,
+                                      ),
+                                      child: Text(
+                                        'You Don`t Have an Account ? Sign_Up',
+                                        style:
+                                            TextStyle(color: klabelTextColor),
+                                      ),
                                     ),
                                   ),
                                 ),

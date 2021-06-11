@@ -7,54 +7,28 @@ import 'package:provider/provider.dart';
 import 'package:syriaonline/constant/constent.dart';
 import 'package:syriaonline/model/model%20services.dart';
 import 'package:syriaonline/provider/providerData.dart';
-import 'package:syriaonline/screen/page%20details3.dart';
 import 'package:syriaonline/screen/page%20service%20info.dart';
 import 'package:syriaonline/service/getAllService.dart';
 
 const kGoogleApiKey = "AIzaSyDELVyIyOWK-s4frDfUmU81fBESRMsEkRE";
 
-class Googlemaps extends StatefulWidget {
+class GooglemapsAll extends StatefulWidget {
   @override
-  _GooglemapsState createState() => _GooglemapsState();
+  _GooglemapsAllState createState() => _GooglemapsAllState();
 }
 
-class _GooglemapsState extends State<Googlemaps> {
+class _GooglemapsAllState extends State<GooglemapsAll> {
   GoogleMapController mapController;
   ServicesModel service;
+  BitmapDescriptor custommarker;
 
   @override
   void initState() {
     super.initState();
     service = Provider.of<Providerdata>(context, listen: false).service;
-    latLng = LatLng(double.parse(service.x), double.parse(service.y));
-    onemarker.add(
-      Marker(
-        markerId: MarkerId(
-          id.toString(),
-        ),
-        position: latLng,
-        infoWindow: InfoWindow(
-            title: service.serviceName,
-            snippet: service.serviceDescription,
-            onTap: () {
-              setService(context: context, val: service);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ServiceInfo(
-                          // service: service,
-                          )));
-            }),
-      ),
-    );
+
     allServiceMarker();
   }
-
-//-------------------------------get service marker-----------------------------
-  int id = Random().nextInt(100);
-
-  List<Marker> onemarker = [];
-  LatLng latLng;
 
 //-------------------------------get all markers------------------------------------
   List<Marker> markers = [];
@@ -66,13 +40,15 @@ class _GooglemapsState extends State<Googlemaps> {
       allserv = servLst;
     });
     for (ServicesModel item in allserv) {
-      markers.add(Marker(
+      markers.add(
+        Marker(
           markerId: MarkerId(item.serviceId.toString()),
           position: LatLng(double.parse(item.x), double.parse(item.y)),
           infoWindow: InfoWindow(
               title: "${item.serviceName}",
+              snippet: "${item.serviceDescription}",
               onTap: () {
-                setService(context: context, val: service);
+                setService(context: context, val: item);
 
                 Navigator.push(
                     context,
@@ -80,7 +56,9 @@ class _GooglemapsState extends State<Googlemaps> {
                         builder: (context) => ServiceInfo(
                             // service: service,
                             )));
-              })));
+              }),
+        ),
+      );
     }
   }
 
@@ -91,14 +69,14 @@ class _GooglemapsState extends State<Googlemaps> {
 //---------------------for current location-------------------------------------
   Position currentPosition;
   var geoLocator = Geolocator();
+  CameraPosition cameraPosition;
   double bottomPaddingOfMap = 0;
   void currentlocatorPosition() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     currentPosition = position;
     LatLng latLngposition = LatLng(position.latitude, position.longitude);
-    CameraPosition cameraPosition =
-        CameraPosition(target: latLngposition, zoom: 18);
+    cameraPosition = CameraPosition(target: latLngposition, zoom: 18);
     mapController.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }
 
@@ -115,14 +93,12 @@ class _GooglemapsState extends State<Googlemaps> {
           onMapCreated: (controller) {
             setState(() {
               mapController = controller;
-              // currentlocatorPosition();
+              currentlocatorPosition();
             });
           },
-          markers: onemarker.toSet(),
+          markers: markers.toSet(),
 
-          initialCameraPosition: CameraPosition(
-              target: LatLng(double.parse(service.x), double.parse(service.y)),
-              zoom: 16),
+          initialCameraPosition: _cameraPosition,
           mapType: maptype,
 
           // onMapCreated: (controller) {

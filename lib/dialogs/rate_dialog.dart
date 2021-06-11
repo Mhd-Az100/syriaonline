@@ -6,7 +6,6 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:syriaonline/constant/constent.dart';
 
 import 'package:syriaonline/provider/providerData.dart';
-import 'package:syriaonline/screen/page%20details3.dart';
 import 'package:syriaonline/service/postApi.dart';
 import 'package:syriaonline/utils/allUrl.dart';
 

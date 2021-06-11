@@ -19,7 +19,7 @@ class ReusableRaisedButton extends StatelessWidget {
         decoration: BoxDecoration(
             gradient: color,
             borderRadius: BorderRadius.all(
-              Radius.circular(80.0),
+              Radius.circular(15.0),
             )),
         padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         child: Text(

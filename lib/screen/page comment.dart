@@ -51,7 +51,13 @@ class _PageCommentState extends State<PageComment> {
     return completer.future.then<void>((_) {
       _scaffoldKey.currentState;
       setState(() {
-        initState();
+        id = Provider.of<Providerdata>(context, listen: false)
+            .service
+            .serviceId
+            .toString();
+
+        fdata();
+        getpref();
       });
     });
   }
@@ -183,7 +189,7 @@ class _PageCommentState extends State<PageComment> {
               Positioned(
                 bottom: 0,
                 child: Container(
-                  color: Colors.transparent,
+                  color: Colors.grey[50],
                   height: 85,
                   width: MediaQuery.of(context).size.width,
                   child: Column(
@@ -232,13 +238,6 @@ class _PageCommentState extends State<PageComment> {
                               ),
                             ),
                           ),
-                          IconButton(
-                            icon: SvgPicture.asset(
-                              "img/icons/image.svg",
-                              width: 40,
-                            ),
-                            onPressed: () => getImage(ImageSource.gallery),
-                          ),
                           Expanded(
                             child: Container(
                               margin: EdgeInsets.all(0),
@@ -249,53 +248,66 @@ class _PageCommentState extends State<PageComment> {
                                   : Image.file(_file),
                             ),
                           ),
-                          IconButton(
+                          Expanded(
+                            child: IconButton(
                               icon: SvgPicture.asset(
-                                "img/icons/send.svg",
-                                width: 60,
+                                "img/icons/image.svg",
+                                width: 50,
                               ),
-                              //----------------comment for data-------------------
-                              onPressed: () {
-                                // ---------map data---------------
-                                if (_file != null) {
-                                  String base64 =
-                                      base64Encode(_file.readAsBytesSync());
-                                  String imgname = _file.path.split('/').last;
+                              onPressed: () => getImage(ImageSource.gallery),
+                            ),
+                          ),
+                          Expanded(
+                            child: IconButton(
+                                icon: SvgPicture.asset(
+                                  "img/icons/send.svg",
+                                  width: 60,
+                                ),
+                                //----------------comment for data-------------------
+                                onPressed: () {
+                                  // ---------map data---------------
+                                  if (_file != null) {
+                                    String base64 =
+                                        base64Encode(_file.readAsBytesSync());
+                                    String imgname = _file.path.split('/').last;
 
-                                  Map commts = {
-                                    'comment': commentController.text,
-                                    'service_id': id,
-                                    'account_id': iduser.toString(),
-                                    'imgname': imgname,
-                                    'base64': base64,
-                                  };
+                                    Map commts = {
+                                      'comment': commentController.text,
+                                      'service_id': id,
+                                      'account_id': iduser.toString(),
+                                      'imgname': imgname,
+                                      'base64': base64,
+                                    };
 
-                                  if (commentformKey.currentState.validate()) {
-                                    setState(() {
-                                      addComm(context, commts);
-                                    });
-                                    commentController.text = '';
-                                    _file = null;
-                                    print(commts);
+                                    if (commentformKey.currentState
+                                        .validate()) {
+                                      setState(() {
+                                        addComm(context, commts);
+                                      });
+                                      commentController.text = '';
+                                      _file = null;
+                                      print(commts);
+                                    }
+                                  } else {
+                                    Map commts = {
+                                      'comment': commentController.text,
+                                      'service_id': id,
+                                      'account_id': iduser.toString(),
+                                    };
+
+                                    if (commentformKey.currentState
+                                        .validate()) {
+                                      setState(() {
+                                        addComm(context, commts);
+                                      });
+
+                                      commentController.text = '';
+                                      _file = null;
+                                      print(commts);
+                                    }
                                   }
-                                } else {
-                                  Map commts = {
-                                    'comment': commentController.text,
-                                    'service_id': id,
-                                    'account_id': iduser.toString(),
-                                  };
-
-                                  if (commentformKey.currentState.validate()) {
-                                    setState(() {
-                                      addComm(context, commts);
-                                    });
-
-                                    commentController.text = '';
-                                    _file = null;
-                                    print(commts);
-                                  }
-                                }
-                              }),
+                                }),
+                          ),
                         ],
                       ),
                     ],

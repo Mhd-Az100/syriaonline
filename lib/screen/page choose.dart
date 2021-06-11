@@ -1,5 +1,3 @@
-import 'package:flutter_svg/flutter_svg.dart';
-
 import 'Page AddService.dart';
 import 'page category list.dart';
 import '../constant/constent.dart';
@@ -64,7 +62,8 @@ class ChoosePage extends StatelessWidget {
                         color: kCardHomeColor),
                     margin: EdgeInsets.all(50),
                     child: Center(
-                        child: Text('Veiw Service', style: kTitleCardViewText)),
+                        child:
+                            Text('Browse Service', style: kTitleCardViewText)),
                   ),
                 ),
               ],

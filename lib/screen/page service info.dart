@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:syriaonline/screen/page%20details3.dart';
 import '../constant/constent.dart';
 import '../constant/drawer.dart';
@@ -65,35 +64,38 @@ class _ServiceInfoState extends State<ServiceInfo> {
         items: [
           TabItemIcon(
             buildWidget: (_, color) => Container(
-                width: 36,
-                height: 36,
-                child: Image.asset(
-                  "img/icons/comment.png",
-                  width: 36,
-                )),
-            curveColor: kCurveColorNAV,
+              width: 36,
+              height: 36,
+              child: SvgPicture.asset(
+                "img/icons/comments.svg",
+                width: 40,
+              ),
+            ),
+            curveColor: Colors.grey[50],
             startColor: kStartColorNAV,
             endColor: kEndColorNAV,
           ),
           TabItemIcon(
               buildWidget: (_, color) => Container(
-                  width: 36,
-                  height: 36,
-                  child: Image.asset(
-                    "img/icons/store.png",
                     width: 36,
-                  )),
+                    height: 36,
+                    child: SvgPicture.asset(
+                      "img/icons/store.svg",
+                      width: 40,
+                    ),
+                  ),
               curveColor: kCurveColorNAV,
               startColor: kStartColorNAV,
               endColor: kEndColorNAV),
           TabItemIcon(
               buildWidget: (_, color) => Container(
-                  width: 36,
-                  height: 36,
-                  child: Image.asset(
-                    "img/icons/location.png",
                     width: 36,
-                  )),
+                    height: 36,
+                    child: SvgPicture.asset(
+                      "img/icons/map.svg",
+                      width: 40,
+                    ),
+                  ),
               curveColor: Colors.lightGreen[400],
               startColor: kStartColorNAV,
               endColor: kEndColorNAV),

@@ -1,8 +1,5 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:provider/provider.dart';
@@ -57,10 +54,8 @@ class _DetailesState extends State<Detailes> {
 
     return completer.future.then<void>((_) {
       _scaffoldKey.currentState;
-      setState(() {
-        initState();
-        ratedata();
-      });
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => ServiceInfo()));
     });
   }
 
@@ -198,15 +193,14 @@ class _DetailesState extends State<Detailes> {
                               builder: (BuildContext ctx,
                                   AsyncSnapshot<List<RateModel>> snapshot) {
                                 double sums = 0;
-
+                                double result;
                                 if (snapshot.data == null) {
                                   return Container();
                                 } else {
                                   snapshot.data.forEach((element) {
                                     sums += double.parse(element.rateFrom5);
+                                    result = sums / snapshot.data.length;
                                   });
-
-                                  double result = sums / snapshot.data.length;
 
                                   return SmoothStarRating(
                                       allowHalfRating: false,

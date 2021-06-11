@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syriaonline/screen/Page%20AddService.dart';
+import 'package:syriaonline/screen/page googlemap view all service.dart';
+
 import '../screen/page category list.dart';
 import '../screen/page choose.dart';
 import '../screen/page login.dart';
@@ -67,9 +69,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   foregroundImage: NetworkImage(
                     picture,
                   ),
-                  child: Icon(
-                    Icons.person,
-                  ),
+                  backgroundColor: Colors.grey,
                 ),
               ),
               decoration: BoxDecoration(
@@ -107,6 +107,20 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                   InkWell(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CategoryListPage(),
+                    )),
+                    child: ListTile(
+                        title: Text(
+                          'Browse Services',
+                          style: kTitledrawer,
+                        ),
+                        leading: SvgPicture.asset(
+                          "img/icons/view.svg",
+                          width: 30,
+                        )),
+                  ),
+                  InkWell(
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => AddService(),
                     )),
                     child: ListTile(
@@ -121,15 +135,15 @@ class _MyDrawerState extends State<MyDrawer> {
                   ),
                   InkWell(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CategoryListPage(),
+                      builder: (context) => GooglemapsAll(),
                     )),
                     child: ListTile(
                         title: Text(
-                          'View Services',
+                          'All service maps',
                           style: kTitledrawer,
                         ),
                         leading: SvgPicture.asset(
-                          "img/icons/view.svg",
+                          "img/icons/map2.svg",
                           width: 30,
                         )),
                   ),
@@ -154,7 +168,54 @@ class _MyDrawerState extends State<MyDrawer> {
                         width: 30,
                       ),
                     ),
-                  )
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(
+                                      child: SvgPicture.asset(
+                                        "img/icons/web-development.svg",
+                                        width: 50,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      'We are mobile developers studying software engineering in Syria, our team works in back end & front end Web applWe are mobile developers studying software engineering in Syria, our team works in programming web and mobile applications ',
+                                      style: kTitledrawer,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
+                            "img/icons/info.svg",
+                            width: 50,
+                          ),
+                          Text(
+                            'about us',
+                            style: kTitledrawer,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             )

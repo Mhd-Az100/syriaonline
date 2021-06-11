@@ -21,7 +21,7 @@ class SortService {
   final double value;
   final ServicesModel service;
 
-  factory SortService.fromJson(Map<String, dynamic> json) => SortService(
+  factory SortService.fromJson(json) => SortService(
         value: json["Value"].toDouble(),
         service: ServicesModel.fromJson(json["Service"]),
       );

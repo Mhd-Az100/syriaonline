@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -66,7 +68,15 @@ class _AddServiceState extends State<AddService> {
       },
       backgroundColor:
           this.positioned == null ? Colors.red : Colors.lightGreen[700],
-      child: Icon(Icons.add_location_alt_outlined),
+      child: this.positioned == null
+          ? SvgPicture.asset(
+              "img/icons/add-place.svg",
+              width: 40,
+            )
+          : SvgPicture.asset(
+              "img/icons/arrived.svg",
+              width: 40,
+            ),
     );
   }
 
@@ -302,7 +312,8 @@ class _AddServiceState extends State<AddService> {
                 Center(
                   child: Text(
                     'pressed to add your photo',
-                    style: kTextBody,
+                    style:
+                        GoogleFonts.alegreya(fontSize: 15, color: Colors.black),
                   ),
                 ),
 
