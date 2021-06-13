@@ -22,6 +22,7 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
   @override
   void initState() {
     super.initState();
+    //جلب جميع الماركر عند فتح الصفحة
     getCustommarker();
   }
   //----------------------------map type----------------------------------------
@@ -42,6 +43,7 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
   }
 
 //---------------------for current location-------------------------------------
+  //اخذ موقع الجهاز الحالي
   Position currentPosition;
   var geoLocator = Geolocator();
   double bottomPaddingOfMap = 0;
@@ -77,11 +79,11 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
           zoomGesturesEnabled: true,
           zoomControlsEnabled: true,
           //--------------------------marker------------------------------------
+          //وضع الماركر على الخريطة
           markers: marker != null ? <Marker>[marker].toSet() : null,
           onTap: (cordinate) async {
             mapController.animateCamera(CameraUpdate.newLatLng(cordinate));
             addmarker(cordinate);
-            print('/////////////////////////////////////////////////');
 
             print(cordinate);
           },

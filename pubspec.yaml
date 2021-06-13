@@ -24,22 +24,47 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  #مكتبة الايقوانات
   email_validator: ^2.0.1
+  #للتحقق من صحة كتابة نمط الايميل
+
   flutter_cache_manager: ^3.1.1
+  #ادارة ذاكرة الكاش
   flutter_svg: ^0.22.0
+  #اضافة صور من نوع svg 
   fluttertoast: ^8.0.7
+  #اضافة اشعار من فلاتر جاهز داخل التطبيق
+
   geolocator: ^7.0.3
+  #لاخذ عنوان الجغرافي للجهاز
+
   google_fonts: ^2.0.0
+  #خطوط غوغل 
+
   google_maps_flutter: ^2.0.6
-  google_nav_bar: ^5.0.5
+  #لاستخدام خرائط غوغل 
+
+
   http: ^0.13.1
+  #طلبات post ,get  للداتا لارسال واستقبال البيانات
   image_picker: ^0.7.4
+  #اضافة صور 
   jumping_bottom_nav_bar: ^0.1.0
+    #ويدجت ناف بار معدلة من فلاتر
+
   line_icons: ^2.0.1
+  #ايقونات 
   liquid_pull_to_refresh: ^3.0.0
+   #ريفرش للصفحة 
+
   provider: ^5.0.0
+  #ادارة الحالة 
+
   shared_preferences: ^2.0.5
+  #حفظ الجلسات 
+
   smooth_star_rating: ^1.1.1
+  #نجوم التقييم 
 
 dev_dependencies:
   flutter_test:

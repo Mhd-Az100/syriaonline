@@ -195,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ]),
                                   child: TextFormField(
                                     enabled: !state,
-                                    obscureText: true,
+                                    // obscureText: true,
                                     controller: loginCodeController,
                                     keyboardType: TextInputType.number,
                                     validator: validateCode,

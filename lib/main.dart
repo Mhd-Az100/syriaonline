@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:syriaonline/screen/page%20login.dart';
 import 'package:syriaonline/screen/page%20signUp.dart';
 import 'package:syriaonline/service/postemail.dart';
 import 'package:syriaonline/utils/allUrl.dart';
@@ -10,11 +11,25 @@ import 'provider/providerData.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var email;
-
   SharedPreferences preferences = await SharedPreferences.getInstance();
   email = preferences.getString('e_mail');
+  if (email != null) {
+    Map m = {'email': email.toString()};
+    bool t = await senddata(m);
+    if (t) {
+      runApp(Home());
+    } else {
+      preferences.remove('e_mail');
+      runApp(Sign());
+    }
+  } else {
+    runApp(Sign());
+  }
+}
 
-  runApp(email != null ? Home() : Sign());
+senddata(Map map) async {
+  bool result1 = await postemail(cheackifemailexict, map);
+  return result1;
 }
 
 class Home extends StatelessWidget {

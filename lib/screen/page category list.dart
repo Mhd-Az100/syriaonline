@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -72,7 +71,6 @@ class _CategoryListPageState extends State<CategoryListPage> {
 
   Future<List<CategoryModel>> fdata() async {
     GetCategoryApi cat = GetCategoryApi();
-    // await cat.getcateg();
 
     List<CategoryModel> cats = await cat.getcateg();
     categories = cats;
