@@ -358,13 +358,6 @@ class _AddServiceState extends State<AddService> {
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM);
                         }
-                        if (select == false) {
-                          Fluttertoast.showToast(
-                              backgroundColor: Color(0xB7FF0000),
-                              msg: 'choose service category',
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM);
-                        }
                         if (positioned == null) {
                           Fluttertoast.showToast(
                               backgroundColor: Color(0xB7FF0000),
@@ -454,8 +447,8 @@ class _AddServiceState extends State<AddService> {
   String validateMobile(String value) {
     if (value.length == 0)
       return 'Please enter PhoneNumber';
-    else if (value.length != 10)
-      return 'Mobile Number must be of 10 digit';
+    else if (value.length != 9)
+      return 'Mobile Number Must be like (+963-9********)';
     else
       return null;
   }

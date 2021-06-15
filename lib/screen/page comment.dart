@@ -190,7 +190,7 @@ class _PageCommentState extends State<PageComment> {
                 bottom: 0,
                 child: Container(
                   color: Colors.grey[50],
-                  height: 85,
+                  height: 100,
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: [

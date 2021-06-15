@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="242" height="193" viewBox="0 0 242 193">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 47.57px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #fff;
+        text-anchor: middle;
+        font-family: "Footlight MT Light";
+      }
+
+      .cls-2 {
+        font-size: 40.132px;
+      }
+
+      .cls-3 {
+        font-size: 46.74px;
+      }
+    </style>
+  </defs>
+  <text id="Syria_nline" data-name="Syria    nline" class="cls-1" transform="translate(122.196 131.157) scale(0.732)"><tspan x="0">Syria    nline</tspan></text>
+  <text id="Welcome_To_" data-name="Welcome To " class="cls-2" transform="translate(132.296 72.597) scale(0.939)"><tspan x="0">Welcome To<tspan class="cls-3"> </tspan></tspan></text>
+  <image id="logo4" x="105" y="106" width="38" height="42" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAqCAYAAADf/ynVAAAI+klEQVRYhbWZe2wbdx3Av/e7O9+dnfP5HTeJE9dZ1qZdGhjQEv7YEEM8KqaxtVEKQbBOpRsCJIomoLQUMq3dQAKEtiGGVjGtQ9o0UdROKwT6WAfraNOlarI82tKka5PGcRI7fvve6HfJebbjPNyWr+XcXe77+/0+v+/rvpcQUIEghBir3dFi5e3rWcEZ4tauq+ZWh3iu2k+jKh6ApnQxlRoVZ6Ph7PhYOHZpaCR+sXdQmY2lKlkHy4rALCzX5KyueZJ3ur9muXstz7d9Bth164GgaNBAB0nTy07MIASgaUpyoO/02LGjB6Pnz3Zbg6E1iYu953RVVW8ZDJGU4K2tP2B3e3fSwdWU46GHgQk0gKTroOoLYZbcHCJAiUxe/e/BP/wkcqL7LxZfdbU0GQ5XDMZV8W2rgk2vURxXb9v8IDjvux9EHSoGKhUGETB79r3DVw8d7CIoikr2X+xdMZjd5dlW3RB6GdmqGMejO8AaCkFW1W4LqFAQXng6crXvwM+/riST09lrIyPldEqhOqobGl9FnI1xPf5dYFffOlSIY2Cj3QYCRYLfQhvWwoJnUz2+xo93/fII9nK5sUUWw+6ra2o+RSCScex4Aqx3r4GcphUpt/JWSCoqjGRFWMqpHpqC7TWePAi2wIyswGhOhFPRZF6Pis1cO/vEo5vk6EykLBgO9GDzhj7KYqlnH/gCeL68GTIllnLRFDRyzNyOdR2uZkUDslKxU6RhxbAog6LrIA70/bN313e+CPpHAUyaJ75A8DdW3v555PWB7xvfgmwZc2Q1DW6KMkyIMoQlOV8mcFmgCQIoggBy/kjMW6qc1DAWsJIIHDQF07ICbLW/UU3GbyaHB98vshiuUw3NGwYJgqDs39wOtpZWELXl44pDCFRJTE28+86R1Ad9PWQut4Z3ex+h/TXV3Npm4EIhUHUAeQWZTGdSU2c6tzSqqaThZwr/cPpW/RBDIY8H+JYNhmVMwSZPKGpRPOF4YUmkX3vr6IvXX/r9HiU+G83vlEC7XP6aH7j8tV1UoJ4RtnYAV1e3bALpNt5b+5Wv7rj+2qHf4muSQIj2NzS+QiDEsvd9FrjQXYbfjV0QBPy5JQQMiSCnakYi4HssIpSBXz/z2NgrLx3QxFy2ZAk1m0q8m00lT35u06aOZjFjsTAMZARHft5ygrH52kDD2OHXXzDAqgTHOrvbuwtfuB5pB5njPnIViaDJyhrB2lrFQZClwYIQnH7hd0+G//rGi0tZQJHEG9dGR3smpmOd4+fOIRRcDazbbbh2MWHsds9Mz3tvWry+MOELBB92eP2HkSCAf29XUXkoFDdFwv56L1C6LiFJnJZleay1tXVToc6VK1ceAIDGmZkZGJmrme/v2v2zbwtu7+PI6QL/j38KOWJB6cwLTpzxQwf3AsAzFMPZAobpauuWjAEgCKh3OvCZZXZ2tgYhlF4wMUnuoGl6G0VR4HQ6IZ1O/yIaHv+V4Pbu1GJRInHhAvCf/NSiiYVLkGN9y6fxaohmWKMKki7Pklx6hc9IgpgrkbKYGxGzmYv4XBzoX7ad4QINzVygASiSomzGRDbbwskB4EELgKIooKXnqjVCc67Qyuwaw+NuBh8lScrrYDCGs35MnZxYdkO0y+3HS1MEQcwVWZJcoIQLZ2dwlXEejUZBlmVgGMa83XD58uWBWCw2pGna9ra2tmShpfAGzHNNVY1GURcl2OcXIJvJwPNxEWJlnEBQtNUYr2uabPxGlsvugCRJYxGLxWJYwrSC1Wq12Gy2dTzPbyFJ8mkTygTCcWaCkTTtxcd7NtwDTQ47rHEK8BhPg62cXzVVBE0FpChywrhOJsqC4ckLFzTFarWC3W43AFiWfQjmXWl+CxtUzlq1ER/v3bgRnIJgjGkR+LJgcjw+JcfjQEm5XIS2MKBOTZUFw+7DQLlcLu8iKEiG0qQwLYrBJqaiqG3zlmNSLhvEdTjD2xcdZ0pu7PoVfJvKZVLXbXYB1PEbWHuBIk3TxiQsyxZNaFrR/EKJK/G4k/85j2sS0jQVNFUBy3xYmK5esBZBwOSlofN4GZRJxC8ZO8jlQLzxodEZFIqRkZpmZJnppkLr6AVxBwXBPw+JSIoEwoAnjedtOVebgggCYr09x2O9PTrKphKjiizdwPdSFy4AjYrBcBbi3XEcl4+3xVxhQuIjDgHjHLdG86rakq0lgJpKTsV7e07Nnj2jYx/o8emI8dyTentAl6QiZZyVZgKYCxfC4etCixXHkD73MfRUA9AEL7UYfosa737rZV2WFTAbRSmb6Re8vp2EqnIKw4LQ2Gj0UCRetLcHxsJh4FgWcqIEqWwWkuk0pDM5SKZScGXkGvT0DwpCc8tOh9PRGpmM0LqmQjyegERWBJ6vApdTAI/LDaHmteCiCLgRjsDbZ3sgLUowzQsGGKWq2cH9+zrV9Fwlz/vN6Vv1PW9dw3MEy4HvR7tBq+KLXtUWe5SYGvhFA3+whbQlmkOiZBwWFiEYff3VAx/+8fk9eU+ZJ7l06ryVF+6nEApKUxEQ7v3EijpPU3A7oxgvwou31OUEJ1v25vjw8NN7O3WcaaVgeBOZRLybd7k7IBoVZESC466miuAqFRzgSJZSfbt3fUmKTI4XDi96QGqamsok4928092ujly1aYID7IHA/wUOQ9G6JvZ37dmSuNh7pvT+gie3qshTmUT877zTvVW5NGTTHE7g7zBcHuqpve2xM+8cK6ezsKWYg4sYcA7XVmX4zsIVQkX//fabi+mVBcvDJeP/4J2uDmV4iNPcHuBra28LzoACXe7fv68j+q9TR5fSXRTMgJPlyWwqcaLK4W5XhgY53eMFvqbmluDQ3B8p5IFnn+qcOXX88HL6S4JhUWRpIptKHK9yuNrlwQFOc7krtpwJ9cGzXZ3TJ7rfWMmYZcFK4RQMV0HMme7Dllop1IrBSuC2GjG3Arh8oO/f17ES990SmAmXSRrZumW5bC3KvmUC/bbBsOCEWK6UrLQk3FEwWKbO3QmoWwZbDM4eqAdCU28bCktF/4AoJ4zVVlPX1Px9kqKt1vZt6vW/HflT9PTJ/tuaFAD+B4jUnIZBe3EMAAAAAElFTkSuQmCC"/>
+</svg>

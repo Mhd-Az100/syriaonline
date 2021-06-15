@@ -111,16 +111,15 @@ class _ServiceViewState extends State<ServiceView> {
           dummylistdata.add(service);
         }
       });
-      setState(() {
-        services.clear();
-        services.addAll(dummylistdata);
-      });
+
+      services.clear();
+      services.addAll(dummylistdata);
+
       return;
     } else {
-      setState(() {
-        services.clear();
-        // fdata();
-      });
+      services.clear();
+      // fdata();
+
     }
   }
 
@@ -170,7 +169,7 @@ class _ServiceViewState extends State<ServiceView> {
                                     child: Center(
                                         child: CircularProgressIndicator()));
                               } else {
-                                return snapshot.data != null
+                                return snapshot.data.length != 0
                                     ? Container(
                                         child: GridView.builder(
                                             shrinkWrap: true,
@@ -185,99 +184,91 @@ class _ServiceViewState extends State<ServiceView> {
                                             itemBuilder: (context, index) {
                                               SortService c =
                                                   snapshot.data[index];
-                                              if (c.service.picture == null) {
-                                                return CircularProgressIndicator();
-                                              } else
-                                                return InkWell(
-                                                  onTap: () {
-                                                    setService(
-                                                        context: context,
-                                                        val: c.service);
-                                                    Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            ServiceInfo(
-                                                                // service: c,
-                                                                ),
-                                                      ),
-                                                    );
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 8.0),
-                                                    child: Container(
-                                                      margin:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 13),
-                                                      decoration: BoxDecoration(
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            spreadRadius: 3,
-                                                            blurRadius: 5,
-                                                            color: Colors.grey
-                                                                .withOpacity(
-                                                                    0.2),
-                                                          )
-                                                        ],
-                                                        color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(15),
-                                                      ),
-                                                      child: Column(
-                                                        children: [
-                                                          //----------card grid-----------
-                                                          Container(
-                                                            height: 140,
-                                                            width: 153,
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        15),
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        15),
+                                              return InkWell(
+                                                onTap: () {
+                                                  setService(
+                                                      context: context,
+                                                      val: c.service);
+                                                  Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ServiceInfo(
+                                                              // service: c,
                                                               ),
-                                                              child:
-                                                                  Image.network(
-                                                                c.service
-                                                                    .picture,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 8.0),
+                                                  child: Container(
+                                                    margin:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 13),
+                                                    decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          spreadRadius: 3,
+                                                          blurRadius: 5,
+                                                          color: Colors.grey
+                                                              .withOpacity(0.2),
+                                                        )
+                                                      ],
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                    ),
+                                                    child: Column(
+                                                      children: [
+                                                        //----------card grid-----------
+                                                        Container(
+                                                          height: 140,
+                                                          width: 153,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .only(
+                                                              topRight: Radius
+                                                                  .circular(15),
+                                                              topLeft: Radius
+                                                                  .circular(15),
+                                                            ),
+                                                            child:
+                                                                Image.network(
+                                                              c.service.picture,
+                                                              fit: BoxFit.cover,
                                                             ),
                                                           ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                              left: 5,
-                                                              bottom: 3,
-                                                              top: 3,
-                                                            ),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  c.service
-                                                                      .serviceName,
-                                                                  style:
-                                                                      kTitleGridText,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                            left: 5,
+                                                            bottom: 3,
+                                                            top: 3,
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                c.service
+                                                                    .serviceName,
+                                                                style:
+                                                                    kTitleGridText,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
                                                   ),
-                                                );
+                                                ),
+                                              );
                                             }),
                                       )
                                     : Center(

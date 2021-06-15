@@ -385,7 +385,7 @@ class _SignUPState extends State<SignUP> {
                                       color: Colors.white,
                                     ),
                                     child: Text(
-                                      'You Don`t Have an Account ? Sign_IN',
+                                      'You have an Account ? Sign_IN',
                                       style: TextStyle(color: klabelTextColor),
                                     ),
                                   ),
@@ -420,8 +420,8 @@ class _SignUPState extends State<SignUP> {
   String validateMobile(String value) {
     if (value.length == 0)
       return 'Please enter PhoneNumber';
-    else if (value.length != 10)
-      return 'Mobile Number must be of 10 digit';
+    else if (value.length != 9)
+      return 'Mobile Number Must be like (+963-9********)';
     else
       return null;
   }

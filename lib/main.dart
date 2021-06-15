@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:syriaonline/screen/page%20login.dart';
-import 'package:syriaonline/screen/page%20signUp.dart';
 import 'package:syriaonline/service/postemail.dart';
+import 'package:syriaonline/splashsrcreen/tap.dart';
 import 'package:syriaonline/utils/allUrl.dart';
 import 'screen/page choose.dart';
 import 'provider/providerData.dart';
@@ -47,9 +46,12 @@ class Home extends StatelessWidget {
 
 class Sign extends StatelessWidget {
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SignUP(),
+    return ChangeNotifierProvider(
+      create: (context) => Providerdata(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SimplePageSelector(),
+      ),
     );
   }
 }

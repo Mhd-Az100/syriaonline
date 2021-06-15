@@ -21,6 +21,11 @@ final kTitlelstText = GoogleFonts.caveat(
     fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white);
 final kTitleGridText = GoogleFonts.elMessiri(
     fontSize: 15, fontWeight: FontWeight.bold, color: Color(0xFF06040F));
+final ksplash = GoogleFonts.caveat(
+    fontSize: 50, fontWeight: FontWeight.bold, color: Color(0xFF76C9D4));
+final ksplashtext = GoogleFonts.alegreya(
+    fontSize: 17, fontWeight: FontWeight.bold, color: Color(0xFF76C9D4));
+
 //------------------------------------Appbar------------------------------------
 final kAppbarDetails = Colors.white;
 final kAppBarColor = Color(0xff5eaaa8);

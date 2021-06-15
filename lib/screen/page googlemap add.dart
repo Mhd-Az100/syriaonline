@@ -13,17 +13,10 @@ class GooglemapsAdd extends StatefulWidget {
 
 class _GooglemapsAddState extends State<GooglemapsAdd> {
   GoogleMapController mapController;
-  BitmapDescriptor custommarker;
-  getCustommarker() async {
-    custommarker = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration.empty, 'img/icons/marker.png');
-  }
 
   @override
   void initState() {
     super.initState();
-    //جلب جميع الماركر عند فتح الصفحة
-    getCustommarker();
   }
   //----------------------------map type----------------------------------------
 
@@ -36,9 +29,9 @@ class _GooglemapsAddState extends State<GooglemapsAdd> {
   addmarker(cordinate) {
     setState(() {
       marker = Marker(
-          markerId: MarkerId(id.toString()),
-          position: cordinate,
-          icon: custommarker);
+        markerId: MarkerId(id.toString()),
+        position: cordinate,
+      );
     });
   }
 
